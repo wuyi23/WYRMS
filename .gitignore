@@ -5,3 +5,4 @@ obj
 src/WY.RMS.Web/Web.Debug.config
 src/WY.RMS.Web/Web.Release.config
 src/WY.RMS.Web/WY.RMS.Web.csproj.user
+/src/packages
