@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72685C95-126E-49B3-BC02-B0D82389A2E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WY.RMS.Component.Data</RootNamespace>
+    <AssemblyName>WY.RMS.Component.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.1.0\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=5.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.5.0.0.73\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Member\Mapping\ModuleConfiguration.cs" />
+    <Compile Include="Configurations\Member\Mapping\OperationConfiguration.cs" />
+    <Compile Include="Configurations\Member\Mapping\PermissionConfiguration.cs" />
+    <Compile Include="Configurations\Member\ModuleConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\OperationConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\PermissionConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\RoleConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\UserConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\UserGroupConfiguration.generated.cs" />
+    <Compile Include="Configurations\Member\Mapping\RoleConfiguration.cs" />
+    <Compile Include="Configurations\Member\Mapping\UserConfiguration .cs" />
+    <Compile Include="Configurations\Member\Mapping\UserGroupConfiguration.cs" />
+    <Compile Include="DataHelper.cs" />
+    <Compile Include="DbInitialize\DatabaseInitializer.cs" />
+    <Compile Include="EF\EFContextFactory.cs" />
+    <Compile Include="EF\EFDbContext.cs" />
+    <Compile Include="EF\EFRepositoryBase.cs" />
+    <Compile Include="EF\EFUnitOfWorkContext.cs" />
+    <Compile Include="EF\Extensions\DbContextExtensions.cs" />
+    <Compile Include="EF\Interface\IRepository.cs" />
+    <Compile Include="EF\Interface\IUnitOfWork.cs" />
+    <Compile Include="Migrations\201509090634017_InitialCreate.cs" />
+    <Compile Include="Migrations\201509090634017_InitialCreate.Designer.cs">
+      <DependentUpon>201509090634017_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509100747196_FirstMigration.cs" />
+    <Compile Include="Migrations\201509100747196_FirstMigration.Designer.cs">
+      <DependentUpon>201509100747196_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4\EntityCodeScript.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityCodeScript.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="T4\EntityCodeScript.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityCodeScript.cs</LastGenOutput>
+      <LastOutputs>
+..\Configurations\Member\ModuleConfiguration.generated.cs
+..\Configurations\Member\OperationConfiguration.generated.cs
+..\Configurations\Member\PermissionConfiguration.generated.cs
+..\Configurations\Member\RoleConfiguration.generated.cs
+..\Configurations\Member\UserConfiguration.generated.cs
+..\Configurations\Member\UserGroupConfiguration.generated.cs
+.\EntityCodeScript.cs
+</LastOutputs>
+    </None>
+    <None Include="T4\EntityConfigurationTemplate.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WY.RMS.Component.Tools\WY.RMS.Component.Tools.csproj">
+      <Project>{e824ee20-20ee-4a4f-aa4a-80830b7ad867}</Project>
+      <Name>WY.RMS.Component.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WY.RMS.Domain.Model\WY.RMS.Domain.Model.csproj">
+      <Project>{05920370-3d78-4b96-84e1-f13ba192c2d7}</Project>
+      <Name>WY.RMS.Domain.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509090634017_InitialCreate.resx">
+      <DependentUpon>201509090634017_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509100747196_FirstMigration.resx">
+      <DependentUpon>201509100747196_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

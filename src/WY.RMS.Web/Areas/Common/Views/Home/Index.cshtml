@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            主页
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard active"></i> 主页</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <h2>欢迎登录，此为首页</h2>
+        <div id="mybrowse" />
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+@section  scripts{
+    <script language="javascript">
+        window.onload = function () {
+
+            var explorer = navigator.userAgent, browse;
+            if (explorer.indexOf("MSIE") >= 0) {
+                //ie
+                browse = "ie";
+            } else if (explorer.indexOf("Firefox") >= 0) {
+                // firefox 火狐
+                browse = "Firefox";
+            } else if (explorer.indexOf("Chrome") >= 0) {
+                //Chrome 谷歌
+                browse = "Chrome";
+            } else if (explorer.indexOf("Opera") >= 0) {
+                //Opera 欧朋
+                browse = "Opera";
+            } else if (explorer.indexOf("Safari") >= 0) {
+                //Safari 苹果浏览器
+                browse = "Safari";
+            } else if (explorer.indexOf("Netscape") >= 0) {
+                //Netscape
+                browse = "Netscape";
+            }
+            $("#mybrowse").html("当前浏览器：" + browse);
+        }
+    </script>
+}
+
+

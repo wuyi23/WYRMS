@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3C03F94-613C-44D8-AED4-263822ED6A8A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WY.RMS.Domain.Data</RootNamespace>
+    <AssemblyName>WY.RMS.Domain.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=5.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.5.0.0.73\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Member\IModuleRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IUserRepository.cs" />
+    <Compile Include="Repositories\Member\Impl\ModuleRepository.generated.cs" />
+    <Compile Include="Repositories\Member\Impl\OperationRepository.generated.cs" />
+    <Compile Include="Repositories\Member\Impl\PermissionRepository.generated.cs" />
+    <Compile Include="Repositories\Member\Impl\RoleRepository.generated.cs" />
+    <Compile Include="Repositories\Member\Impl\UserGroupRepository.generated.cs" />
+    <Compile Include="Repositories\Member\Impl\UserRepository.cs" />
+    <Compile Include="Repositories\Member\Impl\UserRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IOperationRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IPermissionRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IRoleRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IUserGroupRepository.generated.cs" />
+    <Compile Include="Repositories\Member\IUserRepository.generated.cs" />
+    <Compile Include="T4\EntityCodeScript.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityCodeScript.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WY.RMS.Component.Data\WY.RMS.Component.Data.csproj">
+      <Project>{72685c95-126e-49b3-bc02-b0d82389a2e1}</Project>
+      <Name>WY.RMS.Component.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WY.RMS.Component.Tools\WY.RMS.Component.Tools.csproj">
+      <Project>{e824ee20-20ee-4a4f-aa4a-80830b7ad867}</Project>
+      <Name>WY.RMS.Component.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WY.RMS.Domain.Model\WY.RMS.Domain.Model.csproj">
+      <Project>{05920370-3d78-4b96-84e1-f13ba192c2d7}</Project>
+      <Name>WY.RMS.Domain.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="T4\EntityCodeScript.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityCodeScript.cs</LastGenOutput>
+      <LastOutputs>
+..\Repositories\Member\IModuleRepository.generated.cs
+..\Repositories\Member\Impl\ModuleRepository.generated.cs
+..\Repositories\Member\Impl\OperationRepository.generated.cs
+..\Repositories\Member\Impl\PermissionRepository.generated.cs
+..\Repositories\Member\Impl\RoleRepository.generated.cs
+..\Repositories\Member\Impl\UserGroupRepository.generated.cs
+..\Repositories\Member\Impl\UserRepository.generated.cs
+..\Repositories\Member\IOperationRepository.generated.cs
+..\Repositories\Member\IPermissionRepository.generated.cs
+..\Repositories\Member\IRoleRepository.generated.cs
+..\Repositories\Member\IUserGroupRepository.generated.cs
+..\Repositories\Member\IUserRepository.generated.cs
+.\EntityCodeScript.cs
+</LastOutputs>
+    </None>
+    <None Include="T4\EntityRepositoryTemplate.tt" />
+    <None Include="T4\IEntityRepositoryTemplate.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

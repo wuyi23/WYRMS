@@ -1,0 +1,65 @@
+﻿@using WY.RMS.ViewModel.Member
+@model UserVM
+
+<link href="~/Scripts/AdminLTE2.3.0/plugins/iCheck/square/blue.css" rel="stylesheet" />
+@Html.HiddenFor(t => t.Id)
+<div class="form-group">
+    <div class="col-sm-2">
+        <label style="color:red">*</label>@Html.LabelFor(model => model.UserName, new { @class = " control-label" })
+    </div>
+
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserName)
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2">
+        <label style="color: red">*</label>@Html.LabelFor(model => model.TrueName, new { @class = "control-label" })
+    </div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.TrueName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TrueName)
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2">
+        <label style="color: red">*</label>@Html.LabelFor(model => model.Email, new { @class = " control-label" })
+    </div>
+
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Phone, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Phone)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Address, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Address)
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Enabled, new { @class = "col-sm-2 control-label" })
+    <div class="checkbox icheck col-sm-8">
+        @Html.CheckBoxFor(model => model.Enabled, new { @class = "myCheck" })  @*增加myCheck样式为了避免表格中的checkbox失效*@
+        @Html.ValidationMessageFor(model => model.Enabled)
+    </div>
+</div>
+<script>
+    $(function () {
+        $('input.myCheck').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+

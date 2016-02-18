@@ -1,0 +1,40 @@
+﻿
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ Assembly Name="$(SolutionDir)\WY.RMS.Component.Tools\bin\Debug\WY.RMS.Component.Tools.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Reflection" #>
+<#@ Import Namespace="System.Collections.Generic" #>
+<#@ Import Namespace="WY.RMS.Component.Tools" #>
+<#@ Import Namespace="WY.RMS.Component.Tools.T4" #>
+<#@ output extension=".cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="EntityConfigurationTemplate.tt" #>
+
+
+<#
+	//******* Configuration *******
+
+      string currentPath = Path.GetDirectoryName(Host.TemplateFile);  
+    string projectPath =currentPath.Substring(0, currentPath.IndexOf(@"\T4"));
+    string solutionPath = currentPath.Substring(0, currentPath.IndexOf(@"\WY.RMS.Component.Data"));
+ 
+    string modelFile= Path.Combine(solutionPath, @"WY.RMS.Domain.Model\bin\Debug\WY.RMS.Domain.Model.dll");
+    byte[] fileData= File.ReadAllBytes(modelFile);
+    Assembly assembly = Assembly.Load(fileData); 
+    Type baseType = typeof(EntityBase<>);   
+    IEnumerable<Type> modelTypes = assembly.GetTypes().Where(m => m.IsAssignableToGenericType(baseType) && !m.IsAbstract);
+    foreach(Type modelType in modelTypes)
+    {
+        T4ModelInfo model = new T4ModelInfo(modelType, true);
+        //实体映射类
+        EntityConfigurationTemplate config = new EntityConfigurationTemplate(model);
+        var path = model.UseModuleDir 
+            ? string.Format(@"{0}\Configurations\{1}", projectPath, model.ModuleName)
+            : string.Format(@"{0}\Configurations", projectPath);
+        config.Output.Encoding = Encoding.UTF8;
+        config.RenderToFile(Path.Combine(path, config.FileName));
+    }
+#>
