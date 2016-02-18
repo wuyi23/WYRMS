@@ -3,5 +3,5 @@
 服务端采用Autofac对各层解耦，采用T4模板来创建仓储Repository，并用Entityframework.extended插件对EF进行扩展，使其更好支持批量操作。<br/>
 客户端使用了基于Bootstrap3开发的前端框架AdminLTE，github地址：https://github.com/almasaeed2010/AdminLTE <br/>
 表格table则用到了bootstrap-table，github地址：https://github.com/wenzhixin/bootstrap-table <br/>
-WYRMS系统登录账户：admin，密码：123456
+WYRMS系统Demo演示地址：http://www.gzuwuyi.cn ，登录账户：admin，密码：123456
 
