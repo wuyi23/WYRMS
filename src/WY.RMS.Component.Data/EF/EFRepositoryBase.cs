@@ -36,16 +36,12 @@ namespace WY.RMS.Component.Data.EF
         /// <summary>
         /// (贪婪加载)返回指定实体数据集
         /// </summary>
-        /// <param name="IncludeList">贪婪加载属性集合</param>
+        /// <param name="includeList">贪婪加载属性集合</param>
         /// <returns>指定实体数据集</returns>
-        public virtual IQueryable<TEntity> GetEntitiesByEager(IEnumerable<string> IncludeList)
+        public virtual IQueryable<TEntity> GetEntitiesByEager(IEnumerable<string> includeList)
         {
             IQueryable<TEntity> dbset = Context.Set<TEntity>();
-            foreach (var item in IncludeList)
-            {
-                dbset = dbset.Include<TEntity>(item);
-            }
-            return dbset;
+            return includeList.Aggregate(dbset, (current, item) => current.Include<TEntity>(item));
         }
 
         #endregion
