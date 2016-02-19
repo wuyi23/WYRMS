@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using WY.RMS.Component.Data;
 using WY.RMS.Component.Data.DbInitialize;
 
 namespace WY.RMS.Web
