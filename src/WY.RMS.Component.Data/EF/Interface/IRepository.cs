@@ -18,9 +18,9 @@ namespace WY.RMS.Component.Data.EF.Interface
         /// <summary>
         /// (贪婪加载)返回指定实体数据集
         /// </summary>
-        /// <param name="includeList">贪婪加载属性集合</param>
+        /// <param name="IncludeList">贪婪加载属性集合</param>
         /// <returns>指定实体数据集</returns>
-        IQueryable<TEntity> GetEntitiesByEager(IEnumerable<string> includeList);
+        IQueryable<TEntity> GetEntitiesByEager(IEnumerable<string> IncludeList);
         #endregion
 
         #region 公共方法

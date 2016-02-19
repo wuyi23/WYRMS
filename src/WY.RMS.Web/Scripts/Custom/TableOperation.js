@@ -75,7 +75,7 @@ function MultReset(table, actionUrl) {
         toastr.warning('请选择有效数据');
         return;
     }
-    WinMsg.confirm({ message: "确定要将已选择用户的密码重置为初始密码“123456”吗？" }).on(function (e) {
+    WinMsg.confirm({ message: "确认要重置已选择的用户密码吗？" }).on(function (e) {
         if (!e) {
             return;
         }

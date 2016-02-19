@@ -9,11 +9,12 @@ using Autofac.Integration.Mvc;
 using System.Data.Entity;
 using System.Reflection;
 using System.Web.Mvc;
+using WY.RMS.Component.Data;
 using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.CoreBLL.Service;
-using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Data.Repositories.Member.Impl;
+using WY.RMS.Domain.Data.Repositories.Member;
 
 namespace WY.RMS.Web
 {
@@ -42,7 +43,7 @@ namespace WY.RMS.Web
             builder.RegisterType<PermissionService>().As<IPermissionService>().InstancePerHttpRequest();
 
             builder.RegisterType<EFDbContext>().As<DbContext>().InstancePerHttpRequest();
-            builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerHttpRequest();
+            builder.RegisterType<EFUnitOfWorkContext>().As<IUnitOfWork>().InstancePerHttpRequest();
 
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
             builder.RegisterType<UserGroupRepository>().As<IUserGroupRepository>().InstancePerHttpRequest();

@@ -75,7 +75,7 @@
     <Compile Include="EF\EFContextFactory.cs" />
     <Compile Include="EF\EFDbContext.cs" />
     <Compile Include="EF\EFRepositoryBase.cs" />
-    <Compile Include="EF\EFUnitOfWork.cs" />
+    <Compile Include="EF\EFUnitOfWorkContext.cs" />
     <Compile Include="EF\Extensions\DbContextExtensions.cs" />
     <Compile Include="EF\Interface\IRepository.cs" />
     <Compile Include="EF\Interface\IUnitOfWork.cs" />

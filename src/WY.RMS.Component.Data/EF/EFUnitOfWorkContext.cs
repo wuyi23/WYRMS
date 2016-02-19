@@ -15,7 +15,7 @@ namespace WY.RMS.Component.Data.EF
     /// <summary>
     /// EF数据单元操作类
     /// </summary>
-    public class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWorkContext : IUnitOfWork
     {
         /// <summary>
         /// 获取或设置 当前使用的数据访问上下文对象
@@ -24,6 +24,8 @@ namespace WY.RMS.Component.Data.EF
         {
             get
             {
+                //bool secondCachingEnabled = ConfigurationManager.AppSettings["EntityFrameworkCachingEnabled"].CastTo(false);
+                //return secondCachingEnabled ? EFCachingDbContext.Value : EFDbContext.Value;
                 return EFContextFactory.GetCurrentDbContext();
             }
         }
