@@ -82,7 +82,7 @@ namespace WY.RMS.Component.Data.EF.Interface
         int Update(TEntity entity, bool isSave = true);
 
         /// <summary>
-        /// 使用附带新值的实体信息更新指定实体属性的值
+        /// （已弃用，目前使用EF.Extended扩展插件中的方法来实现按需更新）使用附带新值的实体信息更新指定实体属性的值
         /// </summary>
         /// <param name="propertyExpression">属性表达式</param>
         /// <param name="isSave">是否执行保存</param>

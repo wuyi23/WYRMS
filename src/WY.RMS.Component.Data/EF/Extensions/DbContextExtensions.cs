@@ -5,7 +5,6 @@
 *************************************/
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
@@ -14,19 +13,17 @@ using System.Data.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WY.RMS.Component.Tools;
 
 namespace WY.RMS.Component.Data
 {
     /// <summary>
-    /// 扩展按需更新
+    /// 扩展按需更新（此扩展参考郭明峰《MVC实用架构设计》，博客地址：http://www.cnblogs.com/guomingfeng/p/mvc-ef-update.html）
     /// </summary>
     public static class DbContextExtensions
     {
         /// <summary>
-        /// 按需更新
+        /// 整体更新
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -50,13 +47,14 @@ namespace WY.RMS.Component.Data
                 }
                 catch (InvalidOperationException)
                 {
+                    //当同一上下文中存在相同主键的实体时，上面的attach操作将会报错，因为EF状态跟踪ObjectStateManager跟无法跟踪具有相同键的多个对象，所以需要执行下面的代码把新数据赋到现有实体上
                     TEntity oldEntity = dbSet.Find(entity.Id);
                     dbContext.Entry(oldEntity).CurrentValues.SetValues(entity);
                 }
             }
         }
         /// <summary>
-        /// 包含属性表达式的按需更新
+        /// 包含属性表达式的按需更新（已弃用，目前使用EF.Extended扩展插件中的方法来实现按需更新）
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TKey"></typeparam>

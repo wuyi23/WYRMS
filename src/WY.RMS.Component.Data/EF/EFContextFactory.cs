@@ -33,7 +33,6 @@ namespace WY.RMS.Component.Data.EF
                 CallContext.SetData("DbContext", dbContext);
 
             }
-
             return dbContext;
 
         }
