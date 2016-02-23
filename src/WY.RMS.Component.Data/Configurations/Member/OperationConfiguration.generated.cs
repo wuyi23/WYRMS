@@ -7,12 +7,12 @@
 // </auto-generated>
 //
 // <copyright file="OperationConfiguration.generated.cs">
-//		Copyright(c)2013 WUYICN.All rights reserved.
+//		Copyright(c)2015 WUYICN.All rights reserved.
 //		CLR版本：4.5.1
 //		开发组织：WUYI@中国
 //		公司网站：http://www.gzuwuyi.cn
 //		所属工程：WUYI.RMS.Component.Data
-//		生成时间：2015-11-13 14:08
+//		生成时间：2016-02-22 14:41
 // </copyright>
 //------------------------------------------------------------------------------
 
