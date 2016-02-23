@@ -33,13 +33,13 @@ namespace WY.RMS.Component.Data.Migrations
             //
             List<Module> modules = new List<Module>
             {
-                new Module { Id = 1, ParentId = null, Name = "权限管理", Code = "20",LinkUrl=null, OrderSort = 1, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now},
-                new Module { Id = 2, ParentId = 1, Name = "角色管理", LinkUrl = "~/Member/Role/Index",  Code = "2001", OrderSort = 2, Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now},
-                new Module { Id = 3, ParentId = 1, Name = "用户管理", LinkUrl = "~/Member/User/Index", Code = "2002", OrderSort = 3, Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now },
-                new Module { Id = 4, ParentId = 1, Name = "模块管理", LinkUrl = "~/Member/Module/Index",  Code = "2003", OrderSort = 4, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                new Module { Id = 5, ParentId = 1, Name = "权限管理", LinkUrl = "~/Member/Permission/Index",  Code = "2004", OrderSort = 5, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                 new Module { Id = 6, ParentId = null, Name = "系统应用", LinkUrl = null,  Code = "30", OrderSort = 1, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "~/SysConfig/OperateLog/Index",Code = "3001", OrderSort = 2, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 1, ParentId = null, Name = "权限管理", Code = "20",LinkUrl=null,  Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now},
+                new Module { Id = 2, ParentId = 1, Name = "角色管理", LinkUrl = "~/Member/Role/Index",  Code = "2001",Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now},
+                new Module { Id = 3, ParentId = 1, Name = "用户管理", LinkUrl = "~/Member/User/Index", Code = "2002", Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now },
+                new Module { Id = 4, ParentId = 1, Name = "模块管理", LinkUrl = "~/Member/Module/Index",  Code = "2003", Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 5, ParentId = 1, Name = "权限管理", LinkUrl = "~/Member/Permission/Index",  Code = "2004", Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                 new Module { Id = 6, ParentId = null, Name = "系统应用", LinkUrl = null,  Code = "30",  Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "~/SysConfig/OperateLog/Index",Code = "3001",Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
             };
             DbSet<Module> moduleSet = context.Set<Module>();
             moduleSet.AddOrUpdate(t => new { t.Id }, modules.ToArray());

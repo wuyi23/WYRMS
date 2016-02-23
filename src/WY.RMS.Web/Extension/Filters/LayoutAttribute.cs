@@ -27,7 +27,7 @@ namespace WY.RMS.Web.Extension.Filters
         //    this._RoleService = roleService;
         //    this._ModuleService = moduleService;
         //}
-        #region Autofac属性注入
+        #region Autofac属性注入,Filter的注入不同于Controller, Controller的注入是通过构造函数注入的，而Filter是通过属性注入的
         public IRoleService _RoleService { get; set; }
         public IModuleService _ModuleService { get; set; }
         public IPermissionService _PermissionService { get; set; }

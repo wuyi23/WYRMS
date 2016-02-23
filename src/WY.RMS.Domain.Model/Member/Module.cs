@@ -44,9 +44,6 @@ namespace WY.RMS.Domain.Model.Member
         [Description("模块编号")]
         [StringLength(20)]
         public string Code { get; set; }
-        [Required]
-        [Description("排序号")]
-        public int OrderSort { get; set; }
         [Description("描述")]
         [StringLength(100)]
         public string Description { get; set; }

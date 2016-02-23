@@ -137,6 +137,7 @@
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\HomeController.cs" />
     <Compile Include="Areas\Common\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Member\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Member\Controllers\RoleController.cs" />
     <Compile Include="Areas\Member\Controllers\UserController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Areas\Member\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Member\Views\User\Index.cshtml" />
     <Content Include="Areas\Member\Views\User\Create.cshtml" />
+    <Content Include="Areas\Member\Views\Module\Index.cshtml" />
     <None Include="Properties\PublishProfiles\xiaowu.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\AdminLTE2.3.0\bootstrap\css\bootstrap.css" />
