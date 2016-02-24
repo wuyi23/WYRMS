@@ -7,3 +7,4 @@ src/WY.RMS.Web/Web.Release.config
 src/WY.RMS.Web/WY.RMS.Web.csproj.user
 /src/packages
 *.suo
+src/WY.MVC.RMS.v12.suo
