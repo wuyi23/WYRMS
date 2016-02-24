@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace WY.RMS.ViewModel.Member
 {
@@ -46,9 +47,8 @@ namespace WY.RMS.ViewModel.Member
         {
             get
             {
-                return (UpdateDate == null ? string.Empty : UpdateDate.ToString());
+                return UpdateDate.ToString();
             }
-            set { }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                 new SelectListItem { Text = "否", Value = "0" }
             };
             ViewBag.EnableItems = enabledItems;
-            return View(_roleService.Roles.ToList());
+            return View();
         }
 
         public JsonResult GetRoles(int limit, int offset, string roleName, int enable)
@@ -68,14 +68,6 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             return Json(new { total = total, rows = result }, JsonRequestBehavior.AllowGet);
         }
 
-        //
-        // GET: /Member/Role/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            var role = _db.Roles.Find(id);
-            return role == null ? (ActionResult)HttpNotFound() : View(role);
-        }
 
         //
         // GET: /Member/Role/Create

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoginVM.cs" />
+    <Compile Include="Member\ModuleVM.cs" />
     <Compile Include="Member\RoleVM.cs" />
     <Compile Include="Member\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

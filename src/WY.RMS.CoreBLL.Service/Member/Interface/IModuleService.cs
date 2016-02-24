@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel.Member;
 
 namespace WY.RMS.CoreBLL.Service
 {
@@ -17,6 +20,17 @@ namespace WY.RMS.CoreBLL.Service
         /// <param name="inclueList"></param>
         /// <returns></returns>
         IQueryable<Module> GetEntitiesByEager(IEnumerable<string> inclueList);
+
+        /// <summary>
+        /// 获取模块分页列表
+        /// </summary>
+        /// <param name="wh"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        IList<ModuleVM> GetListModuleVM(Expression<Func<Module, bool>> wh, int limit, int offset, out int total);
+
         #endregion
     }
 }

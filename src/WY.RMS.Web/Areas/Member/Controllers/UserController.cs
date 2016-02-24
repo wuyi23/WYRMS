@@ -35,7 +35,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                 new SelectListItem { Text = "否", Value = "0" }
             };
             ViewBag.EnableItems = enabledItems;
-            return View(_userService.Users.ToList());
+            return View();
         }
 
         public JsonResult GetUsers(int limit, int offset, string userName, int enable)

@@ -14,7 +14,7 @@
         </ol>
     </section>
     <!-- Main content -->
-    <section class="content">
+    <section id="moduleSection" class="content">
         <div class="panel-body" style="padding-bottom:0px;">
             <div class="panel panel-default">
                 <div class="panel-heading">查询条件</div>
@@ -59,7 +59,6 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
-
     <script>
         $(function () {
             //得到表格查询的参数
@@ -79,7 +78,7 @@
                 }, {
                     title: '序号',
                     align: 'center',
-                    formatter: function(value, row, index) {
+                    formatter: function (value, row, index) {
                         return m_pagerow + index + 1;
                     }
                 }, {
@@ -89,7 +88,7 @@
                 }, {
                     field: 'Name',
                     title: '模块名称'
-                },, {
+                }, {
                     field: 'ParentName',
                     title: '上级模块'
                 },
@@ -112,17 +111,17 @@
                 }
             ];
             //初始化表格
-            InitTable($("#tb_roles"), actionUrl, dbQueryParams, tbColumns);
+            InitTable($("#tb_modules"), actionUrl, dbQueryParams, tbColumns);
         });
-
+        var $moduleSection = $("#moduleSection");
         //新增模块
-        $("#btn_add").click(function () {
+        $("#btn_add", $moduleSection).click(function () {
             var actionUrl = "@Url.Action("Create")";
             var param = {};
             ShowModal(actionUrl, param, "新增模块");
         });
 
-        $("#btn_edit").click(function () {
+        $("#btn_edit", $moduleSection).click(function () {
             var arrselections = $("#tb_modules").bootstrapTable('getSelections');
             if (arrselections.length > 1) {
                 toastr.warning('只能选择一行进行编辑');
@@ -136,7 +135,7 @@
             var param = { id: arrselections[0].Id };
             ShowModal(actionUrl, param, "编辑模块");
         });
-        $("#btn_delete").click(function () {
+        $("#btn_delete", $moduleSection).click(function () {
             var $tb = $("#tb_modules");
             var actionUrl = "@Url.Action("Delete")";
             MultDelete($tb, actionUrl);
@@ -149,7 +148,7 @@
             SaveModal($tb);
         });
 
-        $("#btn_query").click(function () {
+        $("#btn_query", $moduleSection).click(function () {
             var actionUrl = "@Url.Action("GetModules")";
             m_pagerow = 0;
             $("#tb_modules").bootstrapTable('refresh', { url: actionUrl });
