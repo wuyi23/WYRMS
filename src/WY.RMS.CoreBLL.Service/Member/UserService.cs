@@ -33,7 +33,7 @@ namespace WY.RMS.CoreBLL.Service
             get { return _userRepository.Entities; }
         }
 
-        public Component.Tools.OperationResult Insert(UserVM model)
+        public OperationResult Insert(UserVM model)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace WY.RMS.CoreBLL.Service
             }
         }
 
-        public Component.Tools.OperationResult Update(UserVM model)
+        public OperationResult Update(UserVM model)
         {
             try
             {

@@ -33,17 +33,15 @@ namespace WY.RMS.Domain.Model.Member
         [Description("名称")]
         [StringLength(20)]
         public string Name { get; set; }
-
+        [Required]
         [Description("链接地址")]
         [StringLength(50)]
         public string LinkUrl { get; set; }
 
         [Description("是否是菜单")]
         public bool IsMenu { get; set; }
-        [Required]
         [Description("模块编号")]
-        [StringLength(20)]
-        public string Code { get; set; }
+        public int Code { get; set; }
         [Description("描述")]
         [StringLength(100)]
         public string Description { get; set; }

@@ -15,6 +15,7 @@ namespace WY.RMS.ViewModel.Member
         {
             Enabled = true;
             IsMenu = true;
+            LinkUrl = "#";
         }
         [Display(Name = "模块ID")]
         public int Id { get; set; }
@@ -25,26 +26,24 @@ namespace WY.RMS.ViewModel.Member
         public string Name { get; set; }
 
 
-        [Display(Name = "父模块ID")]
+        [Display(Name = "上级模块ID")]
         public int? ParentId { get; set; }
 
 
-        [Display(Name = "父模块名称")]
+        [Display(Name = "上级模块")]
         [StringLength(20)]
         public string ParentName { get; set; }
 
-
+        [Required(ErrorMessage = "链接地址不能为空")]
         [Display(Name = "链接地址")]
         [StringLength(50)]
         public string LinkUrl { get; set; }
 
-        [Display(Name = "是否是菜单")]
+        [Display(Name = "是否菜单")]
         public bool IsMenu { get; set; }
 
-        [Required(ErrorMessage = "模块编号不能为空")]
         [Display(Name = "模块编号")]
-        [StringLength(20)]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         [Display(Name = "描述")]
         [StringLength(100)]

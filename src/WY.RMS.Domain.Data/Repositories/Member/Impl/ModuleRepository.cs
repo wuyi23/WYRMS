@@ -31,7 +31,8 @@ namespace WY.RMS.Domain.Data.Repositories.Member.Impl
                         Code = m1.Code,
                         Description = m1.Description,
                         Enabled = m1.Enabled,
-                        ParentName = item.Name
+                        ParentName = item.Name,
+                        UpdateDate = m1.UpdateDate
                     };
             total = q.Count();
             if (offset > 0)

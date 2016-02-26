@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
+using System.Data.Objects.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -7,6 +9,7 @@ using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Tools;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel.Member;
 using WY.RMS.Web.Extension.Common;
 using WY.RMS.Web.Extension.Filters;
 
@@ -47,6 +50,25 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             var result = _moduleService.GetListModuleVM(wh, limit, offset, out total);
 
             return Json(new { total = total, rows = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create()
+        {
+            var vm = new ModuleVM();
+            ViewBag.ParentModuleList = _moduleService.Modules
+                                        .Where(c => c.IsMenu == true && c.Enabled == true && c.ParentId == null)
+                                        .Select(c => new SelectListItem() { Text = c.Name, Value = SqlFunctions.StringConvert((double)c.Id).Trim() })
+                                        .ToList();
+            return PartialView(vm);
+
+        }
+        [HttpPost]
+        public ActionResult Create(ModuleVM vm)
+        {
+            if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新输入"));
+            var result = _moduleService.Insert(vm);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
         }
     }
 }

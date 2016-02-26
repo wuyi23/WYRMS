@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using WY.RMS.Component.Tools;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
 
@@ -30,6 +31,13 @@ namespace WY.RMS.CoreBLL.Service
         /// <param name="total"></param>
         /// <returns></returns>
         IList<ModuleVM> GetListModuleVM(Expression<Func<Module, bool>> wh, int limit, int offset, out int total);
+
+        /// <summary>
+        /// 插入实体数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        OperationResult Insert(ModuleVM model);
 
         #endregion
     }

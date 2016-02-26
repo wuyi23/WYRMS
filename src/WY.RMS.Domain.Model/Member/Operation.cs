@@ -24,7 +24,7 @@ namespace WY.RMS.Domain.Model.Member
         public string Name { get; set; }
 
         [Description("操作编号")]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         [Description("描述")]
         public string Description { get; set; }
