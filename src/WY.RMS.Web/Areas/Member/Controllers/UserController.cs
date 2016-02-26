@@ -29,11 +29,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
-            var enabledItems = new List<SelectListItem> { 
-                new SelectListItem { Text = "--- 请选择 ---", Value = "-1", Selected = true }, 
-                new SelectListItem { Text = "是", Value = "1" }, 
-                new SelectListItem { Text = "否", Value = "0" }
-            };
+            var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
         }

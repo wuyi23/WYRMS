@@ -142,6 +142,7 @@
     <Compile Include="Areas\Member\Controllers\UserController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extension\Common\DataSourceHelper.cs" />
     <Compile Include="Extension\Common\ValidationHelper.cs" />
     <Compile Include="Extension\Filters\LayoutAttribute.cs" />
     <Compile Include="Global.asax.cs">

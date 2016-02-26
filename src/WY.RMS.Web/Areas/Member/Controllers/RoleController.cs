@@ -9,6 +9,7 @@ using WY.RMS.Component.Tools;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
+using WY.RMS.Web.Extension.Common;
 using WY.RMS.Web.Extension.Filters;
 
 namespace WY.RMS.Web.Areas.Member.Controllers
@@ -29,11 +30,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
-            var enabledItems = new List<SelectListItem> { 
-                new SelectListItem { Text = "--- 请选择 ---", Value = "-1", Selected = true }, 
-                new SelectListItem { Text = "是", Value = "1" }, 
-                new SelectListItem { Text = "否", Value = "0" }
-            };
+            var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
         }
