@@ -52,7 +52,7 @@ namespace WY.RMS.CoreBLL.Service
         public IList<ModuleVM> GetListModuleVM(Expression<Func<Module, bool>> wh, int limit, int offset, out int total)
         {
             return _moduleRepository.GetListModuleVM(wh, limit, offset, out total);
-        } 
+        }
         #endregion
 
 
@@ -84,5 +84,37 @@ namespace WY.RMS.CoreBLL.Service
                 return new OperationResult(OperationResultType.Error, "新增数据失败，数据库插入数据时发生了错误!");
             }
         }
+
+        public OperationResult Update(ModuleVM model)
+        {
+            try
+            {
+                var module = Modules.FirstOrDefault(c => c.Id == model.Id);
+                if (module == null)
+                {
+                    throw new Exception();
+                }
+                var other = Modules.FirstOrDefault(c => c.Id != model.Id && c.Name == model.Name);
+                if (other!=null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");
+                }
+                module.Name = model.Name.Trim();
+                module.ParentId = model.ParentId;
+                module.LinkUrl = model.LinkUrl;
+                module.IsMenu = model.IsMenu;
+                module.Code = model.Code;
+                module.Description = model.Description;
+                module.Enabled = model.Enabled;
+                module.UpdateDate = DateTime.Now;
+                _moduleRepository.Update(module);
+                return new OperationResult(OperationResultType.Success, "更新数据成功！");
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "更新数据失败!");
+            }
+        }
+
     }
 }

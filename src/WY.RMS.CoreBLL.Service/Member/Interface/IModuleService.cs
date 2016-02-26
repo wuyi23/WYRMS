@@ -33,11 +33,17 @@ namespace WY.RMS.CoreBLL.Service
         IList<ModuleVM> GetListModuleVM(Expression<Func<Module, bool>> wh, int limit, int offset, out int total);
 
         /// <summary>
-        /// 插入实体数据
+        /// 新增
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         OperationResult Insert(ModuleVM model);
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        OperationResult Update(ModuleVM model);
 
         #endregion
     }

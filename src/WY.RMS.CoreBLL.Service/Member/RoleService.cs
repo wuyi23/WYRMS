@@ -36,7 +36,7 @@ namespace WY.RMS.CoreBLL.Service
                 }
                 var entity = new Role
                 {
-                    RoleName = model.RoleName,
+                    RoleName = model.RoleName.Trim(),
                     Description = model.Description,
                     OrderSort = model.OrderSort,
                     Enabled = model.Enabled,
@@ -59,7 +59,12 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                oldRole.RoleName = model.RoleName;
+                var other = Roles.FirstOrDefault(c => c.Id != model.Id && c.RoleName == model.RoleName);
+                if (other != null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的角色，请修改后重新提交！");
+                }
+                oldRole.RoleName = model.RoleName.Trim();
                 oldRole.Description = model.Description;
                 oldRole.OrderSort = model.OrderSort;
                 oldRole.Enabled = model.Enabled;
@@ -81,7 +86,7 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     foreach (var item in list)
                     {
-                        _RoleRepository.Delete(item.Id,false);
+                        _RoleRepository.Delete(item.Id, false);
                     }
                     UnitOfWork.Commit();
                     scope.Complete();

@@ -28,9 +28,8 @@
 </div>
 <div class="form-group">
     <div class="col-sm-2">
-       @Html.LabelFor(model => model.LinkUrl, new { @class = " control-label" })
+       <label style="color:red">*</label>@Html.LabelFor(model => model.LinkUrl, new { @class = " control-label" })
     </div>
-
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.LinkUrl, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.LinkUrl)

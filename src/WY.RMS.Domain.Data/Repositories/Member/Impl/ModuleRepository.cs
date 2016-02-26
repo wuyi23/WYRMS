@@ -35,7 +35,7 @@ namespace WY.RMS.Domain.Data.Repositories.Member.Impl
                         UpdateDate = m1.UpdateDate
                     };
             total = q.Count();
-            if (offset > 0)
+            if (offset >= 0)
             {
                 return q.OrderBy(c => c.Code).Skip(offset).Take(limit).ToList();
             }

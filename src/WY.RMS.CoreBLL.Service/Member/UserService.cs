@@ -44,8 +44,8 @@ namespace WY.RMS.CoreBLL.Service
                 }
                 var entity = new User
                 {
-                    UserName = model.UserName,
-                    TrueName = model.TrueName,
+                    UserName = model.UserName.Trim(),
+                    TrueName = model.TrueName.Trim(),
                     Password = model.Password,
                     Phone = model.Phone,
                     Email = model.Email,
@@ -71,8 +71,13 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                user.TrueName = model.TrueName;
-                user.UserName = model.UserName;
+                var other = Users.FirstOrDefault(c => c.Id != model.Id && c.UserName == model.UserName);
+                if (other != null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同的用户名称，请修改后重新提交！");
+                }
+                user.TrueName = model.TrueName.Trim();
+                user.UserName = model.UserName.Trim();
                 user.Address = model.Address;
                 user.Phone = model.Phone;
                 user.Email = model.Email;

@@ -34,7 +34,7 @@ namespace WY.RMS.ViewModel.Member
         [StringLength(20)]
         public string ParentName { get; set; }
 
-        [Required(ErrorMessage = "链接地址不能为空")]
+        [Required(ErrorMessage = "链接地址不能为空，不需要链接请设置为“#”号")]
         [Display(Name = "链接地址")]
         [StringLength(50)]
         public string LinkUrl { get; set; }

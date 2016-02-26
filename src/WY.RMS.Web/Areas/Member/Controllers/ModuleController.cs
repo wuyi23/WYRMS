@@ -52,6 +52,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             return Json(new { total = total, rows = result }, JsonRequestBehavior.AllowGet);
         }
 
+        #region 新增
         public ActionResult Create()
         {
             var vm = new ModuleVM();
@@ -70,5 +71,45 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }
+        #endregion
+
+        #region 修改
+        //
+        // GET: /Member/Module/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            var module = _moduleService.Modules.FirstOrDefault(c => c.Id == id);
+            if (module == null) return PartialView("Create", new ModuleVM());
+            ViewBag.ParentModuleList = _moduleService.Modules
+                            .Where(c => c.IsMenu == true && c.Enabled == true && c.ParentId == null)
+                            .Select(c => new SelectListItem() { Text = c.Name, Value = SqlFunctions.StringConvert((double)c.Id).Trim(), Selected = (module.ParentId.HasValue && (module.ParentId.Value == c.Id)) })
+                            .ToList();
+            var model = new ModuleVM()
+            {
+                Id = module.Id,
+                Name = module.Name,
+                ParentId = module.ParentId,
+                LinkUrl = module.LinkUrl,
+                IsMenu = module.IsMenu,
+                Code = module.Code,
+                Description = module.Description,
+                Enabled = module.Enabled,
+            };
+            return PartialView("Create", model);
+        }
+
+        //
+        // POST: /Member/Module/Edit
+
+        [HttpPost]
+        public ActionResult Edit(ModuleVM moduleVM)
+        {
+            if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新检查输入"));
+            var result = _moduleService.Update(moduleVM);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
     }
 }
