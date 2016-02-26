@@ -30,5 +30,5 @@ namespace WY.RMS.ViewModel
         /// </summary>
         [Display(Name = "记住登录")]
         public bool IsRememberLogin { get; set; }
-    }
+      }
 }
