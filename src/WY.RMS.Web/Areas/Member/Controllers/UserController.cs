@@ -23,7 +23,6 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             this._userService = userService;
         }
 
-        private readonly EFDbContext _db = new EFDbContext();
         //
         // GET: /Member/User/
         [Layout]

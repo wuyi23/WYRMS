@@ -53,6 +53,8 @@
     <Compile Include="Repositories\Member\IModuleRepository.cs" />
     <Compile Include="Repositories\Member\IModuleRepository.generated.cs" />
     <Compile Include="Repositories\Member\Impl\ModuleRepository.cs" />
+    <Compile Include="Repositories\Member\Impl\PermissionRepository.cs" />
+    <Compile Include="Repositories\Member\IPermissionRepository.cs" />
     <Compile Include="Repositories\Member\IUserRepository.cs" />
     <Compile Include="Repositories\Member\Impl\ModuleRepository.generated.cs" />
     <Compile Include="Repositories\Member\Impl\PermissionRepository.generated.cs" />

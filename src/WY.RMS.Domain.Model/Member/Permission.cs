@@ -1,7 +1,7 @@
-﻿                                                                                                                                       /************************************
- * 描述：尚未添加描述
- * 作者：吴毅
- * 日期：2015/9/15 16:26:44  
+﻿/************************************
+* 描述：尚未添加描述
+* 作者：吴毅
+* 日期：2015/9/15 16:26:44  
 *************************************/
 
 using System;
@@ -26,14 +26,16 @@ namespace WY.RMS.Domain.Model.Member
         {
             this.Roles = new List<Role>();
         }
-
+        [Required]
         [Description("名称")]
+        [StringLength(20)]
         public string Name { get; set; }
 
         [Description("操作编号")]
         public int Code { get; set; }
 
         [Description("描述")]
+        [StringLength(100)]
         public string Description { get; set; }
 
         public bool Enabled { get; set; }
