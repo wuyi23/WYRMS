@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Objects;
 using System.Data.Objects.SqlClient;
@@ -107,6 +108,21 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         {
             if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新检查输入"));
             var result = _moduleService.Update(moduleVM);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
+
+        #region 删除
+        //
+        // POST: /Member/Module/Delete
+
+        [HttpPost]
+        public ActionResult Delete()
+        {
+            var rolelist = Request.Form["arrselections"];
+            IEnumerable<ModuleVM> list = JsonConvert.DeserializeObject<List<ModuleVM>>(rolelist);
+            var result = _moduleService.Delete(list);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }

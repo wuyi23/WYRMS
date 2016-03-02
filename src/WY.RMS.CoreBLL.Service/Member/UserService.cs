@@ -111,7 +111,6 @@ namespace WY.RMS.CoreBLL.Service
                     return new OperationResult(OperationResultType.Error, "删除数据失败!");
                 }
             }
-
         }
 
         public OperationResult ResetPassword(IEnumerable<UserVM> list)

@@ -5,6 +5,7 @@
 *************************************/
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WY.RMS.ViewModel.Member
@@ -77,5 +78,8 @@ namespace WY.RMS.ViewModel.Member
                 return UpdateDate.ToString();
             }
         }
+
+        public IList<ModuleVM> ChildModules { get; set; }
+
     }
 }

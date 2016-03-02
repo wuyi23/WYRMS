@@ -14,6 +14,7 @@ using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Model.Enum;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel.Member;
 
 
 namespace WY.RMS.Web.Extension.Filters
@@ -46,9 +47,9 @@ namespace WY.RMS.Web.Extension.Filters
 
         }
 
-        private List<Module> InitSidebarMenu()
+        private List<ModuleVM> InitSidebarMenu()
         {
-            List<Module> parentMenuList = new List<Module>();
+            List<ModuleVM> parentMenuList = new List<ModuleVM>();
             string userId = ((System.Web.Security.FormsIdentity)(HttpContext.Current.User.Identity)).Ticket.UserData;
             if (!string.IsNullOrEmpty(userId))
             {
@@ -61,76 +62,47 @@ namespace WY.RMS.Web.Extension.Filters
                 else
                 {
                     #region 设置权限Cache
+
                     int id = Convert.ToInt32(userId);
-                    User user = _UserRepository.GetEntitiesByEager(new List<string> { "Roles", "UserGroups" }).FirstOrDefault(c => c.Id == id);
+                    User user =
+                        _UserRepository.GetEntitiesByEager(new List<string> { "Roles", "UserGroups" })
+                            .FirstOrDefault(c => c.Id == id);
                     var roleIdsByUser = user.Roles.Select(r => r.Id).ToList();
                     var roleIdsByUserGroup = user.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
                     roleIdsByUser.AddRange(roleIdsByUserGroup);
                     var roleIds = roleIdsByUser.Distinct().ToList();
-                    List<int> permissions = _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Select(c => c.Id).Distinct().ToList();
+                    List<int> permissions =
+                        _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true)
+                            .SelectMany(c => c.Permissions)
+                            .Select(c => c.Id)
+                            .Distinct()
+                            .ToList();
                     var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
                     CacheHelper.SetCache(strKey, permissions);
+
                     #endregion
+
                     permissionIds = permissions;
                 }
-                List<int> moduleIds = _PermissionService.Permissions.Where(p => p.PermissionType == (int)EnumPermissionType.Module && permissionIds.Contains(p.Id)).Select(p => p.TypeKey).Distinct().ToList();
-                ////取出所有父菜单的节点
-                parentMenuList = _ModuleService.GetEntitiesByEager(new List<string> { "ChildModules" }).Where(m => moduleIds.Contains(m.Id) && m.IsMenu == true && m.ParentId == null).OrderBy(t => t.Code).ToList();
-                //parentMenuList = _ModuleService.Modules.Where(m => moduleIds.Contains(m.Id) && m.IsMenu == true && m.ParentId == null).OrderBy(t => t.Code).ToList();
+                List<Module> childModules =
+                    _PermissionService.Permissions.Where(p => permissionIds.Contains(p.Id) && p.Enabled == true)
+                        .Select(p => p.module)
+                        .Distinct()
+                        .ToList();
+                if (childModules.Count > 0)
+                {
+                    parentMenuList = childModules.Select(c => c.ParentModule).Distinct().Select(c => new ModuleVM { Id = c.Id, Name = c.Name, LinkUrl = c.LinkUrl, Code = c.Code }).ToList();
+                    foreach (var item in parentMenuList.OrderBy(c => c.Code).ToList())
+                    {
+                        var children = childModules.Where(c => c.ParentId == item.Id).OrderBy(c => c.Code).Select(c => new ModuleVM { Name = c.Name, LinkUrl = c.LinkUrl }).ToList();
+                        if (children.Count > 0)
+                        {
+                            item.ChildModules = children;
+                        }
+                    }
+                }
             }
             return parentMenuList;
-            //var permissions = _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.IsDeleted == false).SelectMany(c => c.Permissions).ToList();
-            //List<int> moduleIds = permissions.Where(p => p.IsDeleted == false && p.PermissionType == (int)EnumPermissionType.Module).Select(p => p.TypeKey).Distinct().ToList();
-
-            //var parentModuleIdList = RoleModulePermissionService.RoleModulePermissions.Where(t => RoleIds.Contains(t.RoleId) && t.PermissionId == null && t.IsDeleted == false).Select(t => t.ModuleId).Distinct().ToList();
-            //var childModuleIdList = RoleModulePermissionService.RoleModulePermissions.Where(t => RoleIds.Contains(t.RoleId) && t.PermissionId != null && t.IsDeleted == false).Select(t => t.ModuleId).Distinct().ToList();
-
-            //foreach (var pmId in parentModuleIdList)
-            //{
-            //    //取出父菜单
-            //    var parentModule = ModuleService.Modules.FirstOrDefault(t => t.Id == pmId);
-            //    if (parentModule != null)
-            //    {
-            //        var sideBarMenu = new SideBarMenuVM
-            //        {
-            //            Id = parentModule.Id,
-            //            ParentId = parentModule.ParentId,
-            //            Name = parentModule.Name,
-            //            Code = parentModule.Code,
-            //            Icon = parentModule.Icon,
-            //            LinkUrl = parentModule.LinkUrl,
-            //        };
-
-            //        //取出子菜单
-            //        foreach (var cmId in childModuleIdList)
-            //        {
-            //            var childModule = ModuleService.Modules.FirstOrDefault(t => t.Id == cmId);
-            //            if (childModule != null && childModule.ParentId == sideBarMenu.Id)
-            //            {
-            //                var childSideBarMenu = new SidebarMenuModel
-            //                {
-            //                    Id = childModule.Id,
-            //                    ParentId = childModule.ParentId,
-            //                    Name = childModule.Name,
-            //                    Code = childModule.Code,
-            //                    Icon = childModule.Icon,
-            //                    Area = childModule.Area,
-            //                    Controller = childModule.Controller,
-            //                    Action = childModule.Action
-            //                };
-            //                sideBarMenu.ChildMenuList.Add(childSideBarMenu);
-            //            }
-            //        }
-
-            //        //子菜单排序
-            //        sideBarMenu.ChildMenuList = sideBarMenu.ChildMenuList.OrderBy(t => t.Code).ToList();
-            //        model.Add(sideBarMenu);
-            //    }
-            //    //父菜单排序
-            //    model = model.OrderBy(t => t.Code).ToList();
-            //}
-
-            //return model;
         }
     }
 }

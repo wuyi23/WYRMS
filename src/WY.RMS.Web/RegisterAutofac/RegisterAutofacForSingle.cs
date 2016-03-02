@@ -48,7 +48,6 @@ namespace WY.RMS.Web
             builder.RegisterType<UserGroupRepository>().As<IUserGroupRepository>().InstancePerHttpRequest();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerHttpRequest();
             builder.RegisterType<PermissionRepository>().As<IPermissionRepository>().InstancePerHttpRequest();
-            builder.RegisterType<OperationRepository>().As<IOperationRepository>().InstancePerHttpRequest();
             builder.RegisterType<ModuleRepository>().As<IModuleRepository>().InstancePerHttpRequest();
 
             #endregion

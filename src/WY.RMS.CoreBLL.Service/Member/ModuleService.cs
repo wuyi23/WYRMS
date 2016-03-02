@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Transactions;
 using WY.RMS.Component.Data;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
@@ -113,6 +114,29 @@ namespace WY.RMS.CoreBLL.Service
             catch
             {
                 return new OperationResult(OperationResultType.Error, "更新数据失败!");
+            }
+        }
+
+
+        public OperationResult Delete(IEnumerable<ModuleVM> list)
+        {
+            using (var scope = new TransactionScope())
+            {
+                try
+                {
+                    foreach (var item in list)
+                    {
+                        _moduleRepository.Delete(item.Id, false);
+                    }
+                    UnitOfWork.Commit();
+
+                    scope.Complete();
+                    return new OperationResult(OperationResultType.Success, "删除数据成功！");
+                }
+                catch
+                {
+                    return new OperationResult(OperationResultType.Error, "删除数据失败!");
+                }
             }
         }
 

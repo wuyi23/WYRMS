@@ -10,6 +10,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using WY.RMS.Component.Data.Configurations.Member;
 using WY.RMS.Domain.Model.Member;
 
+using System.Data.Entity.ModelConfiguration.Configuration;
+using System.Data.Entity.ModelConfiguration;
+
 namespace WY.RMS.Component.Data.EF
 {
     public class EFDbContext : DbContext
@@ -33,18 +36,20 @@ namespace WY.RMS.Component.Data.EF
 
         public DbSet<Module> Modules { get; set; }
 
-        public DbSet<Operation> Operations { get; set; }
 
         //[ImportMany(typeof(IEntityMapper))]
         //public IEnumerable<IEntityMapper> EntityMappers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //移除一对多的级联删除约定，想要级联删除可以在 EntityTypeConfiguration<TEntity>的实现类中进行控制
+            //移除一对多的级联删除约定，【想要级联删除可以在 EntityTypeConfiguration<TEntity>的实现类中进行控制,级联删除是在WithMany返回的对象中设定的。】
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //移除一对一的级联删除约定
+            //modelBuilder.Conventions.Remove<OneToOneConstraintIntroductionConvention>();
+            //移除多对多的级联删除约定
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Configurations.Add(new OperationConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
             modelBuilder.Configurations.Add(new RoleConfiguration());
             modelBuilder.Configurations.Add(new ModuleConfiguration());

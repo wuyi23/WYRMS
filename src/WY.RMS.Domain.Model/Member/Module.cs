@@ -23,7 +23,7 @@ namespace WY.RMS.Domain.Model.Member
     {
         public Module()
         {
-            this.Operations = new List<Operation>();
+            this.Permissions = new List<Permission>();
             this.ChildModules = new List<Module>();
         }
 
@@ -53,8 +53,8 @@ namespace WY.RMS.Domain.Model.Member
         public virtual ICollection<Module> ChildModules { get; set; }
 
         /// <summary>
-        /// 操作集合
+        /// 权限集合
         /// </summary>
-        public virtual ICollection<Operation> Operations { get; set; }
+        public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

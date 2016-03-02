@@ -11,7 +11,7 @@
 <#@ output extension=".cs" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="IEntityRepositoryTemplate.tt" #>
-<#@ include file="EntityRepositoryTemplate.tt" #>
+<#@ include file="EntityRepositoryTemplate.tt" #> 
 <#
     string currentPath = Path.GetDirectoryName(Host.TemplateFile);
     string projectPath =currentPath.Substring(0, currentPath.IndexOf(@"\T4"));

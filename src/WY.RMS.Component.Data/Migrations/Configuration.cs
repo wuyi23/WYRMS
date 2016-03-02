@@ -1,14 +1,13 @@
 using WY.RMS.Component.Data.EF;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using WY.RMS.Domain.Model.Member;
 
 namespace WY.RMS.Component.Data.Migrations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using WY.RMS.Domain.Model.Member;
-
     internal sealed class Configuration : DbMigrationsConfiguration<EFDbContext>
     {
         public Configuration()
@@ -42,18 +41,17 @@ namespace WY.RMS.Component.Data.Migrations
                 new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "~/SysConfig/OperateLog/Index",Code = 301,Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
             };
             DbSet<Module> moduleSet = context.Set<Module>();
-            moduleSet.AddOrUpdate(t => new { t.Id }, modules.ToArray());
+            moduleSet.AddOrUpdate(t => new { t.Name }, modules.ToArray());
             context.SaveChanges();
 
             List<Permission> permissions = new List<Permission>
             {
-                new Permission{Id=1, PermissionType=1, TypeKey=1,UpdateDate=DateTime.Now},
-                new Permission{Id=2, PermissionType=1, TypeKey=2,UpdateDate=DateTime.Now},
-                new Permission{Id=3, PermissionType=1, TypeKey=3,UpdateDate=DateTime.Now},
-                new Permission{Id=4, PermissionType=1, TypeKey=4,UpdateDate=DateTime.Now},
-                new Permission{Id=5, PermissionType=1, TypeKey=5,UpdateDate=DateTime.Now},
-                new Permission{Id=6, PermissionType=1, TypeKey=6,UpdateDate=DateTime.Now},
-                new Permission{Id=7, PermissionType=1, TypeKey=7,UpdateDate=DateTime.Now}
+                new Permission{Id=1, Name="查询",Code=1, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+              new Permission{Id=2, Name="查询",Code=2, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=3, Name="查询",Code=3, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[3]},
+                new Permission{Id=4, Name="查询",Code=4, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[4]},
+              new Permission{Id=5, Name="查询",Code=5, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[6]},
+               new Permission{Id=6, Name="修改",Code=6, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
             };
             DbSet<Permission> permissionSet = context.Set<Permission>();
             permissionSet.AddOrUpdate(m => new { m.Id }, permissionSet.ToArray());

@@ -1,5 +1,5 @@
-﻿@using WY.RMS.Domain.Model.Member
-@model IEnumerable<Module>
+﻿@using WY.RMS.ViewModel.Member
+@model IEnumerable<ModuleVM>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -46,20 +46,20 @@
                         <i class="fa fa-windows"></i> <span>@item.Name</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    @if (item.ChildModules.Count > 0)
-                    {
-                        <ul class="treeview-menu">
-                            @{
-                        IList<Module> orderChild = item.ChildModules.OrderBy(c => c.Code).ToList();
-                        foreach (var child in orderChild)
-                        {
-                            <li><a href="@Url.Content(@child.LinkUrl)">@child.Name</a></li>
+                    @*@if (item.ChildModules.Count > 0)
+                        {*@
+                    <ul class="treeview-menu">
+                        @{
+                //IList<Module> orderChild = item.ChildModules.OrderBy(c => c.Code).ToList();
+                foreach (var child in item.ChildModules)
+                {
+                    <li><a href="@Url.Content(@child.LinkUrl)">@child.Name</a></li>
+                }
                         }
-                            }
-                            @*<li><a href="#">Link in level 2</a></li>
-                                <li><a href="#">Link in level 2</a></li>*@
-                        </ul>
-                    }
+                        @*<li><a href="#">Link in level 2</a></li>
+                            <li><a href="#">Link in level 2</a></li>*@
+                    </ul>
+                    @*}*@
                 </li>
 
             }

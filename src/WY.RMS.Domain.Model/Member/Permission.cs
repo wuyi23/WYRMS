@@ -1,4 +1,4 @@
-﻿/************************************
+﻿                                                                                                                                       /************************************
  * 描述：尚未添加描述
  * 作者：吴毅
  * 日期：2015/9/15 16:26:44  
@@ -27,19 +27,22 @@ namespace WY.RMS.Domain.Model.Member
             this.Roles = new List<Role>();
         }
 
-        [Required]
-        [Description("权限类型")]
-        public int PermissionType { get; set; }
+        [Description("名称")]
+        public string Name { get; set; }
 
-        [Required]
-        [Description("相关权限类型表主键")]
-        public int TypeKey { get; set; }
+        [Description("操作编号")]
+        public int Code { get; set; }
 
+        [Description("描述")]
+        public string Description { get; set; }
 
+        public bool Enabled { get; set; }
+
+        public virtual Module module { get; set; }
 
         /// <summary>
         /// 角色集合
-        /// </summary>
+        /// </summary>   
         public virtual ICollection<Role> Roles { get; set; }
 
     }

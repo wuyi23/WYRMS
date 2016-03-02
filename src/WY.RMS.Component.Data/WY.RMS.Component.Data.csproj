@@ -59,10 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\Member\Mapping\ModuleConfiguration.cs" />
-    <Compile Include="Configurations\Member\Mapping\OperationConfiguration.cs" />
     <Compile Include="Configurations\Member\Mapping\PermissionConfiguration.cs" />
     <Compile Include="Configurations\Member\ModuleConfiguration.generated.cs" />
-    <Compile Include="Configurations\Member\OperationConfiguration.generated.cs" />
     <Compile Include="Configurations\Member\PermissionConfiguration.generated.cs" />
     <Compile Include="Configurations\Member\RoleConfiguration.generated.cs" />
     <Compile Include="Configurations\Member\UserConfiguration.generated.cs" />

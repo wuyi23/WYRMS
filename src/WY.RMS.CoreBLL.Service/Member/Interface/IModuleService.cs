@@ -44,6 +44,12 @@ namespace WY.RMS.CoreBLL.Service
         /// <param name="model"></param>
         /// <returns></returns>
         OperationResult Update(ModuleVM model);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        OperationResult Delete(IEnumerable<ModuleVM> list);
 
         #endregion
     }
