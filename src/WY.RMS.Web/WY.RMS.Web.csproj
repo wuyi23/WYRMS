@@ -383,6 +383,7 @@
     <Content Include="Areas\Member\Views\Module\Index.cshtml" />
     <Content Include="Areas\Member\Views\Module\Create.cshtml" />
     <Content Include="Areas\Member\Views\Permission\Index.cshtml" />
+    <Content Include="Areas\Member\Views\Permission\Create.cshtml" />
     <None Include="Properties\PublishProfiles\xiaowu.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\AdminLTE2.3.0\bootstrap\css\bootstrap.css" />

@@ -5,7 +5,7 @@
 @Html.HiddenFor(t => t.Id)
 <div class="form-group">
     <div class="col-sm-2">
-        <label style="color:red">*</label>@Html.LabelFor(model => model.UserName, new { @class = " control-label" })
+        <label style="color: red; margin-left: -8px;">*</label>@Html.LabelFor(model => model.UserName, new { @class = " control-label" })
     </div>
 
     <div class="col-sm-8">
@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <div class="col-sm-2">
-        <label style="color: red">*</label>@Html.LabelFor(model => model.TrueName, new { @class = "control-label" })
+        <label style="color: red; margin-left: -8px;">*</label>@Html.LabelFor(model => model.TrueName, new { @class = "control-label" })
     </div>
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.TrueName, new { @class = "form-control" })
@@ -24,32 +24,37 @@
 </div>
 <div class="form-group">
     <div class="col-sm-2">
-        <label style="color: red">*</label>@Html.LabelFor(model => model.Email, new { @class = " control-label" })
+        <label style="color: red; margin-left: -8px;">*</label>@Html.LabelFor(model => model.Email, new { @class = " control-label" })
     </div>
-
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Email)
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.Phone, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Phone, new { @class = " control-label" })
+    </div>
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Phone)
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.Address, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Address, new { @class = "control-label" })
+    </div>
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Address)
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.Enabled, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Enabled, new { @class = " control-label" })
+    </div>
     <div class="checkbox icheck col-sm-8">
-        @Html.CheckBoxFor(model => model.Enabled, new { @class = "myCheck" })  @*增加myCheck样式为了避免表格中的checkbox失效*@
+        @Html.CheckBoxFor(model => model.Enabled, new { @class = "myCheck" }) @*增加myCheck样式为了避免表格中的checkbox失效*@
         @Html.ValidationMessageFor(model => model.Enabled)
     </div>
 </div>

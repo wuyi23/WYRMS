@@ -5,38 +5,42 @@
 @Html.HiddenFor(t => t.Id)
 <div class="form-group">
     <div class="col-sm-2">
-        <label style="color:red">*</label>@Html.LabelFor(model => model.RoleName, new { @class = " control-label" })
+        <label style="color: red; margin-left: -8px;">*</label>@Html.LabelFor(model => model.RoleName, new { @class = " control-label" })
     </div>
-
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.RoleName)
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.Description, new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+    </div>
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Description)
     </div>
 </div>
-<div class="form-group">
-    @Html.LabelFor(model => model.Enabled, new { @class = "col-sm-2 control-label" })
-    <div class="checkbox icheck col-sm-8">
-        @Html.CheckBoxFor(model => model.Enabled, new { @class = "myCheck" })  @*增加myCheck样式为了避免表格中的checkbox失效*@
-        @Html.ValidationMessageFor(model => model.Enabled)
-    </div>
-</div>
+
 
 <div class="form-group">
     <div class="col-sm-2">
-        <label style="color:red">*</label>
+        <label style="color:red; margin-left: -8px;">*</label>
         @Html.LabelFor(model => model.OrderSort, new { @class = "control-label" })
     </div>
 
     <div class="col-sm-8">
         @Html.TextBoxFor(model => model.OrderSort, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.OrderSort)
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Enabled, new { @class = "control-label" })
+    </div>
+    <div class="checkbox icheck col-sm-8">
+        @Html.CheckBoxFor(model => model.Enabled, new { @class = "myCheck" }) @*增加myCheck样式为了避免表格中的checkbox失效*@
+        @Html.ValidationMessageFor(model => model.Enabled)
     </div>
 </div>
 <script>

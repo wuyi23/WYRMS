@@ -61,7 +61,7 @@ namespace WY.RMS.ViewModel.Member
         public int ModuleId { get; set; }
 
 
-        [Display(Name = "所属模块名称")]
+        [Display(Name = "所属模块")]
         public string ModuleName { get; set; }
     }
 }

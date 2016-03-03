@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -17,9 +18,11 @@ namespace WY.RMS.Web.Areas.Member.Controllers
     public class PermissionController : Controller
     {
         private readonly IPermissionService _permissionService;
-        public PermissionController(IPermissionService permissionService)
+        private readonly IModuleService _moduleService;
+        public PermissionController(IPermissionService permissionService, IModuleService moduleService)
         {
             this._permissionService = permissionService;
+            this._moduleService = moduleService;
         }
 
         //
@@ -49,5 +52,26 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
             return Json(new { total = total, rows = result }, JsonRequestBehavior.AllowGet);
         }
+
+        #region 新增
+        public ActionResult Create()
+        {
+            var vm = new PermissionVM();
+            ViewBag.ModuleList = _moduleService.Modules
+                                        .Where(c=>c.Enabled == true && c.ChildModules.Count==0)
+                                        .Select(c => new SelectListItem() { Text = c.Name, Value = SqlFunctions.StringConvert((double)c.Id).Trim() })
+                                        .ToList();
+            return PartialView(vm);
+
+        }
+        [HttpPost]
+        public ActionResult Create(PermissionVM vm)
+        {
+            if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新输入"));
+            var result = _permissionService.Insert(vm);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
     }
 }
