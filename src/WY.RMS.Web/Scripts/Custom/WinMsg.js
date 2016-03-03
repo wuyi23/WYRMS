@@ -12,8 +12,8 @@
                                       '<p>[Message]</p>' +
                                       '</div>' +
                                        '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-default cancel" data-dismiss="modal">[BtnCancel]</button>' +
         '<button type="button" class="btn btn-primary ok" data-dismiss="modal">[BtnOk]</button>' +
+                '<button type="button" class="btn btn-default cancel" data-dismiss="modal">[BtnCancel]</button>' +
     '</div>' +
                                   '</div>' +
                               '</div>' +

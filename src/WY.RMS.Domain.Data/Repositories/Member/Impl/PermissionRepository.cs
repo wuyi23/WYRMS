@@ -36,7 +36,7 @@ namespace WY.RMS.Domain.Data.Repositories.Member.Impl
             total = q.Count();
             if (offset >= 0)
             {
-                return q.OrderBy(c => c.Code).Skip(offset).Take(limit).ToList();
+                return q.OrderBy(c => c.ModuleId).ThenBy(c => c.Code).Skip(offset).Take(limit).ToList();
             }
             return q.ToList();
         }
