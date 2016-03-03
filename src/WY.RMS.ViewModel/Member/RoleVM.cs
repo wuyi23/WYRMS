@@ -15,6 +15,7 @@ namespace WY.RMS.ViewModel.Member
         public RoleVM()
         {
             Enabled = true;
+            OrderSort = 9999;
         }
         [Display(Name = "角色ID")]
         public int Id { get; set; }
@@ -38,7 +39,7 @@ namespace WY.RMS.ViewModel.Member
         }
         [Display(Name = "排序号")]
         [RegularExpression(@"\d+", ErrorMessage = "排序必须是整数")]
-        [Range(1, 99999, ErrorMessage = "排序数值范围必须为{1}到{2}")]
+        [Range(1, 9999, ErrorMessage = "排序数值范围必须为{1}到{2}")]
         public int OrderSort { get; set; }
         [Display(Name = "更新时间")]
         public DateTime UpdateDate { get; set; }

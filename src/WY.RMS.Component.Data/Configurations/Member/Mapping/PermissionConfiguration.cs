@@ -14,7 +14,7 @@ namespace WY.RMS.Component.Data.Configurations.Member
         {
             this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.HasMany(r => r.Roles).WithMany(u => u.Permissions);
-            this.HasRequired(c => c.module).WithMany(c => c.Permissions);
+            this.HasRequired(c => c.module).WithMany(c => c.Permissions).HasForeignKey(d => d.ModuleId); ;
         }
     }
 }

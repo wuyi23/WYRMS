@@ -58,7 +58,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         {
             var vm = new PermissionVM();
             ViewBag.ModuleList = _moduleService.Modules
-                                        .Where(c=>c.Enabled == true && c.ChildModules.Count==0)
+                                        .Where(c => c.Enabled == true && c.ChildModules.Count == 0)
                                         .Select(c => new SelectListItem() { Text = c.Name, Value = SqlFunctions.StringConvert((double)c.Id).Trim() })
                                         .ToList();
             return PartialView(vm);
@@ -69,6 +69,43 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         {
             if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新输入"));
             var result = _permissionService.Insert(vm);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
+
+        #region 修改
+        //
+        // GET: /Member/Permission/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            var permission = _permissionService.Permissions.FirstOrDefault(c => c.Id == id);
+            if (permission == null) return PartialView("Create", new PermissionVM());
+            ViewBag.ModuleList = _moduleService.Modules
+                             .Where(c => c.Enabled == true && c.ChildModules.Count == 0)
+                            .Select(c => new SelectListItem() { Text = c.Name, Value = SqlFunctions.StringConvert((double)c.Id).Trim(), Selected = (permission.ModuleId == c.Id) })
+                            .ToList();
+            var entity = new PermissionVM()
+            {
+                Id = permission.Id,
+                Name = permission.Name,
+                ModuleId = permission.ModuleId,
+                Code = permission.Code,
+                Description = permission.Description,
+                Enabled = permission.Enabled,
+            };
+            return PartialView("Create", entity);
+        }
+
+        //
+        // POST: /Member/Module/Edit
+
+        [HttpPost]
+        public ActionResult Edit(PermissionVM permissionVM)
+        {
+            if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新检查输入"));
+            var result = _permissionService.Update(permissionVM);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }

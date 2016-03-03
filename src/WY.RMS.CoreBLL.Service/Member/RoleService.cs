@@ -29,7 +29,7 @@ namespace WY.RMS.CoreBLL.Service
         {
             try
             {
-                Role oldRole = _RoleRepository.Entities.FirstOrDefault(c => c.RoleName == model.RoleName);
+                Role oldRole = _RoleRepository.Entities.FirstOrDefault(c => c.RoleName == model.RoleName.Trim());
                 if (oldRole != null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的角色，请修改后重新提交！");
@@ -59,7 +59,7 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                var other = Roles.FirstOrDefault(c => c.Id != model.Id && c.RoleName == model.RoleName);
+                var other = Roles.FirstOrDefault(c => c.Id != model.Id && c.RoleName == model.RoleName.Trim());
                 if (other != null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的角色，请修改后重新提交！");

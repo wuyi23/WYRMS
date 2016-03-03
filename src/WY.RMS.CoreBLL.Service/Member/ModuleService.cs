@@ -61,14 +61,14 @@ namespace WY.RMS.CoreBLL.Service
         {
             try
             {
-                Module oldModule = Modules.FirstOrDefault(c => c.Name == model.Name);
+                Module oldModule = Modules.FirstOrDefault(c => c.Name == model.Name.Trim());
                 if (oldModule != null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");
                 }
                 var entity = new Module
                 {
-                    Name = model.Name,
+                    Name = model.Name.Trim(),
                     ParentId = model.ParentId,
                     LinkUrl = model.LinkUrl,
                     IsMenu = model.IsMenu,
@@ -95,7 +95,7 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                var other = Modules.FirstOrDefault(c => c.Id != model.Id && c.Name == model.Name);
+                var other = Modules.FirstOrDefault(c => c.Id != model.Id && c.Name == model.Name.Trim());
                 if (other!=null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");

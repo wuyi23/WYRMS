@@ -40,6 +40,9 @@ namespace WY.RMS.Domain.Model.Member
 
         public bool Enabled { get; set; }
 
+        [Description("所属模块Id")]
+        public int ModuleId { get; set; }
+
         public virtual Module module { get; set; }
 
         /// <summary>

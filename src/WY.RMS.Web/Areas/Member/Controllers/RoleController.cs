@@ -71,7 +71,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
         public ActionResult Create()
         {
-            var model = new RoleVM() { OrderSort = 9999 };
+            var model = new RoleVM();
             return PartialView(model);
         }
 

@@ -17,6 +17,7 @@ namespace WY.RMS.ViewModel.Member
             Enabled = true;
             IsMenu = true;
             LinkUrl = "#";
+            Code = 9999;
         }
         [Display(Name = "模块ID")]
         public int Id { get; set; }
@@ -44,6 +45,7 @@ namespace WY.RMS.ViewModel.Member
         public bool IsMenu { get; set; }
 
         [Display(Name = "模块编号")]
+        [Range(1, 9999, ErrorMessage = "数值范围必须为{1}到{2}")]
         public int Code { get; set; }
 
         [Display(Name = "描述")]

@@ -19,6 +19,7 @@ namespace WY.RMS.ViewModel.Member
         public PermissionVM()
         {
             Enabled = true;
+            Code = 9999;
         }
         [Display(Name = "权限ID")]
         public int Id { get; set; }
@@ -29,7 +30,7 @@ namespace WY.RMS.ViewModel.Member
         public string Name { get; set; }
 
 
-
+        [Range(1, 9999, ErrorMessage = "排序数值范围必须为{1}到{2}")]
         [Display(Name = "权限编号")]
         public int Code { get; set; }
 

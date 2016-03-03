@@ -70,7 +70,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
         public ActionResult Create()
         {
-            var model = new UserVM() { Enabled = true };
+            var model = new UserVM();
             return PartialView(model);
         }
 

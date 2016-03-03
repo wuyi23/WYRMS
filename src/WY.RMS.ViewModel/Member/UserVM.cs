@@ -15,6 +15,11 @@ namespace WY.RMS.ViewModel.Member
 {
     public class UserVM
     {
+        public UserVM()
+        {
+            Enabled = true;
+        }
+
         [Display(Name = "用户ID")]
         public int Id { get; set; }
 

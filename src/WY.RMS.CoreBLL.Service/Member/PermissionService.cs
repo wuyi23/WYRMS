@@ -34,7 +34,7 @@ namespace WY.RMS.CoreBLL.Service
             }
         }
 
-                /// <summary>
+        /// <summary>
         /// 获取模块分页列表
         /// </summary>
         /// <param name="wh">查询where表达式</param>
@@ -53,23 +53,21 @@ namespace WY.RMS.CoreBLL.Service
         {
             try
             {
-                //Module oldModule = Permissions.FirstOrDefault(c => c.Name == model.Name);
-                //if (oldModule != null)
-                //{
-                //    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");
-                //}
-                //var entity = new Module
-                //{
-                //    Name = model.Name,
-                //    ParentId = model.ParentId,
-                //    LinkUrl = model.LinkUrl,
-                //    IsMenu = model.IsMenu,
-                //    Code = model.Code,
-                //    Description = model.Description,
-                //    Enabled = model.Enabled,
-                //    UpdateDate = DateTime.Now
-                //};
-                //_moduleRepository.Insert(entity);
+                Permission oldPermission = Permissions.Where(c => c.module.Id == model.ModuleId).FirstOrDefault(c => c.Name == model.Name.Trim());
+                if (oldPermission != null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称的权限，请修改后重新提交！");
+                }
+                var entity = new Permission
+                {
+                    Name = model.Name,
+                    ModuleId = model.ModuleId,
+                    Code = model.Code,
+                    Description = model.Description,
+                    Enabled = model.Enabled,
+                    UpdateDate = DateTime.Now
+                };
+                _PermissionRepository.Insert(entity);
                 return new OperationResult(OperationResultType.Success, "新增数据成功！");
             }
             catch
@@ -82,25 +80,23 @@ namespace WY.RMS.CoreBLL.Service
         {
             try
             {
-                //var module = Modules.FirstOrDefault(c => c.Id == model.Id);
-                //if (module == null)
-                //{
-                //    throw new Exception();
-                //}
-                //var other = Modules.FirstOrDefault(c => c.Id != model.Id && c.Name == model.Name);
-                //if (other!=null)
-                //{
-                //    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");
-                //}
-                //module.Name = model.Name.Trim();
-                //module.ParentId = model.ParentId;
-                //module.LinkUrl = model.LinkUrl;
-                //module.IsMenu = model.IsMenu;
-                //module.Code = model.Code;
-                //module.Description = model.Description;
-                //module.Enabled = model.Enabled;
-                //module.UpdateDate = DateTime.Now;
-                //_moduleRepository.Update(module);
+                var permission = Permissions.FirstOrDefault(c => c.Id == model.Id);
+                if (permission == null)
+                {
+                    throw new Exception();
+                }
+                var other = Permissions.FirstOrDefault(c => c.Id != model.Id && c.ModuleId == model.ModuleId && c.Name == model.Name.Trim());
+                if (other != null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称的权限，请修改后重新提交！");
+                }
+                permission.Name = model.Name.Trim();
+                permission.ModuleId = model.ModuleId;
+                permission.Code = model.Code;
+                permission.Description = model.Description;
+                permission.Enabled = model.Enabled;
+                permission.UpdateDate = DateTime.Now;
+                _PermissionRepository.Update(permission);
                 return new OperationResult(OperationResultType.Success, "更新数据成功！");
             }
             catch

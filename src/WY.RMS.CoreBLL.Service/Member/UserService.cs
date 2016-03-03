@@ -71,7 +71,7 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                var other = Users.FirstOrDefault(c => c.Id != model.Id && c.UserName == model.UserName);
+                var other = Users.FirstOrDefault(c => c.Id != model.Id && c.UserName == model.UserName.Trim());
                 if (other != null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同的用户名称，请修改后重新提交！");
