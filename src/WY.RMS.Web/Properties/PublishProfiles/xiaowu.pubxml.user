@@ -21,6 +21,18 @@
     <File Include="Areas/Common/Views/_ViewStart.cshtml">
       <publishTime>11/25/2015 11:02:41</publishTime>
     </File>
+    <File Include="Areas/Member/Views/Module/Create.cshtml">
+      <publishTime>03/03/2016 14:06:37</publishTime>
+    </File>
+    <File Include="Areas/Member/Views/Module/Index.cshtml">
+      <publishTime>03/02/2016 13:49:22</publishTime>
+    </File>
+    <File Include="Areas/Member/Views/Permission/Create.cshtml">
+      <publishTime>03/03/2016 14:03:35</publishTime>
+    </File>
+    <File Include="Areas/Member/Views/Permission/Index.cshtml">
+      <publishTime>03/03/2016 15:41:56</publishTime>
+    </File>
     <File Include="Areas/Member/Views/Role/Create.cshtml">
       <publishTime>12/28/2015 17:28:09</publishTime>
     </File>
@@ -31,10 +43,10 @@
       <publishTime>02/03/2016 15:17:26</publishTime>
     </File>
     <File Include="Areas/Member/Views/User/Create.cshtml">
-      <publishTime>02/16/2016 11:25:34</publishTime>
+      <publishTime>03/03/2016 14:12:22</publishTime>
     </File>
     <File Include="Areas/Member/Views/User/Index.cshtml">
-      <publishTime>02/19/2016 10:41:41</publishTime>
+      <publishTime>02/24/2016 17:44:18</publishTime>
     </File>
     <File Include="Areas/Member/Views/Web.config">
       <publishTime>11/17/2015 14:11:40</publishTime>
@@ -100,28 +112,28 @@
       <publishTime>02/18/2016 14:21:02</publishTime>
     </File>
     <File Include="bin/WY.RMS.Component.Data.dll">
-      <publishTime>02/22/2016 11:44:36</publishTime>
+      <publishTime>03/03/2016 15:54:49</publishTime>
     </File>
     <File Include="bin/WY.RMS.Component.Tools.dll">
-      <publishTime>02/19/2016 09:45:04</publishTime>
+      <publishTime>03/03/2016 15:54:36</publishTime>
     </File>
     <File Include="bin/WY.RMS.CoreBLL.Data.dll">
       <publishTime>01/04/2016 14:00:33</publishTime>
     </File>
     <File Include="bin/WY.RMS.CoreBLL.Service.dll">
-      <publishTime>02/22/2016 11:44:37</publishTime>
+      <publishTime>03/03/2016 15:54:52</publishTime>
     </File>
     <File Include="bin/WY.RMS.Domain.Data.dll">
-      <publishTime>02/22/2016 11:44:37</publishTime>
+      <publishTime>03/03/2016 15:54:51</publishTime>
     </File>
     <File Include="bin/WY.RMS.Domain.Model.dll">
-      <publishTime>02/19/2016 09:45:04</publishTime>
+      <publishTime>03/03/2016 15:54:47</publishTime>
     </File>
     <File Include="bin/WY.RMS.ViewModel.dll">
-      <publishTime>02/19/2016 09:45:04</publishTime>
+      <publishTime>03/03/2016 15:54:36</publishTime>
     </File>
     <File Include="bin/WY.RMS.Web.dll">
-      <publishTime>02/22/2016 11:44:39</publishTime>
+      <publishTime>03/03/2016 15:55:06</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/18/2016 14:16:52</publishTime>
@@ -3151,10 +3163,10 @@
       <publishTime>12/31/2015 10:01:10</publishTime>
     </File>
     <File Include="Scripts/Custom/TableOperation.js">
-      <publishTime>02/19/2016 14:29:34</publishTime>
+      <publishTime>02/24/2016 17:12:29</publishTime>
     </File>
     <File Include="Scripts/Custom/WinMsg.js">
-      <publishTime>12/18/2015 10:44:32</publishTime>
+      <publishTime>03/03/2016 10:41:18</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>12/18/2015 10:44:32</publishTime>
@@ -3223,10 +3235,10 @@
       <publishTime>08/20/2015 16:58:42</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/22/2015 16:57:59</publishTime>
+      <publishTime>03/02/2016 11:56:53</publishTime>
     </File>
     <File Include="Views/Shared/_LeftSideMenus.cshtml">
-      <publishTime>12/22/2015 16:56:03</publishTime>
+      <publishTime>03/02/2016 11:37:44</publishTime>
     </File>
     <File Include="Views/Shared/_MainFooter.cshtml">
       <publishTime>11/27/2015 13:50:15</publishTime>

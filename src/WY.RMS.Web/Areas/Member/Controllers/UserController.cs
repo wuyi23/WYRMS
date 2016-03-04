@@ -86,7 +86,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         }
         //
         // GET: /Member/User/Edit/5
-
+        [IsAjax]
         public ActionResult Edit(int id = 0)
         {
             var user = _userService.Users.FirstOrDefault(c => c.Id == id);

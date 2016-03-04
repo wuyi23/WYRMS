@@ -23,7 +23,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         }
 
         private readonly EFDbContext _db = new EFDbContext();
-        
+
 
         //
         // GET: /Member/Role/
@@ -89,7 +89,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
         //
         // GET: /Member/Role/Edit/5
-
+        [IsAjax]
         public ActionResult Edit(int id = 0)
         {
             var role = _roleService.Roles.FirstOrDefault(c => c.Id == id);

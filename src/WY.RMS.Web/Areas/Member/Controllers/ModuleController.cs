@@ -77,7 +77,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         #region 修改
         //
         // GET: /Member/Module/Edit/5
-
+        [IsAjax]
         public ActionResult Edit(int id = 0)
         {
             var module = _moduleService.Modules.FirstOrDefault(c => c.Id == id);

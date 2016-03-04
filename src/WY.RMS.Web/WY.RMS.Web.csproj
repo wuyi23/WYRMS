@@ -145,6 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extension\Common\DataSourceHelper.cs" />
     <Compile Include="Extension\Common\ValidationHelper.cs" />
+    <Compile Include="Extension\Filters\IsAjaxAttribute.cs" />
     <Compile Include="Extension\Filters\LayoutAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
