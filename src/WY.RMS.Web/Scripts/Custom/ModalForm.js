@@ -3,10 +3,10 @@
 
 /*******弹出表单*********/
 function ShowModal(actionUrl, param, title) {
-
+    var $modal = $("#authorizeModal");
     //表单初始化
-    $(".modal-title").html(title);
-    $("#modal-content").attr("action", actionUrl);
+    $(".modal-title", $modal).html(title);
+    $("#modal-content", $modal).attr("action", actionUrl);
 
     $.ajax({
         type: "GET",

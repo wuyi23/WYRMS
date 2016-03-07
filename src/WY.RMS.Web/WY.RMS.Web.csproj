@@ -154,6 +154,23 @@
     <Compile Include="RegisterAutofac\RegisterAutofacForSingle.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\diy\1_close.png" />
+    <Content Include="Content\img\diy\1_open.png" />
+    <Content Include="Content\img\diy\2.png" />
+    <Content Include="Content\img\diy\3.png" />
+    <Content Include="Content\img\diy\4.png" />
+    <Content Include="Content\img\diy\5.png" />
+    <Content Include="Content\img\diy\6.png" />
+    <Content Include="Content\img\diy\7.png" />
+    <Content Include="Content\img\diy\8.png" />
+    <Content Include="Content\img\diy\9.png" />
+    <Content Include="Content\img\line_conn.gif" />
+    <Content Include="Content\img\line_conn.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\metro.gif" />
+    <Content Include="Content\img\metro.png" />
+    <Content Include="Content\img\zTreeStandard.gif" />
+    <Content Include="Content\img\zTreeStandard.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -208,6 +225,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\zTree.css" />
+    <Content Include="Content\zTree.min.css" />
+    <Content Include="Content\zTree.theme.metro.css" />
+    <Content Include="Content\zTree.theme.metro.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\AdminLTE2.3.0\bootstrap\css\bootstrap.css.map" />
@@ -369,8 +390,12 @@
     <Content Include="Scripts\bootstraptable\dist\locale\bootstrap-table-zh-TW.min.js" />
     <Content Include="Scripts\Custom\ModalForm.js" />
     <Content Include="Scripts\Custom\MyCommon.js" />
+    <Content Include="Scripts\Custom\Role\AuthorizePermissionModal.js" />
     <Content Include="Scripts\Custom\WinMsg.js" />
     <Content Include="Scripts\Custom\TableOperation.js" />
+    <Content Include="Scripts\jquery.ztree.all-3.5.js" />
+    <Content Include="Scripts\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Scripts\jquery.ztree.dropdown.js" />
     <Content Include="Scripts\Toastr\toastr.css" />
     <Content Include="Scripts\Toastr\toastr.min.css" />
     <Content Include="Scripts\Toastr\toastr.min.js" />
@@ -385,6 +410,7 @@
     <Content Include="Areas\Member\Views\Module\Create.cshtml" />
     <Content Include="Areas\Member\Views\Permission\Index.cshtml" />
     <Content Include="Areas\Member\Views\Permission\Create.cshtml" />
+    <Content Include="Areas\Member\Views\Role\AuthorizePermission.cshtml" />
     <None Include="Properties\PublishProfiles\xiaowu.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\AdminLTE2.3.0\bootstrap\css\bootstrap.css" />

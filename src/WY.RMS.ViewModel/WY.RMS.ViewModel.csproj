@@ -55,6 +55,7 @@
     <Compile Include="Member\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SideBarMenuVM.cs" />
+    <Compile Include="ZTreeVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

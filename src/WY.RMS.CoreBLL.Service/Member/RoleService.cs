@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
 using WY.RMS.Component.Data;
@@ -7,6 +8,7 @@ using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel;
 using WY.RMS.ViewModel.Member;
 
 namespace WY.RMS.CoreBLL.Service
@@ -14,11 +16,15 @@ namespace WY.RMS.CoreBLL.Service
     public class RoleService : CoreServiceBase, IRoleService
     {
         private readonly IRoleRepository _RoleRepository;
+        private readonly IModuleService _ModuleService;
+        private readonly IPermissionService _PermissionService;
 
-        public RoleService(IRoleRepository roleRepository, IUnitOfWork unitOfWork)
+        public RoleService(IRoleRepository roleRepository, IModuleService moduleService, IPermissionService permissionService, IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             this._RoleRepository = roleRepository;
+            this._ModuleService = moduleService;
+            this._PermissionService = permissionService;
         }
         public IQueryable<Role> Roles
         {
@@ -98,6 +104,40 @@ namespace WY.RMS.CoreBLL.Service
                 }
             }
 
+        }
+        /// <summary>
+        /// 构造树的数据源
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IList<ZTreeVM> GetListZTreeVM(int id)
+        {
+            List<ZTreeVM> result = new List<ZTreeVM>();
+            List<double> permissionIds = Roles.First(c => c.Id == id).Permissions.Select(c => c.Id + 0.5).ToList();
+            List<ZTreeVM> mouduleNodes = _ModuleService.Modules.Where(c => c.Enabled == true).Select(c => new ZTreeVM()
+            {
+                id = c.Id,
+                pId = c.ParentId,
+                name = c.Name,
+                isParent = !c.ParentId.HasValue
+            }).ToList();
+            List<ZTreeVM> permissionNodes =
+                _PermissionService.Permissions.Where(c => c.Enabled == true).Select(c => new ZTreeVM()
+                {
+                    id = c.Id + 0.5,
+                    pId = c.ModuleId,
+                    name = c.Name
+                }).ToList();
+            foreach (var node in permissionNodes)
+            {
+                if (permissionIds.Contains(node.id))
+                {
+                    node.@checked = true;
+                }
+            }
+            result.AddRange(mouduleNodes);
+            result.AddRange(permissionNodes);
+            return result;
         }
     }
 }

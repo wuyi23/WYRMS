@@ -1,6 +1,9 @@
 ﻿@{
     List<SelectListItem> enableItems = ViewBag.EnableItems;
 }
+@section css{
+    <link href="~/Content/zTree.theme.metro.min.css" rel="stylesheet" />
+}
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -47,19 +50,24 @@
                 <button id="btn_delete" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                 </button>
+                <button id="btn_authorize" type="button" class="btn btn-info ">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>授权
+                </button>
             </div>
             <table id="tb_roles"></table>
         </div>
 
         @Html.Partial("_ModalForm")
+        @Html.Partial("AuthorizePermission")
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @section  scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.ztree.all-3.5.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
-
+    <script src="~/Scripts/Custom/Role/AuthorizePermissionModal.js"></script>
     <script>
         $(function () {
             //得到表格查询的参数
@@ -108,7 +116,7 @@
             var param = {};
             ShowModal(actionUrl, param, "新增角色");
         });
-
+        //编辑角色
         $("#btn_edit").click(function () {
             var arrselections = $("#tb_roles").bootstrapTable('getSelections');
             if (arrselections.length > 1) {
@@ -128,6 +136,27 @@
             var actionUrl = "@Url.Action("Delete")";
             MultDelete($tb, actionUrl);
         });
+        //权限授权
+        $("#btn_authorize").click(function () {
+            var arrselections = $("#tb_roles").bootstrapTable('getSelections');
+            if (arrselections.length > 1) {
+                toastr.warning('只能选择一个角色进行授权');
+                return;
+            }
+            if (arrselections.length <= 0) {
+                toastr.warning('请选择有效数据');
+                return;
+            }
+            var actionUrl = "@Url.Action("AuthorizePermission")";
+            var param = { id: arrselections[0].Id };
+            ShowModal_Authorize(actionUrl, param, "权限授权");
+        });
+        $("#btn_delete").click(function () {
+            var $tb = $("#tb_roles");
+            var actionUrl = "@Url.Action("Delete")";
+            MultDelete($tb, actionUrl);
+        });
+
 
         //模态框中保存
         var $formmodal = $("#modal-form");
