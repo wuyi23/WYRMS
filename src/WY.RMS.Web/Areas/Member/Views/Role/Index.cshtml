@@ -157,8 +157,14 @@
             MultDelete($tb, actionUrl);
         });
 
+        //“权限授权”模态框中保存
+        var $modal = $("#authorizeModal");
+        $("#btnSave", $modal).click(function () {
+            var actionUrl = "@Url.Action("AuthorizePermission")";
+            SaveModal_Authorize(actionUrl);
+        });
 
-        //模态框中保存
+        //“新增编辑角色”模态框中保存
         var $formmodal = $("#modal-form");
         $("#btnSave", $formmodal).click(function () {
             var $tb = $("#tb_roles");

@@ -26,7 +26,7 @@ namespace WY.RMS.Component.Data.EF
         /// </summary>
         protected EFDbContext Context = EFContextFactory.GetCurrentDbContext();
 
-        #region 返回IQueryable实体集
+        #region 返回IQueryable<>实体集
         /// <summary>
         ///     获取当前实体的查询数据集
         /// </summary>

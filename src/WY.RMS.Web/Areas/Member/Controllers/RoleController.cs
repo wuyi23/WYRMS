@@ -137,6 +137,18 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             IList<ZTreeVM> nodes = _roleService.GetListZTreeVM(id);
             return Json(nodes, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult AuthorizePermission(int roleid, string ids)
+        {
+            string[] idArray = ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            double[] idsDoubles = Array.ConvertAll<string, double>(idArray, s => Convert.ToDouble(s));
+            int[] idInts = Array.ConvertAll<double, int>(idsDoubles, s => Convert.ToInt32(s - 0.5));
+            OperationResult result = _roleService.UpdateAuthorize(roleid, idInts);
+            //var result = _roleService.Update(roleVM);
+            //result.Message = result.Message ?? result.ResultType.GetDescription();
+            //return Json(result);
+            return Json(new OperationResult(OperationResultType.Success, "成功啦"));
+        }
 
     }
 }

@@ -3,12 +3,11 @@
 
 
 
-
-
+var $modal = $("#authorizeModal");
+var zTree;
 
 /*******弹出表单*********/
 function ShowModal_Authorize(actionUrl, param, title) {
-    var $modal = $("#authorizeModal");
     //表单初始化
     $(".modal-title", $modal).html(title);
     $("#modal-content", $modal).attr("action", actionUrl);
@@ -40,7 +39,7 @@ function ShowModal_Authorize(actionUrl, param, title) {
             //
         },
         success: function (zNodes) {
-            $.fn.zTree.init($("#treePermission", $modal), treeSetting, zNodes);
+            zTree = $.fn.zTree.init($("#treePermission", $modal), treeSetting, zNodes);
             $modal.modal('show');
         },
         error: function () {
@@ -50,4 +49,43 @@ function ShowModal_Authorize(actionUrl, param, title) {
             //
         }
     });
+}
+
+
+//“权限授权”模态框中保存
+
+function SaveModal_Authorize(actionUrl) {
+    var nodes = zTree.getCheckedNodes(true);
+    var l = nodes.length;
+    if (l <= 0) {
+        toastr.warning('请至少选择一项权限！');
+        return;
+    } else {
+        var leaves = "";
+        for (var i = 0; i < l; i++) {
+            if (!nodes[i].isParent) {
+                leaves += nodes[i].id + ",";
+            }
+        }
+        var roleId = $("#roleId", $modal).val();
+        var param = { roleid: roleId, ids: leaves };
+        $.ajax(
+        {
+            type: 'POST',
+            url: actionUrl,
+            data: param,
+            success: function (result) {
+                if (result.ResultType === 0) {
+                    toastr.success(result.Message);
+                    $('#modal-form', $modal).modal('hide');
+                }
+                else {
+                    toastr.error(result.Message);
+                }
+            },
+            error: function () {
+                toastr.error('网络错误，请重新提交！');
+            }
+        });
+    }
 }

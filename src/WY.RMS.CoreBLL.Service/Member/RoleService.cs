@@ -114,12 +114,13 @@ namespace WY.RMS.CoreBLL.Service
         {
             List<ZTreeVM> result = new List<ZTreeVM>();
             List<double> permissionIds = Roles.First(c => c.Id == id).Permissions.Select(c => c.Id + 0.5).ToList();
-            List<ZTreeVM> mouduleNodes = _ModuleService.Modules.Where(c => c.Enabled == true).Select(c => new ZTreeVM()
+            List<ZTreeVM> mouduleNodes = _ModuleService.Modules.Where(c => c.Enabled == true).OrderBy(c => c.Code).Select(c => new ZTreeVM()
             {
                 id = c.Id,
                 pId = c.ParentId,
                 name = c.Name,
-                isParent = !c.ParentId.HasValue
+                isParent = !c.ParentId.HasValue,
+                open = !c.ParentId.HasValue
             }).ToList();
             List<ZTreeVM> permissionNodes =
                 _PermissionService.Permissions.Where(c => c.Enabled == true).Select(c => new ZTreeVM()
@@ -139,5 +140,37 @@ namespace WY.RMS.CoreBLL.Service
             result.AddRange(permissionNodes);
             return result;
         }
+
+
+        public OperationResult UpdateAuthorize(int roleId, int[] ids)
+        {
+            try
+            {
+                var oldRole = Roles.First(c => c.Id == roleId);
+                if (oldRole == null)
+                {
+                    throw new Exception();
+                }
+                oldRole.Permissions.Clear();
+                UnitOfWork.Commit();
+                //var other = Roles.FirstOrDefault(c => c.Id != model.Id && c.RoleName == model.RoleName.Trim());
+                //if (other != null)
+                //{
+                //    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的角色，请修改后重新提交！");
+                //}
+                //oldRole.RoleName = model.RoleName.Trim();
+                //oldRole.Description = model.Description;
+                //oldRole.OrderSort = model.OrderSort;
+                //oldRole.Enabled = model.Enabled;
+                //oldRole.UpdateDate = DateTime.Now;
+                //_RoleRepository.Update(oldRole);
+                return new OperationResult(OperationResultType.Success, "更新数据成功！");
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "更新数据失败!");
+            }
+        }
+
     }
 }

@@ -58,9 +58,9 @@ namespace WY.RMS.Component.Data.Migrations
             context.SaveChanges();
             List<Role> roles = new List<Role>
             {
-                new Role { Id=1,  RoleName = "superadmin", Description="超级管理员",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=1,  RoleName = "superadmin", Description="超级管理员",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now ,Permissions=permissions},
                 new Role { Id=2,  RoleName = "管理员", Description="系统管理员",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now,Permissions=permissions},
-                 new Role { Id=3,  RoleName = "普通角色1", Description="普通角色1",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                 new Role { Id=3,  RoleName = "普通角色1", Description="普通角色1",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now ,Permissions=permissions},
                   new Role { Id=4,  RoleName = "普通角色2", Description="普通角色2",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
                    new Role { Id=5,  RoleName = "普通角色3", Description="普通角色3",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
                     new Role { Id=6,  RoleName = "普通角色4", Description="普通角色4",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },

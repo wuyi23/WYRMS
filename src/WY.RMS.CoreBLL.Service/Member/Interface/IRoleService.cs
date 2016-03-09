@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using WY.RMS.Component.Tools;
 using WY.RMS.Domain.Model.Member;
@@ -14,5 +15,6 @@ namespace WY.RMS.CoreBLL.Service
         OperationResult Update(RoleVM model);
         OperationResult Delete(IEnumerable<RoleVM> list);
         IList<ZTreeVM> GetListZTreeVM(int id);
+        OperationResult UpdateAuthorize(int roleId, int[] ids);
     }
 }
