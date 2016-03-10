@@ -93,10 +93,11 @@ namespace WY.RMS.CoreBLL.Service
 
         public OperationResult Delete(IEnumerable<UserVM> list)
         {
-            using (var scope = new TransactionScope())
+            try
             {
-                try
+                using (var scope = new TransactionScope())
                 {
+
                     foreach (var item in list)
                     {
                         _userRepository.Delete(item.Id, false);
@@ -105,11 +106,12 @@ namespace WY.RMS.CoreBLL.Service
 
                     scope.Complete();
                     return new OperationResult(OperationResultType.Success, "删除数据成功！");
+
                 }
-                catch
-                {
-                    return new OperationResult(OperationResultType.Error, "删除数据失败!");
-                }
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "删除数据失败!");
             }
         }
 

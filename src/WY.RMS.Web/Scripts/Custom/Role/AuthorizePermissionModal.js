@@ -77,7 +77,7 @@ function SaveModal_Authorize(actionUrl) {
             success: function (result) {
                 if (result.ResultType === 0) {
                     toastr.success(result.Message);
-                    $('#modal-form', $modal).modal('hide');
+                    $modal.modal('hide');
                 }
                 else {
                     toastr.error(result.Message);

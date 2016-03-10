@@ -86,10 +86,11 @@ namespace WY.RMS.CoreBLL.Service
 
         public OperationResult Delete(IEnumerable<RoleVM> list)
         {
-            using (var scope = new TransactionScope())
+            try
             {
-                try
+                using (var scope = new TransactionScope())
                 {
+
                     foreach (var item in list)
                     {
                         _RoleRepository.Delete(item.Id, false);
@@ -97,13 +98,13 @@ namespace WY.RMS.CoreBLL.Service
                     UnitOfWork.Commit();
                     scope.Complete();
                     return new OperationResult(OperationResultType.Success, "删除数据成功！");
-                }
-                catch
-                {
-                    return new OperationResult(OperationResultType.Error, "删除数据失败!");
+
                 }
             }
-
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "删除数据失败!");
+            }
         }
         /// <summary>
         /// 构造树的数据源
@@ -141,30 +142,26 @@ namespace WY.RMS.CoreBLL.Service
             return result;
         }
 
-
+        //更新权限授权
         public OperationResult UpdateAuthorize(int roleId, int[] ids)
         {
             try
             {
-                var oldRole = Roles.First(c => c.Id == roleId);
-                if (oldRole == null)
+                using (var scope = new TransactionScope())
                 {
-                    throw new Exception();
+
+                    var oldRole = Roles.FirstOrDefault(c => c.Id == roleId);
+                    if (oldRole == null)
+                    {
+                        throw new Exception();
+                    }
+                    oldRole.Permissions.Clear();
+                    var permissions = _PermissionService.Permissions.Where(c => ids.Contains(c.Id)).ToList();
+                    oldRole.Permissions = permissions;
+                    UnitOfWork.Commit();
+                    scope.Complete();
+                    return new OperationResult(OperationResultType.Success, "更新数据成功！");
                 }
-                oldRole.Permissions.Clear();
-                UnitOfWork.Commit();
-                //var other = Roles.FirstOrDefault(c => c.Id != model.Id && c.RoleName == model.RoleName.Trim());
-                //if (other != null)
-                //{
-                //    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的角色，请修改后重新提交！");
-                //}
-                //oldRole.RoleName = model.RoleName.Trim();
-                //oldRole.Description = model.Description;
-                //oldRole.OrderSort = model.OrderSort;
-                //oldRole.Enabled = model.Enabled;
-                //oldRole.UpdateDate = DateTime.Now;
-                //_RoleRepository.Update(oldRole);
-                return new OperationResult(OperationResultType.Success, "更新数据成功！");
             }
             catch
             {

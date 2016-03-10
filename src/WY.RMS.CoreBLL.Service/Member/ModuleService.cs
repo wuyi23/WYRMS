@@ -96,7 +96,7 @@ namespace WY.RMS.CoreBLL.Service
                     throw new Exception();
                 }
                 var other = Modules.FirstOrDefault(c => c.Id != model.Id && c.Name == model.Name.Trim());
-                if (other!=null)
+                if (other != null)
                 {
                     return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的模块，请修改后重新提交！");
                 }
@@ -120,10 +120,11 @@ namespace WY.RMS.CoreBLL.Service
 
         public OperationResult Delete(IEnumerable<ModuleVM> list)
         {
-            using (var scope = new TransactionScope())
+            try
             {
-                try
+                using (var scope = new TransactionScope())
                 {
+
                     foreach (var item in list)
                     {
                         _moduleRepository.Delete(item.Id, false);
@@ -132,11 +133,12 @@ namespace WY.RMS.CoreBLL.Service
 
                     scope.Complete();
                     return new OperationResult(OperationResultType.Success, "删除数据成功！");
+
                 }
-                catch
-                {
-                    return new OperationResult(OperationResultType.Error, "删除数据失败!");
-                }
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "删除数据失败!");
             }
         }
 
