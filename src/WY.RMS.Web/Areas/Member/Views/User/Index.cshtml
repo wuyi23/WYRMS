@@ -50,6 +50,12 @@
                 <button id="btn_reset" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>重置密码
                 </button>
+                <button id="btn_setrole" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>设置角色
+                </button>
+                <button id="btn_setusergroup" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>设置用户组
+                </button>
             </div>
             <table id="tb_users"></table>
         </div>
@@ -64,9 +70,9 @@
     <script src="~/Scripts/Custom/ModalForm.js"></script>
 
     <script>
-        $(function() {
+        $(function () {
             //得到表格查询的参数
-            var dbQueryParams = function(params) {
+            var dbQueryParams = function (params) {
                 var temp = {
                     //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
                     limit: params.limit, //页面显示行数
@@ -78,54 +84,62 @@
             };
             var actionUrl = "@Url.Action("GetUsers")";
             var tbColumns = [
-                {
-                    checkbox: true
-                }, {
-                    title: '序号',
-                    align: 'center',
-                    formatter: function(value, row, index) {
-                        return m_pagerow + index + 1;
-                    }
-                }, {
-                    field: 'Id',
-                    title: 'Id号',
-                    visible: false
-                }, {
-                    field: 'TrueName',
-                    title: '用户名称'
-                }, {
-                    field: 'Email',
-                    title: '邮箱'
-                },
-                {
-                    field: 'Phone',
-                    title: '电话'
-                },
-                {
-                    field: 'Address',
-                    title: '地址'
-                },
-                {
-                    field: 'StrUpdateDate',
-                    title: '更新时间'
-                }, {
-                    field: 'StrEnabled',
-                    title: '是否激活'
+            {
+                checkbox: true
+            }, {
+                title: '序号',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return m_pagerow + index + 1;
                 }
-            ];
-            //初始化表格
-            InitTable($("#tb_users"), actionUrl, dbQueryParams, tbColumns);
+            }, {
+                field: 'Id',
+                title: 'Id号',
+                visible: false
+            }, {
+                field: 'TrueName',
+                title: '用户名称'
+            }, {
+                field: 'Email',
+                title: '邮箱'
+            },
+            {
+                field: 'Phone',
+                title: '电话'
+            },
+            {
+                field: 'Address',
+                title: '地址&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'
+            },
+            {
+                field: 'StrUpdateDate',
+                title: '更新时间'
+            }, {
+                field: 'StrEnabled',
+                title: '是否激活',
+                cellStyle: function (value, row, index) {
+                    if (value === '否') {
+                        return {
+                            css: { "color": "red" }
+                        };
+                    } else {
+                        return {};
+                    }
+                }
+            }];
+        //初始化表格
+        InitTable($("#tb_users"), actionUrl, dbQueryParams, tbColumns);
         });
 
         var $userSection = $("#userSection");
         //新增用户
-        $("#btn_add", $userSection).click(function() {
+        $("#btn_add", $userSection).click(function () {
             var actionUrl = "@Url.Action("Create")";
             var param = {};
             ShowModal(actionUrl, param, "新增用户");
         });
         //编辑用户
-        $("#btn_edit", $userSection).click(function() {
+        $("#btn_edit", $userSection).click(function () {
             var arrselections = $("#tb_users").bootstrapTable('getSelections');
             if (arrselections.length > 1) {
                 toastr.warning('只能选择一行进行编辑');
@@ -140,7 +154,7 @@
             ShowModal(actionUrl, param, "编辑用户");
         });
         //删除用户
-        $("#btn_delete", $userSection).click(function() {
+        $("#btn_delete", $userSection).click(function () {
             var $tb = $("#tb_users");
             var actionUrl = "@Url.Action("Delete")";
             MultDelete($tb, actionUrl);
@@ -155,12 +169,12 @@
 
         //模态框中保存
         var $formmodal = $("#modal-form");
-        $("#btnSave", $formmodal).click(function() {
+        $("#btnSave", $formmodal).click(function () {
             var $tb = $("#tb_users");
             SaveModal($tb);
         });
         //查询
-        $("#btn_query", $userSection).click(function() {
+        $("#btn_query", $userSection).click(function () {
             var actionUrl = "@Url.Action("GetUsers")";
             m_pagerow = 0;
             $("#tb_users").bootstrapTable('refresh', { url: actionUrl });

@@ -3,7 +3,7 @@
 
 /*******弹出表单*********/
 function ShowModal(actionUrl, param, title) {
-    var $modal = $("#authorizeModal");
+    var $modal = $("#modal-form");
     //表单初始化
     $(".modal-title", $modal).html(title);
     $("#modal-content", $modal).attr("action", actionUrl);
@@ -49,7 +49,7 @@ function SaveModal(table) {
         url: actionUrl,
         data: $form.serialize(),
         success: function (result) {
-            if (result.ResultType == 0) {
+            if (result.ResultType === 0) {
                 toastr.success(result.Message);
                 $('#modal-form').modal('hide');
                 $(table).bootstrapTable('refresh');

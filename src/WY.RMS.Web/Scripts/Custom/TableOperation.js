@@ -30,7 +30,6 @@ function InitTable(tb, actionUrl, dbQueryParams, tbColumns) {
         onPageChange: function (number, size) {
             m_pagerow = (number - 1) * size;
         }
-
     });
 };
 

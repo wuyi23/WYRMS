@@ -81,31 +81,42 @@
                 return temp;
             };
             var actionUrl = "@Url.Action("GetRoles")";
-            var tbColumns = [{
-                checkbox: true
-            }, {
-                title: '序号',
-                align: 'center',
-                formatter: function (value, row, index) {
-                    return m_pagerow + index + 1;
+            var tbColumns = [
+                {
+                    checkbox: true
+                }, {
+                    title: '序号',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return m_pagerow + index + 1;
+                    }
+                }, {
+                    field: 'Id',
+                    title: 'Id号',
+                    visible: false
+                }, {
+                    field: 'RoleName',
+                    title: '角色名称'
+                }, {
+                    field: 'Description',
+                    title: '描述'
+                }, {
+                    field: 'StrUpdateDate',
+                    title: '更新时间'
+                }, {
+                    field: 'StrEnabled',
+                    title: '是否激活',
+                    cellStyle: function(value, row, index) {
+                        if (value === '否') {
+                            return {
+                                css: { "color": "red" }
+                            };
+                        } else {
+                            return {};
+                        }
+                    }
                 }
-            }, {
-                field: 'Id',
-                title: 'Id号',
-                visible: false
-            }, {
-                field: 'RoleName',
-                title: '角色名称'
-            }, {
-                field: 'Description',
-                title: '描述'
-            }, {
-                field: 'StrUpdateDate',
-                title: '更新时间'
-            }, {
-                field: 'StrEnabled',
-                title: '是否激活'
-            }, ]
+            ];
             //初始化表格
             InitTable($("#tb_roles"), actionUrl, dbQueryParams, tbColumns);
         });

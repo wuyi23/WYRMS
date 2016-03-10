@@ -107,7 +107,16 @@
                     title: '更新时间'
                 }, {
                     field: 'StrEnabled',
-                    title: '是否激活'
+                    title: '是否激活',
+                    cellStyle: function (value, row, index) {
+                        if (value === '否') {
+                            return {
+                                css: { "color": "red" }
+                            };
+                        } else {
+                            return {};
+                        }
+                    }
                 }
             ];
             //初始化表格
