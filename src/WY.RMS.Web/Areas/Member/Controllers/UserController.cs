@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Objects.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -9,6 +11,7 @@ using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel;
 using WY.RMS.ViewModel.Member;
 using WY.RMS.Web.Extension.Common;
 using WY.RMS.Web.Extension.Filters;
@@ -18,9 +21,11 @@ namespace WY.RMS.Web.Areas.Member.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IRoleService _roleService;
+        public UserController(IUserService userService, IRoleService roleService)
         {
             this._userService = userService;
+            this._roleService = roleService;
         }
 
         //
@@ -141,6 +146,34 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             return Json(result);
         }
 
+
+        // GET: /Member/User/SetRoles
+        public ActionResult SetRoles(int id = 0)
+        {
+            ViewBag.RoleId = id;
+            var user = _userService.Users.Include(c => c.Roles).FirstOrDefault(c => c.Id == id);
+            if (user == null)
+            {
+                return PartialView("Create", new UserVM());
+            }
+            else
+            {
+                List<int> ids = user.Roles.Select(c => c.Id).ToList();
+                var list = _roleService.Roles.Where(c => c.Enabled == true).Select(c => new CheckBoxVM()
+            {
+                Name = "chk_roles",
+                Value = c.Id,
+                Discription = c.RoleName,
+
+            }).ToList();
+                return PartialView(list);
+            }
+        }
+        [HttpPost]
+        public ActionResult SetRoles(int roleId, string[] chk_roles)
+        {
+            return null;
+        }
 
     }
 }

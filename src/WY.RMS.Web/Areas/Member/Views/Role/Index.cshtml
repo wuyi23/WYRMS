@@ -87,7 +87,7 @@
                 }, {
                     title: '序号',
                     align: 'center',
-                    formatter: function(value, row, index) {
+                    formatter: function (value, row, index) {
                         return m_pagerow + index + 1;
                     }
                 }, {
@@ -107,7 +107,7 @@
                     field: 'StrEnabled',
                     title: '是否激活',
                     align: 'center',
-                    cellStyle: function(value, row, index) {
+                    cellStyle: function (value, row, index) {
                         if (value === '否') {
                             return {
                                 css: { "color": "red" }
@@ -121,7 +121,13 @@
             //初始化表格
             InitTable($("#tb_roles"), actionUrl, dbQueryParams, tbColumns);
         });
+        //查询角色
+        $("#btn_query").click(function () {
+            var actionUrl = "@Url.Action("GetRoles")";
+            m_pagerow = 0;
+            $("#tb_roles").bootstrapTable('refresh', { url: actionUrl });
 
+        });
         //新增角色
         $("#btn_add").click(function () {
             var actionUrl = "@Url.Action("Create")";
@@ -143,6 +149,7 @@
             var param = { id: arrselections[0].Id };
             ShowModal(actionUrl, param, "编辑角色");
         });
+        //删除角色
         $("#btn_delete").click(function () {
             var $tb = $("#tb_roles");
             var actionUrl = "@Url.Action("Delete")";
@@ -163,32 +170,20 @@
             var param = { id: arrselections[0].Id };
             ShowModal_Authorize(actionUrl, param, "权限授权");
         });
-        $("#btn_delete").click(function () {
-            var $tb = $("#tb_roles");
-            var actionUrl = "@Url.Action("Delete")";
-            MultDelete($tb, actionUrl);
-        });
-
-        //“权限授权”模态框中保存
+        //模态框中“权限授权”保存
         var $modal = $("#authorizeModal");
         $("#btnSave", $modal).click(function () {
             var actionUrl = "@Url.Action("AuthorizePermission")";
             SaveModal_Authorize(actionUrl);
         });
-
-        //“新增编辑角色”模态框中保存
+        //模态框中“新增编辑角色”保存
         var $formmodal = $("#modal-form");
         $("#btnSave", $formmodal).click(function () {
             var $tb = $("#tb_roles");
             SaveModal($tb);
         });
 
-        $("#btn_query").click(function () {
-            var actionUrl = "@Url.Action("GetRoles")";
-            m_pagerow = 0;
-            $("#tb_roles").bootstrapTable('refresh', { url: actionUrl });
 
-        });
     </script>
 }
 

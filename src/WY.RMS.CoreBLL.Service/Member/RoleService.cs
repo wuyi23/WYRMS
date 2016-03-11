@@ -160,12 +160,12 @@ namespace WY.RMS.CoreBLL.Service
                     oldRole.Permissions = permissions;
                     UnitOfWork.Commit();
                     scope.Complete();
-                    return new OperationResult(OperationResultType.Success, "更新数据成功！");
+                    return new OperationResult(OperationResultType.Success, "更新角色权限成功！");
                 }
             }
             catch
             {
-                return new OperationResult(OperationResultType.Error, "更新数据失败!");
+                return new OperationResult(OperationResultType.Error, "更新角色权限失败!");
             }
         }
 

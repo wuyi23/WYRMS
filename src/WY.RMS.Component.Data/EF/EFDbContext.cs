@@ -10,9 +10,6 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using WY.RMS.Component.Data.Configurations.Member;
 using WY.RMS.Domain.Model.Member;
 
-using System.Data.Entity.ModelConfiguration.Configuration;
-using System.Data.Entity.ModelConfiguration;
-
 namespace WY.RMS.Component.Data.EF
 {
     public class EFDbContext : DbContext

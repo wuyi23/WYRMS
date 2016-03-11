@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div id="toolbar" class="btn-group">
+            <div id="toolbar" class="btn-group" role="group">
                 <button id="btn_add" type="button" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                 </button>
@@ -62,7 +62,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
-
+    <script src="~/Scripts/Custom/User/SetRolesModal.js"></script>
     <script>
         $(function () {
             //得到表格查询的参数
@@ -145,11 +145,18 @@
                 alert('You click like action, row: ' + JSON.stringify(row));
             },
             'click .setrole': function (e, value, row, index) {
-                alert(row.Id);
+                var actionUrl = "@Url.Action("SetRoles")";
+                var param = { id: row.Id };
+                ShowModal_SetRoles(actionUrl, param, "设置角色");
             }
         };
 
-
+        //查询用户
+        $("#btn_query", $userSection).click(function () {
+            var actionUrl = "@Url.Action("GetUsers")";
+            m_pagerow = 0;
+            $("#tb_users").bootstrapTable('refresh', { url: actionUrl });
+        });
         var $userSection = $("#userSection");
         //新增用户
         $("#btn_add", $userSection).click(function () {
@@ -183,22 +190,21 @@
             var $tb = $("#tb_users");
             var actionUrl = "@Url.Action("ResetPassword")";
             MultReset($tb, actionUrl);
-
         });
 
-        //模态框中保存
+        //模态框中“新增编辑用户”保存
         var $formmodal = $("#modal-form");
         $("#btnSave", $formmodal).click(function () {
             var $tb = $("#tb_users");
             SaveModal($tb);
         });
-        //查询
-        $("#btn_query", $userSection).click(function () {
-            var actionUrl = "@Url.Action("GetUsers")";
-            m_pagerow = 0;
-            $("#tb_users").bootstrapTable('refresh', { url: actionUrl });
 
+        //模态框中“角色授权”保存
+        var $setrolesmodal = $("#setRolesModal");
+        $("#btnSave", $setrolesmodal).click(function () {
+            SaveModal_SetRoles();
         });
+
     </script>
 }
 
