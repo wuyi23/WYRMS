@@ -25,13 +25,16 @@
       <publishTime>03/03/2016 14:06:37</publishTime>
     </File>
     <File Include="Areas/Member/Views/Module/Index.cshtml">
-      <publishTime>03/02/2016 13:49:22</publishTime>
+      <publishTime>03/10/2016 17:13:15</publishTime>
     </File>
     <File Include="Areas/Member/Views/Permission/Create.cshtml">
       <publishTime>03/03/2016 14:03:35</publishTime>
     </File>
     <File Include="Areas/Member/Views/Permission/Index.cshtml">
-      <publishTime>03/03/2016 15:41:56</publishTime>
+      <publishTime>03/10/2016 17:13:10</publishTime>
+    </File>
+    <File Include="Areas/Member/Views/Role/AuthorizePermission.cshtml">
+      <publishTime>03/09/2016 13:38:05</publishTime>
     </File>
     <File Include="Areas/Member/Views/Role/Create.cshtml">
       <publishTime>12/28/2015 17:28:09</publishTime>
@@ -40,13 +43,16 @@
       <publishTime>11/25/2015 09:51:39</publishTime>
     </File>
     <File Include="Areas/Member/Views/Role/Index.cshtml">
-      <publishTime>02/03/2016 15:17:26</publishTime>
+      <publishTime>03/11/2016 11:25:25</publishTime>
     </File>
     <File Include="Areas/Member/Views/User/Create.cshtml">
       <publishTime>03/03/2016 14:12:22</publishTime>
     </File>
     <File Include="Areas/Member/Views/User/Index.cshtml">
-      <publishTime>02/24/2016 17:44:18</publishTime>
+      <publishTime>03/14/2016 11:32:51</publishTime>
+    </File>
+    <File Include="Areas/Member/Views/User/SetRoles.cshtml">
+      <publishTime>03/14/2016 14:31:09</publishTime>
     </File>
     <File Include="Areas/Member/Views/Web.config">
       <publishTime>11/17/2015 14:11:40</publishTime>
@@ -112,7 +118,7 @@
       <publishTime>02/18/2016 14:21:02</publishTime>
     </File>
     <File Include="bin/WY.RMS.Component.Data.dll">
-      <publishTime>03/03/2016 15:54:49</publishTime>
+      <publishTime>03/14/2016 15:04:12</publishTime>
     </File>
     <File Include="bin/WY.RMS.Component.Tools.dll">
       <publishTime>03/03/2016 15:54:36</publishTime>
@@ -121,19 +127,19 @@
       <publishTime>01/04/2016 14:00:33</publishTime>
     </File>
     <File Include="bin/WY.RMS.CoreBLL.Service.dll">
-      <publishTime>03/03/2016 15:54:52</publishTime>
+      <publishTime>03/14/2016 15:04:14</publishTime>
     </File>
     <File Include="bin/WY.RMS.Domain.Data.dll">
-      <publishTime>03/03/2016 15:54:51</publishTime>
+      <publishTime>03/14/2016 15:04:13</publishTime>
     </File>
     <File Include="bin/WY.RMS.Domain.Model.dll">
       <publishTime>03/03/2016 15:54:47</publishTime>
     </File>
     <File Include="bin/WY.RMS.ViewModel.dll">
-      <publishTime>03/03/2016 15:54:36</publishTime>
+      <publishTime>03/14/2016 15:04:12</publishTime>
     </File>
     <File Include="bin/WY.RMS.Web.dll">
-      <publishTime>03/03/2016 15:55:06</publishTime>
+      <publishTime>03/14/2016 15:04:15</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/18/2016 14:16:52</publishTime>
@@ -167,6 +173,57 @@
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
       <publishTime>02/18/2016 14:20:23</publishTime>
+    </File>
+    <File Include="Content/img/diy/1_close.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/1_open.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/2.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/3.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/4.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/5.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/6.png">
+      <publishTime>03/07/2016 11:45:58</publishTime>
+    </File>
+    <File Include="Content/img/diy/7.png">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/diy/8.png">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/diy/9.png">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/line_conn.gif">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/line_conn.png">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/loading.gif">
+      <publishTime>03/07/2016 11:45:57</publishTime>
+    </File>
+    <File Include="Content/img/metro.gif">
+      <publishTime>03/07/2016 11:45:56</publishTime>
+    </File>
+    <File Include="Content/img/metro.png">
+      <publishTime>03/07/2016 11:45:56</publishTime>
+    </File>
+    <File Include="Content/img/zTreeStandard.gif">
+      <publishTime>03/07/2016 11:45:56</publishTime>
+    </File>
+    <File Include="Content/img/zTreeStandard.png">
+      <publishTime>03/07/2016 11:45:55</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>09/06/2015 09:37:43</publishTime>
@@ -333,11 +390,23 @@
     <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
       <publishTime>09/06/2015 09:37:52</publishTime>
     </File>
+    <File Include="Content/zTree.css">
+      <publishTime>03/07/2016 11:45:55</publishTime>
+    </File>
+    <File Include="Content/zTree.min.css">
+      <publishTime>03/07/2016 11:45:55</publishTime>
+    </File>
+    <File Include="Content/zTree.theme.metro.css">
+      <publishTime>03/07/2016 11:45:55</publishTime>
+    </File>
+    <File Include="Content/zTree.theme.metro.min.css">
+      <publishTime>03/07/2016 11:45:54</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>09/06/2015 09:43:46</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/17/2016 15:17:53</publishTime>
+      <publishTime>03/07/2016 11:45:58</publishTime>
     </File>
     <File Include="Scripts/AdminLTE2.3.0/bootstrap/css/bootstrap.css">
       <publishTime>12/18/2015 10:44:31</publishTime>
@@ -3157,13 +3226,19 @@
       <publishTime>12/18/2015 10:44:32</publishTime>
     </File>
     <File Include="Scripts/Custom/ModalForm.js">
-      <publishTime>02/17/2016 11:26:53</publishTime>
+      <publishTime>03/10/2016 16:15:29</publishTime>
     </File>
     <File Include="Scripts/Custom/MyCommon.js">
       <publishTime>12/31/2015 10:01:10</publishTime>
     </File>
+    <File Include="Scripts/Custom/Role/AuthorizePermissionModal.js">
+      <publishTime>03/10/2016 12:02:52</publishTime>
+    </File>
     <File Include="Scripts/Custom/TableOperation.js">
-      <publishTime>02/24/2016 17:12:29</publishTime>
+      <publishTime>03/11/2016 11:25:08</publishTime>
+    </File>
+    <File Include="Scripts/Custom/User/SetRolesModal.js">
+      <publishTime>03/14/2016 10:55:25</publishTime>
     </File>
     <File Include="Scripts/Custom/WinMsg.js">
       <publishTime>03/03/2016 10:41:18</publishTime>
@@ -3197,6 +3272,15 @@
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>12/18/2015 10:44:32</publishTime>
+    </File>
+    <File Include="Scripts/jquery.ztree.all-3.5.js">
+      <publishTime>03/07/2016 11:45:54</publishTime>
+    </File>
+    <File Include="Scripts/jquery.ztree.all-3.5.min.js">
+      <publishTime>03/07/2016 11:45:54</publishTime>
+    </File>
+    <File Include="Scripts/jquery.ztree.dropdown.js">
+      <publishTime>03/07/2016 11:45:50</publishTime>
     </File>
     <File Include="Scripts/knockout-2.2.0.debug.js">
       <publishTime>12/18/2015 10:44:32</publishTime>
@@ -3256,7 +3340,7 @@
       <publishTime>09/06/2015 09:37:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/19/2016 09:45:12</publishTime>
+      <publishTime>03/14/2016 15:04:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

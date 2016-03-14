@@ -148,6 +148,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
 
         // GET: /Member/User/SetRoles
+        [IsAjax]
         public ActionResult SetRoles(int id = 0)
         {
             ViewBag.UserId = id;

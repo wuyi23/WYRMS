@@ -72,7 +72,7 @@ namespace WY.RMS.Component.Tools
                 flat = 1;
             }
 
-            System.Drawing.Image.GetThumbnailImageAbort callb = null;
+            //  System.Drawing.Image.GetThumbnailImageAbort callb = null;
             // ＝＝＝缩小图片＝＝＝    
             //调用缩放算法
             System.Drawing.Image thumbnailImage = Makesmallimage(oldimage, (int)New_Width, (int)New_Height);

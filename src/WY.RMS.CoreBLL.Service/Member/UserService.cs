@@ -164,7 +164,6 @@ namespace WY.RMS.CoreBLL.Service
             {
                 return new OperationResult(OperationResultType.Error, "设置用户角色失败!");
             }
-            return null;
         }
     }
 }
