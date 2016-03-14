@@ -22,11 +22,13 @@ namespace WY.RMS.CoreBLL.Service
     public class UserService : CoreServiceBase, IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRoleService _roleService;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IRoleService roleService, IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             this._userRepository = userRepository;
+            this._roleService = roleService;
         }
         public IQueryable<User> Users
         {
@@ -134,5 +136,35 @@ namespace WY.RMS.CoreBLL.Service
 
         }
 
+
+        public OperationResult UpdateUserRoles(int userId, string[] chkRoles)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var oldUser = Users.FirstOrDefault(c => c.Id == userId);
+                    if (oldUser == null)
+                    {
+                        throw new Exception();
+                    }
+                    oldUser.Roles.Clear();
+                    if (chkRoles != null && chkRoles.Length > 0)
+                    {
+                        int[] idInts = Array.ConvertAll<string, int>(chkRoles, s => Convert.ToInt32(s));
+                        var roles = _roleService.Roles.Where(c => idInts.Contains(c.Id)).ToList();
+                        oldUser.Roles = roles;
+                    }
+                    UnitOfWork.Commit();
+                    scope.Complete();
+                    return new OperationResult(OperationResultType.Success, "设置用户角色成功！");
+                }
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "设置用户角色失败!");
+            }
+            return null;
+        }
     }
 }

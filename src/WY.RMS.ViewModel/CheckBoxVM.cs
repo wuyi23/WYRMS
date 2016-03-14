@@ -13,5 +13,7 @@ namespace WY.RMS.ViewModel
         public int Value { get; set; }
 
         public string Discription { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 }

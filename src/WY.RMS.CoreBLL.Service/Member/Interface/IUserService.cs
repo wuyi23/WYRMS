@@ -16,6 +16,6 @@ namespace WY.RMS.CoreBLL.Service
         OperationResult Update(UserVM model);
         OperationResult Delete(IEnumerable<UserVM> list);
         OperationResult ResetPassword(IEnumerable<UserVM> list);
-
+        OperationResult UpdateUserRoles(int roleId, string[] chkRoles);
     }
 }

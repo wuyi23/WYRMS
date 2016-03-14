@@ -1,42 +1,24 @@
 ﻿@using WY.RMS.ViewModel
 @model List<CheckBoxVM>
 @{
-    int currentRoleId = ViewBag.RoleId;
+    int currentUserId = ViewBag.UserId;
 }
 <link href="~/Scripts/AdminLTE2.3.0/plugins/iCheck/square/blue.css" rel="stylesheet" />
 
-<div id="setRolesModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <form id="modal-content" class="form-horizontal" action="">
-                    <!--Content-->
-                    <input type="hidden" id="roleId" name="roleId" value="@currentRoleId" />
-                    <div class="form-group">
-                        @foreach (var item in Model)
-                        {
-                            @*<div class="checkbox icheck col-sm-4">
-                                @Html.CheckBoxFor(c=>item.Name, new { @class = "myCheck" }) @*增加myCheck样式为了避免表格中的checkbox失效*@
-                            @*</div>*@
-                            <div class="checkbox icheck  col-sm-4">
-                                <label>
-                                    <input class="myCheck" type="checkbox" name="@item.Name" value="@item.Value">@item.Discription
-                                </label>
-                            </div>
-                        }
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnSave" class="btn btn-primary">保存</button>
-                @*<button type="button" class="btn btn-default" onclick="CloseModal()">取消</button>*@
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
+<div>
+    <input type="hidden" id="userId" name="userId" value="@currentUserId" />
+    <div class="form-group">
+        @foreach (var item in Model)
+        {
+            @*<div class="checkbox icheck col-sm-4">
+                @Html.CheckBoxFor(c=>item.Name, new { @class = "myCheck" }) @*增加myCheck样式为了避免表格中的checkbox失效*@
+            @*</div>*@
+    <div class="checkbox icheck col-sm-4 col-xs-6">
+        <label>
+            <input class="myCheck" checked="@item.IsChecked" type="checkbox" name="@item.Name" value="@item.Value">@item.Discription
+        </label>
+    </div>
+        }
     </div>
 </div>
 <script>

@@ -150,7 +150,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         // GET: /Member/User/SetRoles
         public ActionResult SetRoles(int id = 0)
         {
-            ViewBag.RoleId = id;
+            ViewBag.UserId = id;
             var user = _userService.Users.Include(c => c.Roles).FirstOrDefault(c => c.Id == id);
             if (user == null)
             {
@@ -161,18 +161,25 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                 List<int> ids = user.Roles.Select(c => c.Id).ToList();
                 var list = _roleService.Roles.Where(c => c.Enabled == true).Select(c => new CheckBoxVM()
             {
-                Name = "chk_roles",
+                Name = "chkRoles",
                 Value = c.Id,
                 Discription = c.RoleName,
+                IsChecked = ids.Contains(c.Id)
 
             }).ToList();
                 return PartialView(list);
             }
         }
         [HttpPost]
-        public ActionResult SetRoles(int roleId, string[] chk_roles)
+        public ActionResult SetRoles(int userId, string[] chkRoles)
         {
-            return null;
+            if (userId <= 0)
+            {
+                return Json(new OperationResult(OperationResultType.ParamError, "参数错误!"));
+            }
+            OperationResult result = _userService.UpdateUserRoles(userId, chkRoles);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
         }
 
     }

@@ -11,7 +11,7 @@ function ShowModal_SetRoles(actionUrl, param, title) {
         url: actionUrl,
         data: param,
         success: function (result) {
-            $("#modal-content").html(result);
+            $("#modal-content", $setRolesModal).html(result);
             $setRolesModal.modal('show');
             //RegisterForm();//通过Ajax加载返回的页面原有MVC属性验证将失效，需要重新注册验证脚本。
         }
