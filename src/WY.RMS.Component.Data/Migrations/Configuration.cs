@@ -38,7 +38,8 @@ namespace WY.RMS.Component.Data.Migrations
                 new Module { Id = 4, ParentId = 1, Name = "模块管理", LinkUrl = "~/Member/Module/Index",  Code = 203, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
                 new Module { Id = 5, ParentId = 1, Name = "权限管理", LinkUrl = "~/Member/Permission/Index",  Code = 204, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
                  new Module { Id = 6, ParentId = null, Name = "系统应用", LinkUrl = "#",  Code = 300,  Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "~/SysConfig/OperateLog/Index",Code = 301,Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "#",Code = 301,Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now }
+                //~/SysConfig/OperateLog/Index
             };
             DbSet<Module> moduleSet = context.Set<Module>();
             moduleSet.AddOrUpdate(t => new { t.Name }, modules.ToArray());

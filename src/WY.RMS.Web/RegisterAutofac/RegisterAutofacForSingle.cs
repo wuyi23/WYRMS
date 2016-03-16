@@ -11,9 +11,11 @@ using System.Reflection;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Data.EF.Interface;
+using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Data.Repositories.Member.Impl;
+using WY.RMS.Web.Areas.Common.Controllers;
 
 namespace WY.RMS.Web
 {
@@ -34,13 +36,15 @@ namespace WY.RMS.Web
             //    .Where(t => baseType.IsAssignableFrom(t) && t != baseType)
             //    .AsImplementedInterfaces().InstancePerMatchingLifetimeScope();
 
+            //注册一个接口多个实现并定义多个Name的情况需要使用的Helper类
+            builder.RegisterType<AutofacHelper>().As<IAutofacHelper>().InstancePerHttpRequest();
+
             //Member
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerHttpRequest();
             builder.RegisterType<ModuleService>().As<IModuleService>().InstancePerHttpRequest();
             builder.RegisterType<RoleService>().As<IRoleService>().InstancePerHttpRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerHttpRequest();
             builder.RegisterType<PermissionService>().As<IPermissionService>().InstancePerHttpRequest();
-
             builder.RegisterType<EFDbContext>().As<DbContext>().InstancePerHttpRequest();
             builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerHttpRequest();
 
@@ -60,3 +64,37 @@ namespace WY.RMS.Web
 
     }
 }
+
+#region 特殊例子配置：一个接口多个实现的情况（builder.Register(c => new ProductController(c.ResolveNamed<Interface>("给具体类型配置不同的名称")));）
+//public interface ISinger { }
+
+//public class MizukiNana : ISinger { }
+
+//public class ShimotsukiHaruka : ISinger { }
+
+//public class Stage
+//{
+//    public ISinger Singer { get; set; }
+
+//    public Stage(ISinger singer)
+//    {
+//        this.Singer = singer;
+//    }
+//}
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        var builder = new ContainerBuilder();
+//        builder.RegisterType<MizukiNana>().Named<ISinger>("nana");
+//        builder.RegisterType<ShimotsukiHaruka>().Named<ISinger>("haruka");
+//        //建议在Stage中使用AutofacHelper类
+//        builder.Register(c => new Stage(c.ResolveNamed<ISinger>("nana")));
+//        var container = builder.Build();
+
+//        var stage = container.Resolve<Stage>();
+//        Console.WriteLine(stage.Singer.ToString());
+//    }
+//}
+#endregion
