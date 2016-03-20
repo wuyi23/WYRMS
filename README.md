@@ -6,4 +6,7 @@
 WYRMS系统前后端基础框架已经基本搭建完成，功能模块尚未全部完成，但不影响运行使用，更多功能模块目前仍在持续更新中...<br/>Demo演示地址（建议使用Chrome浏览器打开）：http://www.gzuwuyi.cn ，登录账户：admin，密码：123456
 ![image](https://github.com/wuyi23/WYRMS/blob/master/screenshots/login.jpg)
 ![image](https://github.com/wuyi23/WYRMS/blob/master/screenshots/角色管理.jpg)
+![image](https://github.com/wuyi23/WYRMS/blob/master/screenshots/QQ截图20160320230653.png)
+
+
 
