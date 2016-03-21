@@ -151,7 +151,7 @@ namespace WY.RMS.CoreBLL.Service
                     oldUser.Roles.Clear();
                     if (chkRoles != null && chkRoles.Length > 0)
                     {
-                        int[] idInts = Array.ConvertAll<string, int>(chkRoles, s => Convert.ToInt32(s));
+                        int[] idInts = Array.ConvertAll<string, int>(chkRoles,Convert.ToInt32);
                         var roles = _roleService.Roles.Where(c => idInts.Contains(c.Id)).ToList();
                         oldUser.Roles = roles;
                     }
