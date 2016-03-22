@@ -17,6 +17,7 @@ using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Component.Tools.helpers;
+using System.Web.Caching;
 
 namespace WY.RMS.CoreBLL.Service
 {
@@ -63,8 +64,6 @@ namespace WY.RMS.CoreBLL.Service
             }
             else
             {
-                //LoginVM loginLog = new LoginVM { LoginName = user.UserName, Password = user.Password, IsRememberL};
-                // LoginLogRepository.Insert(loginLog);
                 result = new OperationResult(OperationResultType.Success, "登录成功。", user);
                 var roleIdsByUser = user.Roles.Select(r => r.Id).ToList();
                 var roleIdsByUserGroup = user.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
@@ -72,7 +71,8 @@ namespace WY.RMS.CoreBLL.Service
                 var roleIds = roleIdsByUser.Distinct().ToList();
                 List<int> permissions = _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Select(c => c.Id).Distinct().ToList();
                 var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
-                CacheHelper.SetCache(strKey, permissions);
+                //设置Cache滑动过期时间为1天
+                CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
             }
             if (result.ResultType != OperationResultType.Success) return result;
             User userTemp = (User)result.AppendData;

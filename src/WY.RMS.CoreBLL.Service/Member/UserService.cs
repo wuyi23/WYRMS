@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using System.Web.Caching;
 using EntityFramework.Extensions;
 using WY.RMS.Component.Data;
 using WY.RMS.Component.Data.EF.Interface;
@@ -149,13 +150,24 @@ namespace WY.RMS.CoreBLL.Service
                         throw new Exception();
                     }
                     oldUser.Roles.Clear();
+                    List<Role> newRoles = new List<Role>();
                     if (chkRoles != null && chkRoles.Length > 0)
                     {
-                        int[] idInts = Array.ConvertAll<string, int>(chkRoles,Convert.ToInt32);
-                        var roles = _roleService.Roles.Where(c => idInts.Contains(c.Id)).ToList();
-                        oldUser.Roles = roles;
+                        int[] idInts = Array.ConvertAll<string, int>(chkRoles, Convert.ToInt32);
+                        newRoles = _roleService.Roles.Where(c => idInts.Contains(c.Id)).ToList();
+                        oldUser.Roles = newRoles;
                     }
                     UnitOfWork.Commit();
+                    #region 重置权限缓存
+                    var roleIdsByUser = newRoles.Select(r => r.Id).ToList();
+                    var roleIdsByUserGroup = oldUser.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
+                    roleIdsByUser.AddRange(roleIdsByUserGroup);
+                    var roleIds = roleIdsByUser.Distinct().ToList();
+                    List<int> permissions = _roleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Select(c => c.Id).Distinct().ToList();
+                    var strKey = CacheKey.StrPermissionsByUid + "_" + oldUser.Id;
+                    //设置Cache滑动过期时间为1天
+                    CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
+                    #endregion
                     scope.Complete();
                     return new OperationResult(OperationResultType.Success, "设置用户角色成功！");
                 }

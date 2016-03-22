@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
@@ -21,13 +22,6 @@ namespace WY.RMS.Web.Extension.Filters
 {
     public class LayoutAttribute : ActionFilterAttribute
     {
-        //private readonly IRoleService _RoleService;
-        //private readonly IModuleService _ModuleService;
-        //public LayoutAttribute(IRoleService roleService, IModuleService moduleService)
-        //{
-        //    this._RoleService = roleService;
-        //    this._ModuleService = moduleService;
-        //}
         #region Autofac属性注入,Filter的注入不同于Controller, Controller的注入是通过构造函数注入的，而Filter是通过属性注入的
         public IRoleService _RoleService { get; set; }
         public IModuleService _ModuleService { get; set; }
@@ -78,7 +72,8 @@ namespace WY.RMS.Web.Extension.Filters
                             .Distinct()
                             .ToList();
                     var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
-                    CacheHelper.SetCache(strKey, permissions);
+                    //设置Cache滑动过期时间为1天
+                    CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
 
                     #endregion
 
