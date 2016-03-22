@@ -49,9 +49,10 @@ namespace WY.RMS.Web.Extension.Filters
             {
                 object permissionCache = CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
                 List<int> permissionIds;
-                if (permissionCache != null && ((List<int>)permissionCache).Count > 0)
+                if (permissionCache != null)
                 {
-                    permissionIds = (List<int>)permissionCache;
+                    List<Permission> permissionList = (List<Permission>)permissionCache;
+                    permissionIds = permissionList.Select(p => p.Id).ToList();
                 }
                 else
                 {
@@ -65,10 +66,9 @@ namespace WY.RMS.Web.Extension.Filters
                     var roleIdsByUserGroup = user.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
                     roleIdsByUser.AddRange(roleIdsByUserGroup);
                     var roleIds = roleIdsByUser.Distinct().ToList();
-                    List<int> permissions =
+                    List<Permission> permissions =
                         _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true)
                             .SelectMany(c => c.Permissions)
-                            .Select(c => c.Id)
                             .Distinct()
                             .ToList();
                     var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
@@ -76,8 +76,7 @@ namespace WY.RMS.Web.Extension.Filters
                     CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
 
                     #endregion
-
-                    permissionIds = permissions;
+                    permissionIds = permissions.Select(p => p.Id).ToList();
                 }
                 List<Module> childModules =
                     _PermissionService.Permissions.Where(p => permissionIds.Contains(p.Id) && p.Enabled == true)

@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Tools;
+using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel;
@@ -32,6 +33,10 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
+            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
+            List<Permission> permissionCache = (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
+            //TODO:控制权限可见与否
+            //获取下拉框数据源
             var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();

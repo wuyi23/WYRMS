@@ -163,7 +163,7 @@ namespace WY.RMS.CoreBLL.Service
                     var roleIdsByUserGroup = oldUser.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
                     roleIdsByUser.AddRange(roleIdsByUserGroup);
                     var roleIds = roleIdsByUser.Distinct().ToList();
-                    List<int> permissions = _roleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Select(c => c.Id).Distinct().ToList();
+                    List<Permission> permissions = _roleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Distinct().ToList();
                     var strKey = CacheKey.StrPermissionsByUid + "_" + oldUser.Id;
                     //设置Cache滑动过期时间为1天
                     CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
