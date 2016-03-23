@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
+using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
@@ -33,14 +34,13 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
-            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
-            List<Permission> permissionCache = (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
-            //TODO:控制权限可见与否
+            GetButtonPermissions();
             //获取下拉框数据源
             var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
         }
+
 
         public JsonResult GetRoles(int limit, int offset, string roleName, int enable)
         {
@@ -152,6 +152,35 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }
+
+        #region 私有函数
+        /// <summary>
+        /// 获取按钮可见权限
+        /// </summary>
+        [NonAction]
+        private void GetButtonPermissions()
+        {
+            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
+            List<Permission> permissionCache =
+                (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
+            //新增按钮
+            Permission addRoleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.AddRole.ToString());
+            ViewBag.AddRoleButton = addRoleButton;
+            //修改按钮
+            Permission updateRoleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.UpdateRole.ToString());
+            ViewBag.UpdateRoleButton = updateRoleButton;
+            //删除按钮
+            Permission deleteRoleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.DeleteRole.ToString());
+            ViewBag.DeleteRoleButton = deleteRoleButton;
+            //授权按钮
+            Permission authorizeRoleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.AuthorizeRole.ToString());
+            ViewBag.AuthorizeRoleButton = authorizeRoleButton;
+        }
+        #endregion
 
     }
 }

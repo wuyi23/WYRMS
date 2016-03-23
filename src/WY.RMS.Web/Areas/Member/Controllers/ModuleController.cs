@@ -7,7 +7,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
+using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
+using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
@@ -30,6 +32,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
+            GetButtonPermissions();
             var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
@@ -125,6 +128,27 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             var result = _moduleService.Delete(list);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
+        }
+        #endregion
+
+        #region 私有函数
+        /// <summary>
+        /// 获取页面按钮可见权限
+        /// </summary>
+        [NonAction]
+        private void GetButtonPermissions()
+        {
+            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
+            List<Permission> permissionCache =
+                (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
+            //新增按钮
+            Permission addModuleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.AddModule.ToString());
+            ViewBag.AddModuleButton = addModuleButton;
+            //修改按钮
+            Permission updateModuleButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.UpdateModule.ToString());
+            ViewBag.UpdateModuleButton = updateModuleButton;
         }
         #endregion
     }

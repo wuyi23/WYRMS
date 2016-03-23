@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\EnumPermissionType.cs" />
-    <Compile Include="Enum\EnumYesOrNot.cs" />
     <Compile Include="Member\Module.cs" />
     <Compile Include="Member\Permission.cs" />
     <Compile Include="Member\Role.cs" />

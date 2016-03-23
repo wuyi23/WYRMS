@@ -53,10 +53,10 @@ namespace WY.RMS.CoreBLL.Service
         {
             try
             {
-                Permission oldPermission = Permissions.Where(c => c.module.Id == model.ModuleId).FirstOrDefault(c => c.Name == model.Name.Trim());
+                Permission oldPermission = Permissions.Where(c => c.module.Id == model.ModuleId).FirstOrDefault(c => (c.Name == model.Name.Trim()) || (c.Code == model.Code.Trim()));
                 if (oldPermission != null)
                 {
-                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称的权限，请修改后重新提交！");
+                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称或编码的权限，请修改后重新提交！");
                 }
                 var entity = new Permission
                 {
@@ -85,10 +85,10 @@ namespace WY.RMS.CoreBLL.Service
                 {
                     throw new Exception();
                 }
-                var other = Permissions.FirstOrDefault(c => c.Id != model.Id && c.ModuleId == model.ModuleId && c.Name == model.Name.Trim());
+                var other = Permissions.FirstOrDefault(c => c.Id != model.Id && c.ModuleId == model.ModuleId && (c.Name == model.Name.Trim() || c.Code == model.Code));
                 if (other != null)
                 {
-                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称的权限，请修改后重新提交！");
+                    return new OperationResult(OperationResultType.Warning, "该模块中已经存在相同名称或编码的权限，请修改后重新提交！");
                 }
                 permission.Name = model.Name.Trim();
                 permission.ModuleId = model.ModuleId;

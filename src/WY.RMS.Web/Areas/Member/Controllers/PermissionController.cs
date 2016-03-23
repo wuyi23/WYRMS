@@ -6,7 +6,9 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
+using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
+using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
@@ -108,6 +110,27 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             var result = _permissionService.Update(permissionVM);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
+        }
+        #endregion
+
+        #region 私有函数
+        /// <summary>
+        /// 获取页面按钮可见权限
+        /// </summary>
+        [NonAction]
+        private void GetButtonPermissions()
+        {
+            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
+            List<Permission> permissionCache =
+                (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
+            //新增按钮
+            Permission addPermissionButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.AddPermission.ToString());
+            ViewBag.AddPermissionButton = addPermissionButton;
+            //修改按钮
+            Permission updatePermissionButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.UpdatePermission.ToString());
+            ViewBag.UpdatePermissionButton = updatePermissionButton;
         }
         #endregion
     }

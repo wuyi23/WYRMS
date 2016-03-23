@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using WY.RMS.Component.Data.Enum;
 using WY.RMS.Domain.Model.Member;
 
 namespace WY.RMS.Component.Data.Migrations
@@ -47,12 +48,40 @@ namespace WY.RMS.Component.Data.Migrations
 
             List<Permission> permissions = new List<Permission>
             {
-                new Permission{Id=1, Name="查询",Code=1, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
-              new Permission{Id=2, Name="查询",Code=2, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
-               new Permission{Id=3, Name="查询",Code=3, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[3]},
-                new Permission{Id=4, Name="查询",Code=4, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[4]},
-              new Permission{Id=5, Name="查询",Code=5, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[6]},
-               new Permission{Id=6, Name="修改",Code=6, Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+             #region 角色管理
+		       new Permission{Id=1, Name="查询",Code=EnumPermissionCode.QueryRole.ToString(), 
+                    Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+               new Permission{Id=2, Name="新增",Code=EnumPermissionCode.AddRole.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+               new Permission{Id=3, Name="修改",Code=EnumPermissionCode.UpdateRole.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+               new Permission{Id=4, Name="删除",Code=EnumPermissionCode.DeleteRole.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]},
+               new Permission{Id=5, Name="授权",Code=EnumPermissionCode.AuthorizeRole.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[1]}, 
+             #endregion
+
+             #region 用户管理
+		       new Permission{Id=6, Name="查询",Code=EnumPermissionCode.QueryUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=7, Name="新增",Code=EnumPermissionCode.AddUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=8, Name="修改",Code=EnumPermissionCode.UpdateUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=9, Name="删除",Code=EnumPermissionCode.DeleteUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=10, Name="重置密码",Code=EnumPermissionCode.ResetPwdUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=11, Name="设置用户组",Code=EnumPermissionCode.SetGroupUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]},
+               new Permission{Id=12, Name="设置角色",Code=EnumPermissionCode.SetRolesUser.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[2]}, 
+	         #endregion
+               
+             #region 模块管理
+		     new Permission{Id=13, Name="查询",Code=EnumPermissionCode.QueryModule.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[3]},
+             new Permission{Id=14, Name="新增",Code=EnumPermissionCode.AddModule.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[3]},
+             new Permission{Id=15, Name="修改",Code=EnumPermissionCode.UpdateModule.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[3]},
+	         #endregion
+
+             #region 权限管理
+		     new Permission{Id=16, Name="查询",Code=EnumPermissionCode.QueryPermission.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[4]},
+             new Permission{Id=17, Name="新增",Code=EnumPermissionCode.AddPermission.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[4]},
+             new Permission{Id=18, Name="修改",Code=EnumPermissionCode.UpdatePermission.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[4]},
+	         #endregion
+
+             #region 操作日志管理
+		     new Permission{Id=19, Name="查询",Code=EnumPermissionCode.QuerySystemLog.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[6]}
+	         #endregion
             };
             DbSet<Permission> permissionSet = context.Set<Permission>();
             permissionSet.AddOrUpdate(m => new { m.Id }, permissionSet.ToArray());

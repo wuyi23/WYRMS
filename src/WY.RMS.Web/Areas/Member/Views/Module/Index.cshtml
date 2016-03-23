@@ -1,5 +1,8 @@
-﻿@{
+﻿@using WY.RMS.Domain.Model.Member
+@{
     List<SelectListItem> enableItems = ViewBag.EnableItems;
+    Permission AddPermission = ViewBag.AddModuleButton;
+    Permission UpdatePermission = ViewBag.UpdateModuleButton;
 }
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -38,15 +41,24 @@
             </div>
 
             <div id="toolbar" class="btn-group">
-                <button id="btn_add" type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-                </button>
-                <button id="btn_edit" type="button" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-                </button>
+                @{
+
+                    if (AddPermission != null)
+                    {
+                        <button id="btn_add" type="button" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>@AddPermission.Name
+                        </button>
+                    }
+                    if(UpdatePermission!=null)
+                    {
+                        <button id="btn_edit" type="button" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>@UpdatePermission.Name
+                        </button>
+                    }
+                }
                 @*<button id="btn_delete" type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-                </button>*@
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                    </button>*@
             </div>
             <table id="tb_modules"></table>
         </div>

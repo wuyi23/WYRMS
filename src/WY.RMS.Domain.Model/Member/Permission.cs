@@ -12,7 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WY.RMS.Component.Tools;
-using WY.RMS.Domain.Model.Enum;
 
 namespace WY.RMS.Domain.Model.Member
 {
@@ -31,8 +30,8 @@ namespace WY.RMS.Domain.Model.Member
         [StringLength(20)]
         public string Name { get; set; }
 
-        [Description("操作编号")]
-        public int Code { get; set; }
+        [Description("权限编码")]
+        public string Code { get; set; }
 
         [Description("描述")]
         [StringLength(100)]

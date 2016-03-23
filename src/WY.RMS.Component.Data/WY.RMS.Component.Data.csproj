@@ -77,6 +77,9 @@
     <Compile Include="EF\Extensions\DbContextExtensions.cs" />
     <Compile Include="EF\Interface\IRepository.cs" />
     <Compile Include="EF\Interface\IUnitOfWork.cs" />
+    <Compile Include="Enum\EnumPermissionCode.cs" />
+    <Compile Include="Enum\EnumPermissionType.cs" />
+    <Compile Include="Enum\EnumYesOrNot.cs" />
     <Compile Include="Migrations\201509090634017_InitialCreate.cs" />
     <Compile Include="Migrations\201509090634017_InitialCreate.Designer.cs">
       <DependentUpon>201509090634017_InitialCreate.cs</DependentUpon>

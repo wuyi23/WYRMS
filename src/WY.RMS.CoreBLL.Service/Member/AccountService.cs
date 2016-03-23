@@ -65,14 +65,16 @@ namespace WY.RMS.CoreBLL.Service
             else
             {
                 result = new OperationResult(OperationResultType.Success, "登录成功。", user);
-                //var roleIdsByUser = user.Roles.Select(r => r.Id).ToList();
-                //var roleIdsByUserGroup = user.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
-                //roleIdsByUser.AddRange(roleIdsByUserGroup);
-                //var roleIds = roleIdsByUser.Distinct().ToList();
-                //List<Permission> permissions = _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Distinct().ToList();
-                //var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
-                ////设置Cache滑动过期时间为1天
-                //CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
+                #region 设置用户权限缓存
+                var roleIdsByUser = user.Roles.Select(r => r.Id).ToList();
+                var roleIdsByUserGroup = user.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
+                roleIdsByUser.AddRange(roleIdsByUserGroup);
+                var roleIds = roleIdsByUser.Distinct().ToList();
+                List<Permission> permissions = _RoleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Distinct().ToList();
+                var strKey = CacheKey.StrPermissionsByUid + "_" + user.Id;
+                //设置Cache滑动过期时间为1天
+                CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
+                #endregion
             }
             if (result.ResultType != OperationResultType.Success) return result;
             User userTemp = (User)result.AppendData;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
+using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
@@ -33,6 +34,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
+            GetButtonPermissions();
             var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
@@ -182,6 +184,43 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }
+
+        #region 私有函数
+        /// <summary>
+        /// 获取按钮可见权限
+        /// </summary>
+        [NonAction]
+        private void GetButtonPermissions()
+        {
+            string userId = ((System.Web.Security.FormsIdentity)(HttpContext.User.Identity)).Ticket.UserData;
+            List<Permission> permissionCache =
+                (List<Permission>)CacheHelper.GetCache(CacheKey.StrPermissionsByUid + "_" + userId);
+            //新增按钮
+            Permission addUserButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.AddUser.ToString());
+            ViewBag.AddUserButton = addUserButton;
+            //修改按钮
+            Permission updateUserButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.UpdateUser.ToString());
+            ViewBag.UpdateUserButton = updateUserButton;
+            //删除按钮
+            Permission deleteUserButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.DeleteUser.ToString());
+            ViewBag.DeleteUserButton = deleteUserButton;
+            //重置密码按钮
+            Permission resetPwdUserButton =
+                permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.ResetPwdUser.ToString());
+            ViewBag.ResetPwdUserButton = resetPwdUserButton;
+            //设置用户组
+            Permission setGroupUserButton =
+           permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.SetGroupUser.ToString());
+            ViewBag.SetGroupUserButton = setGroupUserButton;
+            //设置角色
+            Permission setRolesUserButton =
+           permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.SetRolesUser.ToString());
+            ViewBag.SetRolesUserButton = setRolesUserButton;
+        }
+        #endregion
 
     }
 }
