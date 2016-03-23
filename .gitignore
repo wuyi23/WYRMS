@@ -10,3 +10,10 @@ src/WY.RMS.Web/WY.RMS.Web.csproj.user
 src/WY.MVC.RMS.v12.suo
 *.suo
 *.user
+*.pubxml
+src/WY.RMS.Web/Properties/PublishProfiles/xiaowu.pubxml.user
+*.user
+src/WY.RMS.Web/Properties/PublishProfiles/xiaowu.pubxml
+*.user
+src/WY.RMS.Web/Properties/PublishProfiles/xiaowu.pubxml
+*.user

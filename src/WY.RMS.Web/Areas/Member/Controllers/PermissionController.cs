@@ -32,6 +32,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [Layout]
         public ActionResult Index()
         {
+            GetButtonPermissions();
             var enabledItems = DataSourceHelper.GetIsTrue();
             ViewBag.EnableItems = enabledItems;
             return View();
