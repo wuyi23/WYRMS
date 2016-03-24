@@ -171,11 +171,21 @@
                     formatter: function (value, row, index) {
                         var strSetgroup = "";
                         var strSetrole = "";
-                        if (@((SetGroupPermission != null) ? 1 : 0)) {
+                        @*if (@((SetGroupPermission != null) ? 1 : 0)) {
                             strSetgroup = '<a class="setgroup" href="javascript:void(0)" title="@(SetGroupPermission==null?string.Empty:SetGroupPermission.Name)"><i class="glyphicon glyphicon-user"></i></a>';
-                        }
+                    }
                         if (@((SetRolesPermission != null) ? 1 : 0)){
                             strSetrole = '&nbsp&nbsp<a class="setrole" href="javascript:void(0)" title="@(SetRolesPermission == null ? string.Empty : SetRolesPermission.Name)"><i class="glyphicon glyphicon-cog"></i></a>';
+        }*@
+                        @{
+                            if (SetGroupPermission != null)
+                            {
+                                <text> strSetgroup = '<a class="setgroup" href="javascript:void(0)" title="@SetGroupPermission.Name"><i class="glyphicon glyphicon-user"></i></a>'; </text>
+                            }
+                            if (SetRolesPermission != null)
+                            {
+                               <text> strSetrole = '&nbsp&nbsp<a class="setrole" href="javascript:void(0)" title="@SetRolesPermission.Name"><i class="glyphicon glyphicon-cog"></i></a>'; </text>
+                            }
                         }
                         return strSetgroup + strSetrole;
                     }
