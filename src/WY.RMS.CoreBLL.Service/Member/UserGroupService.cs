@@ -60,9 +60,32 @@ namespace WY.RMS.CoreBLL.Service.Member
             }
         }
 
-        public Component.Tools.OperationResult Update(ViewModel.Member.UserGroupVM model)
+        public OperationResult Update(UserGroupVM model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var oldRole = UserGroups.FirstOrDefault(c => c.Id == model.Id);
+                if (oldRole == null)
+                {
+                    throw new Exception();
+                }
+                var other = UserGroups.FirstOrDefault(c => c.Id != model.Id && c.GroupName == model.GroupName.Trim());
+                if (other != null)
+                {
+                    return new OperationResult(OperationResultType.Warning, "数据库中已经存在相同名称的用户组，请修改后重新提交！");
+                }
+                oldRole.GroupName = model.GroupName.Trim();
+                oldRole.Description = model.Description;
+                oldRole.OrderSort = model.OrderSort;
+                oldRole.Enabled = model.Enabled;
+                oldRole.UpdateDate = DateTime.Now;
+                _UserGroupRepository.Update(oldRole);
+                return new OperationResult(OperationResultType.Success, "更新数据成功！");
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "更新数据失败!");
+            }
         }
 
         public Component.Tools.OperationResult Delete(IEnumerable<ViewModel.Member.UserGroupVM> list)

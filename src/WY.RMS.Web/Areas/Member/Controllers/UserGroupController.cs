@@ -66,6 +66,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             return Json(new { total = total, rows = result }, JsonRequestBehavior.AllowGet);
         }
 
+        #region 新增
 
         //
         // GET: /Member/UserGroup/Create
@@ -87,7 +88,39 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }
+        #endregion
 
+        #region 编辑
+        //
+        // GET: /Member/Role/Edit/5
+        [IsAjax]
+        public ActionResult Edit(int id = 0)
+        {
+            var userGroup = _userGroupService.UserGroups.FirstOrDefault(c => c.Id == id);
+            if (userGroup == null) return PartialView("Create", new UserGroupVM());
+            var model = new UserGroupVM()
+            {
+                Id = userGroup.Id,
+                GroupName = userGroup.GroupName,
+                Description = userGroup.Description,
+                OrderSort = userGroup.OrderSort,
+                Enabled = userGroup.Enabled,
+            };
+            return PartialView("Create", model);
+        }
+
+        //
+        // POST: /Member/Role/Edit
+
+        [HttpPost]
+        public ActionResult Edit(UserGroupVM userGroupVM)
+        {
+            if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新检查输入"));
+            var result = _userGroupService.Update(userGroupVM);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
 
         #region 私有函数
         /// <summary>
