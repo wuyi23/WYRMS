@@ -11,6 +11,7 @@ using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
 using WY.RMS.Web.Extension.Common;
@@ -26,7 +27,6 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             this._moduleService = moduleService;
         }
 
-        private readonly EFDbContext _db = new EFDbContext();
         //
         // GET: /Member/Module/
         [Layout]

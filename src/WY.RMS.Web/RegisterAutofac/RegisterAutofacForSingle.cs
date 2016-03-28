@@ -12,10 +12,10 @@ using System.Web.Mvc;
 using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools.helpers;
-using WY.RMS.CoreBLL.Service;
+using WY.RMS.CoreBLL.Service.Member;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Data.Repositories.Member.Impl;
-using WY.RMS.Web.Areas.Common.Controllers;
 
 namespace WY.RMS.Web
 {
@@ -44,6 +44,7 @@ namespace WY.RMS.Web
             builder.RegisterType<ModuleService>().As<IModuleService>().InstancePerHttpRequest();
             builder.RegisterType<RoleService>().As<IRoleService>().InstancePerHttpRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerHttpRequest();
+            builder.RegisterType<UserGroupService>().As<IUserGroupService>().InstancePerHttpRequest();
             builder.RegisterType<PermissionService>().As<IPermissionService>().InstancePerHttpRequest();
             builder.RegisterType<EFDbContext>().As<DbContext>().InstancePerHttpRequest();
             builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerHttpRequest();

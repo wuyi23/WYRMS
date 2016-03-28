@@ -3,7 +3,7 @@ using WY.RMS.Component.Tools;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel;
 
-namespace WY.RMS.CoreBLL.Service
+namespace WY.RMS.CoreBLL.Service.Member.Interface
 {
     /// <summary>
     /// 账户模块业务接口

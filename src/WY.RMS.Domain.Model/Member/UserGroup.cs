@@ -36,6 +36,11 @@ namespace WY.RMS.Domain.Model.Member
         [StringLength(100)]
         public string Description { set; get; }
 
+        [Display(Name = "排序")]
+        [RegularExpression(@"\d+", ErrorMessage = "排序必须是数字")]
+        [Range(1, 99999)]
+        public int OrderSort { get; set; }
+
         [Description("是否激活")]
         public bool Enabled { get; set; }
         /// <summary>

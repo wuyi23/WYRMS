@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using WY.RMS.Component.Tools;
 using WY.RMS.CoreBLL.Service;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.ViewModel;
 
 namespace WY.RMS.Web.Areas.Common.Controllers

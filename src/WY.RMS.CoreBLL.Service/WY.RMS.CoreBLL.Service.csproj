@@ -65,10 +65,12 @@
     <Compile Include="Member\Interface\IModuleService.cs" />
     <Compile Include="Member\Interface\IPermissionService.cs" />
     <Compile Include="Member\Interface\IRoleService.cs" />
+    <Compile Include="Member\Interface\IUserGroupService.cs" />
     <Compile Include="Member\Interface\IUserService.cs" />
     <Compile Include="Member\PermissionService.cs" />
     <Compile Include="Member\RoleService.cs" />
     <Compile Include="Member\ModuleService.cs" />
+    <Compile Include="Member\UserGroupService.cs" />
     <Compile Include="Member\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using WY.RMS.Component.Tools;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel;
 using WY.RMS.ViewModel.Member;
 
-namespace WY.RMS.CoreBLL.Service
+namespace WY.RMS.CoreBLL.Service.Member.Interface
 {
     public interface IRoleService
     {

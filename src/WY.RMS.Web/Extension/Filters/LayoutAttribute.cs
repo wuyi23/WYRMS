@@ -12,6 +12,7 @@ using System.Web.Caching;
 using System.Web.Mvc;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;

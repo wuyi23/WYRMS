@@ -10,6 +10,7 @@ using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel;
 using WY.RMS.ViewModel.Member;
@@ -25,9 +26,6 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         {
             this._roleService = roleService;
         }
-
-        private readonly EFDbContext _db = new EFDbContext();
-
 
         //
         // GET: /Member/Role/

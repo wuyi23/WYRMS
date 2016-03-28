@@ -37,10 +37,11 @@ namespace WY.RMS.Component.Data.Migrations
                 new Module { Id = 1, ParentId = null, Name = "授权管理", Code = 200,LinkUrl="#",  Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now},
                 new Module { Id = 2, ParentId = 1, Name = "角色管理", LinkUrl = "~/Member/Role/Index",  Code = 201,Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now},
                 new Module { Id = 3, ParentId = 1, Name = "用户管理", LinkUrl = "~/Member/User/Index", Code = 202, Description = null, IsMenu = true, Enabled = true, UpdateDate = DateTime.Now },
-                new Module { Id = 4, ParentId = 1, Name = "模块管理", LinkUrl = "~/Member/Module/Index",  Code = 203, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                new Module { Id = 5, ParentId = 1, Name = "权限管理", LinkUrl = "~/Member/Permission/Index",  Code = 204, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 4, ParentId = 1, Name = "模块管理", LinkUrl = "~/Member/Module/Index",  Code = 204, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 5, ParentId = 1, Name = "权限管理", LinkUrl = "~/Member/Permission/Index",  Code = 205, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
                  new Module { Id = 6, ParentId = null, Name = "系统应用", LinkUrl = "#",  Code = 300,  Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
-                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "#",Code = 301,Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now }
+                new Module { Id = 7, ParentId = 6, Name = "操作日志管理", LinkUrl = "#",Code = 301,Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now },
+                new Module { Id = 8, ParentId = 1, Name = "用户组管理", LinkUrl = "~/Member/UserGroup/Index",  Code = 203, Description = null, IsMenu = true, Enabled = true,  UpdateDate = DateTime.Now }
                 //~/SysConfig/OperateLog/Index
             };
             DbSet<Module> moduleSet = context.Set<Module>();
@@ -83,7 +84,14 @@ namespace WY.RMS.Component.Data.Migrations
 	         #endregion
 
              #region 操作日志
-		     new Permission{Id=19, Name="查询",Code=EnumPermissionCode.QuerySystemLog.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[6]}
+		     new Permission{Id=19, Name="查询",Code=EnumPermissionCode.QuerySystemLog.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[6]},
+	         #endregion
+
+             #region 用户组
+		     new Permission{Id=20, Name="查询",Code=EnumPermissionCode.QueryUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
+             new Permission{Id=21, Name="新增",Code=EnumPermissionCode.AddUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
+             new Permission{Id=22, Name="修改",Code=EnumPermissionCode.UpdateUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
+             new Permission{Id=23, Name="删除",Code=EnumPermissionCode.DeleteUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]}
 	         #endregion
             };
             DbSet<Permission> permissionSet = context.Set<Permission>();
@@ -123,11 +131,11 @@ namespace WY.RMS.Component.Data.Migrations
             context.SaveChanges();
             #endregion
 
-            #region 用户管理
+            #region 用户组管理
             List<UserGroup> userGroups = new List<UserGroup>
             {
-                new UserGroup { Id=1, GroupName = "开发组",Description = "开发人员组",Enabled=true,Roles=new List<Role>{roles[1]} ,Users = new List<User>(){members[0]}},
-                new UserGroup { Id=2, GroupName = "项目经理组", Description = "项目经理组",Enabled=true,Roles=new List<Role>{roles[1]}, Users = new List<User>(){members[1]}}
+                new UserGroup { Id=1, GroupName = "开发组",Description = "开发人员组",Enabled=true,Roles=new List<Role>{roles[1]},OrderSort = 1,Users = new List<User>(){members[0]}},
+                new UserGroup { Id=2, GroupName = "项目经理组", Description = "项目经理组",Enabled=true,Roles=new List<Role>{roles[1]},OrderSort = 2,Users = new List<User>(){members[1]}}
             };
             DbSet<UserGroup> userGroupsSet = context.Set<UserGroup>();
             userGroupsSet.AddOrUpdate(m => new { m.GroupName }, userGroups.ToArray());

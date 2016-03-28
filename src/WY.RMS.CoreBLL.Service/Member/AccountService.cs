@@ -7,19 +7,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WY.RMS.Component.Tools;
-using WY.RMS.ViewModel;
 using System.Web;
-
-using System.Web.Security;
-using WY.RMS.Component.Data;
-using WY.RMS.Component.Data.EF.Interface;
-using WY.RMS.Domain.Model.Member;
-using WY.RMS.Domain.Data.Repositories.Member;
-using WY.RMS.Component.Tools.helpers;
 using System.Web.Caching;
+using System.Web.Security;
+using WY.RMS.Component.Data.EF.Interface;
+using WY.RMS.Component.Tools;
+using WY.RMS.Component.Tools.helpers;
+using WY.RMS.CoreBLL.Service.Member.Interface;
+using WY.RMS.Domain.Data.Repositories.Member;
+using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel;
 
-namespace WY.RMS.CoreBLL.Service
+namespace WY.RMS.CoreBLL.Service.Member
 {
     /// <summary>
     /// 账户业务类

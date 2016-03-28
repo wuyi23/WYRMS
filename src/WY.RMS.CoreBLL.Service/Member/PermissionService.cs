@@ -8,14 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using WY.RMS.Component.Data;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
+using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Data.Repositories.Member;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel.Member;
 
-namespace WY.RMS.CoreBLL.Service
+namespace WY.RMS.CoreBLL.Service.Member
 {
     public class PermissionService : CoreServiceBase, IPermissionService
     {

@@ -107,7 +107,27 @@ namespace WY.RMS.Component.Data.Enum
         /// <summary>
         /// 查询按钮（操作日志管理）
         /// </summary>
-        QuerySystemLog = 262144
+        QuerySystemLog = 262144,
+
+        #endregion
+
+        #region 用户组管理
+        /// <summary>
+        /// 查询按钮（用户组管理）
+        /// </summary>
+        QueryUserGroup = 524288,
+        /// <summary>
+        /// 新增按钮（用户组管理）
+        /// </summary>
+        AddUserGroup = 1048576,
+        /// <summary>
+        /// 修改按钮（用户组管理）
+        /// </summary>
+        UpdateUserGroup = 2097152,
+        /// <summary>
+        /// 删除按钮（用户组管理）
+        /// </summary>
+        DeleteUserGroup = 4194304 
         #endregion
     }
 }
