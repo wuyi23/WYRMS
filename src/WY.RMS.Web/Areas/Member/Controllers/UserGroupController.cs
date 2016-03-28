@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
@@ -92,7 +93,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
         #region 编辑
         //
-        // GET: /Member/Role/Edit/5
+        // GET: /Member/UserGroup/Edit/5
         [IsAjax]
         public ActionResult Edit(int id = 0)
         {
@@ -110,13 +111,27 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         }
 
         //
-        // POST: /Member/Role/Edit
+        // POST: /Member/UserGroup/Edit
 
         [HttpPost]
         public ActionResult Edit(UserGroupVM userGroupVM)
         {
             if (!ModelState.IsValid) return Json(new OperationResult(OperationResultType.ParamError, "参数错误，请重新检查输入"));
             var result = _userGroupService.Update(userGroupVM);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        }
+        #endregion
+
+        #region 删除
+        //
+        // POST: /Member/UserGroup/Delete
+        [HttpPost]
+        public ActionResult Delete()
+        {
+            var grouplist = Request.Form["arrselections"];
+            IEnumerable<UserGroupVM> list = JsonConvert.DeserializeObject<List<UserGroupVM>>(grouplist);
+            var result = _userGroupService.Delete(list);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }

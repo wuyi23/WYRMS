@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using EntityFramework.Extensions;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
 using WY.RMS.CoreBLL.Service.Member.Interface;
@@ -88,9 +90,29 @@ namespace WY.RMS.CoreBLL.Service.Member
             }
         }
 
-        public Component.Tools.OperationResult Delete(IEnumerable<ViewModel.Member.UserGroupVM> list)
+
+        public OperationResult Delete(IEnumerable<UserGroupVM> list)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    //var userGroups = list as UserGroup[] ?? list.ToArray();
+                    //var groupIds = userGroups.Select(c => c.Id).ToList();
+                    //_UserGroupRepository.Entities.Where(c => groupIds.Contains(c.Id)).Delete();
+                    foreach (var item in list)
+                    {
+                        _UserGroupRepository.Delete(item.Id, false);
+                    }
+                    UnitOfWork.Commit();
+                    scope.Complete();
+                    return new OperationResult(OperationResultType.Success, "删除数据成功！");
+                }
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "删除数据失败!");
+            }
         }
     }
 }
