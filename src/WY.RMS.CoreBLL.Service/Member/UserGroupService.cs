@@ -95,18 +95,22 @@ namespace WY.RMS.CoreBLL.Service.Member
         {
             try
             {
-                using (var scope = new TransactionScope())
+                if (list != null)
                 {
-                    //var userGroups = list as UserGroup[] ?? list.ToArray();
-                    //var groupIds = userGroups.Select(c => c.Id).ToList();
-                    //_UserGroupRepository.Entities.Where(c => groupIds.Contains(c.Id)).Delete();
-                    foreach (var item in list)
+                    var groupIds = list.Select(c => c.Id).ToList();
+                    int count = _UserGroupRepository.Entities.Where(c => groupIds.Contains(c.Id)).Delete();
+                    if (count > 0)
                     {
-                        _UserGroupRepository.Delete(item.Id, false);
+                        return new OperationResult(OperationResultType.Success, "删除数据成功！");
                     }
-                    UnitOfWork.Commit();
-                    scope.Complete();
-                    return new OperationResult(OperationResultType.Success, "删除数据成功！");
+                    else
+                    {
+                        return new OperationResult(OperationResultType.Error, "删除数据失败!");
+                    }
+                }
+                else
+                {
+                    return new OperationResult(OperationResultType.ParamError, "参数错误，请选择需要删除的数据!");
                 }
             }
             catch

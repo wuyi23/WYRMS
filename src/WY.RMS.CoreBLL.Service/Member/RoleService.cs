@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using EntityFramework.Extensions;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
 using WY.RMS.CoreBLL.Service.Member.Interface;
@@ -87,17 +88,22 @@ namespace WY.RMS.CoreBLL.Service.Member
         {
             try
             {
-                using (var scope = new TransactionScope())
+                if (list != null)
                 {
-
-                    foreach (var item in list)
+                    var roleIds = list.Select(c => c.Id).ToList();
+                    int count = _RoleRepository.Entities.Where(c => roleIds.Contains(c.Id)).Delete();
+                    if (count > 0)
                     {
-                        _RoleRepository.Delete(item.Id, false);
+                        return new OperationResult(OperationResultType.Success, "删除数据成功！");
                     }
-                    UnitOfWork.Commit();
-                    scope.Complete();
-                    return new OperationResult(OperationResultType.Success, "删除数据成功！");
-
+                    else
+                    {
+                        return new OperationResult(OperationResultType.Error, "删除数据失败!");
+                    }
+                }
+                else
+                {
+                    return new OperationResult(OperationResultType.ParamError, "参数错误，请选择需要删除的数据!");
                 }
             }
             catch
