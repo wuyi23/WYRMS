@@ -4,6 +4,7 @@
     Permission AddPermission = ViewBag.AddUserGroupButton;
     Permission UpdatePermission = ViewBag.UpdateUserGroupButton;
     Permission DeletePermission = ViewBag.DeleteUserGroupButton;
+    Permission SetRolesPermission = ViewBag.SetRolesUserGroupButton;
 }
 @section css{
     <link href="~/Content/zTree.theme.metro.min.css" rel="stylesheet" />
@@ -70,6 +71,7 @@
         </div>
 
         @Html.Partial("_ModalForm")
+        @Html.Partial("_SetRoleModal")
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @section  scripts{
@@ -78,6 +80,7 @@
     <script src="~/Scripts/jquery.ztree.all-3.5.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
+    <script src="~/Scripts/Custom/User/SetRolesModal.js"></script>
     <script>
         $(function () {
             //得到表格查询的参数
@@ -126,11 +129,34 @@
                             return {};
                         }
                     }
+                }, {
+                    field: 'operate',
+                    title: '&nbsp&nbsp&nbsp&nbsp设置&nbsp&nbsp&nbsp&nbsp',
+                    align: 'center',
+                    events: operateEvents,
+                    formatter: function (value, row, index) {
+                        var strSetrole = "";
+                        @{
+                            if (SetRolesPermission != null)
+                            {
+                                <text> strSetrole = '&nbsp&nbsp<a class="setrole" href="javascript:void(0)" title="@SetRolesPermission.Name"><i class="glyphicon glyphicon-cog"></i></a>'; </text>
+                            }
+                        }
+                        return  strSetrole;
+                    }
                 }
             ];
             //初始化表格
             InitTable($("#tb_usergroups"), actionUrl, dbQueryParams, tbColumns);
         });
+        window.operateEvents = {
+            'click .setrole': function (e, value, row, index) {
+                var actionUrl = "@Url.Action("SetRoles")";
+                var param = { id: row.Id };
+                ShowModal_SetRoles(actionUrl, param, "设置角色");
+            }
+        };
+
         //查询用户组
         $("#btn_query").click(function () {
             var actionUrl = "@Url.Action("GetUserGroups")";
@@ -173,6 +199,11 @@
             SaveModal($tb);
         });
 
+        //模态框中“角色授权”保存
+        var $setrolesmodal = $("#setRolesModal");
+        $("#btnSave", $setrolesmodal).click(function () {
+            SaveModal_SetRoles();
+        });
 
     </script>
 }

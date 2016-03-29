@@ -127,7 +127,12 @@ namespace WY.RMS.Component.Data.Enum
         /// <summary>
         /// 删除按钮（用户组管理）
         /// </summary>
-        DeleteUserGroup = 4194304 
+        DeleteUserGroup = 4194304,
+        /// <summary>
+        /// 设置角色按钮（用户组管理）
+        /// </summary>
+        SetRolesUserGroup = 8388608 
+
         #endregion
     }
 }

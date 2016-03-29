@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -11,6 +12,7 @@ using WY.RMS.Component.Tools.helpers;
 using WY.RMS.CoreBLL.Service;
 using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Model.Member;
+using WY.RMS.ViewModel;
 using WY.RMS.ViewModel.Member;
 using WY.RMS.Web.Extension.Common;
 using WY.RMS.Web.Extension.Filters;
@@ -20,9 +22,11 @@ namespace WY.RMS.Web.Areas.Member.Controllers
     public class UserGroupController : Controller
     {
         private readonly IUserGroupService _userGroupService;
-        public UserGroupController(IUserGroupService userGroupService)
+        private readonly IRoleService _roleService;
+        public UserGroupController(IUserGroupService userGroupService, IRoleService roleService)
         {
             this._userGroupService = userGroupService;
+            this._roleService = roleService;
         }
         //
         // GET: /Member/UserGroup/
@@ -137,6 +141,45 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         }
         #endregion
 
+
+        #region 设置角色
+        // GET: /Member/UserGroup/SetRoles
+        [IsAjax]
+        public ActionResult SetRoles(int id = 0)
+        {
+            ViewBag.KeyId = id;
+            var user = _userGroupService.UserGroups.Include(c => c.Roles).FirstOrDefault(c => c.Id == id);
+            if (user == null)
+            {
+                return PartialView("Create", new UserGroupVM());
+            }
+            else
+            {
+                List<int> ids = user.Roles.Select(c => c.Id).ToList();
+                var list = _roleService.Roles.Where(c => c.Enabled == true).Select(c => new CheckBoxVM()
+                {
+                    Name = "chkGroupRoles",
+                    Value = c.Id,
+                    Discription = c.RoleName,
+                    IsChecked = ids.Contains(c.Id)
+
+                }).ToList();
+                return PartialView(list);
+            }
+        }
+        [HttpPost]
+        public ActionResult SetRoles(int keyId, string[] chkGroupRoles)
+        {
+            if (keyId <= 0)
+            {
+                return Json(new OperationResult(OperationResultType.ParamError, "参数错误!"));
+            }
+            OperationResult result = _userGroupService.UpdateUserGroupRoles(keyId, chkGroupRoles);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        } 
+        #endregion
+
         #region 私有函数
         /// <summary>
         /// 获取按钮可见权限
@@ -159,6 +202,10 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             Permission deleteUserGroupButton =
                 permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.DeleteUserGroup.ToString());
             ViewBag.DeleteUserGroupButton = deleteUserGroupButton;
+            //设置角色
+            Permission setRolesUserGroupButton =
+           permissionCache.FirstOrDefault(c => c.Enabled == true && c.Code == EnumPermissionCode.SetRolesUserGroup.ToString());
+            ViewBag.SetRolesUserGroupButton = setRolesUserGroupButton;
         }
         #endregion
     }

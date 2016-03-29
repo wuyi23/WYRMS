@@ -154,7 +154,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         [IsAjax]
         public ActionResult SetRoles(int id = 0)
         {
-            ViewBag.UserId = id;
+            ViewBag.KeyId = id;
             var user = _userService.Users.Include(c => c.Roles).FirstOrDefault(c => c.Id == id);
             if (user == null)
             {
@@ -175,13 +175,13 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             }
         }
         [HttpPost]
-        public ActionResult SetRoles(int userId, string[] chkRoles)
+        public ActionResult SetRoles(int keyId, string[] chkRoles)
         {
-            if (userId <= 0)
+            if (keyId <= 0)
             {
                 return Json(new OperationResult(OperationResultType.ParamError, "参数错误!"));
             }
-            OperationResult result = _userService.UpdateUserRoles(userId, chkRoles);
+            OperationResult result = _userService.UpdateUserRoles(keyId, chkRoles);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
         }

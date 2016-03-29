@@ -77,26 +77,7 @@
         </div>
 
         @Html.Partial("_ModalForm")
-        <div id="setRolesModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="modal-content" class="form-horizontal" action="">
-                            <!--Content-->
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btnSave" class="btn btn-primary">保存</button>
-                        @*<button type="button" class="btn btn-default" onclick="CloseModal()">取消</button>*@
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_SetRoleModal")
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @section scripts{
@@ -171,12 +152,6 @@
                     formatter: function (value, row, index) {
                         var strSetgroup = "";
                         var strSetrole = "";
-                        @*if (@((SetGroupPermission != null) ? 1 : 0)) {
-                            strSetgroup = '<a class="setgroup" href="javascript:void(0)" title="@(SetGroupPermission==null?string.Empty:SetGroupPermission.Name)"><i class="glyphicon glyphicon-user"></i></a>';
-                    }
-                        if (@((SetRolesPermission != null) ? 1 : 0)){
-                            strSetrole = '&nbsp&nbsp<a class="setrole" href="javascript:void(0)" title="@(SetRolesPermission == null ? string.Empty : SetRolesPermission.Name)"><i class="glyphicon glyphicon-cog"></i></a>';
-        }*@
                         @{
                             if (SetGroupPermission != null)
                             {

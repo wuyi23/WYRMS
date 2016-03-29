@@ -1,12 +1,12 @@
 ﻿@using WY.RMS.ViewModel
 @model List<CheckBoxVM>
 @{
-    int currentUserId = ViewBag.UserId;
+    int currentKeyId = ViewBag.KeyId;
 }
 <link href="~/Scripts/AdminLTE2.3.0/plugins/iCheck/square/blue.css" rel="stylesheet" />
 
 <div>
-    <input type="hidden" id="userId" name="userId" value="@currentUserId" />
+    <input type="hidden" id="keyId" name="keyId" value="@currentKeyId" />
     <div class="form-group">
         @foreach (var item in Model)
         {

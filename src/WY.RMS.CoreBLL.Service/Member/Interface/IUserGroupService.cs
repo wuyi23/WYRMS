@@ -15,5 +15,6 @@ namespace WY.RMS.CoreBLL.Service.Member.Interface
         OperationResult Insert(UserGroupVM model);
         OperationResult Update(UserGroupVM model);
         OperationResult Delete(IEnumerable<UserGroupVM> list);
+        OperationResult UpdateUserGroupRoles(int userId, string[] chkRoles);
     }
 }

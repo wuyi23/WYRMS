@@ -91,7 +91,8 @@ namespace WY.RMS.Component.Data.Migrations
 		     new Permission{Id=20, Name="查询",Code=EnumPermissionCode.QueryUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
              new Permission{Id=21, Name="新增",Code=EnumPermissionCode.AddUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
              new Permission{Id=22, Name="修改",Code=EnumPermissionCode.UpdateUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
-             new Permission{Id=23, Name="删除",Code=EnumPermissionCode.DeleteUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]}
+             new Permission{Id=23, Name="删除",Code=EnumPermissionCode.DeleteUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]},
+             new Permission{Id=24, Name="设置角色",Code=EnumPermissionCode.SetRolesUserGroup.ToString(), Description="描述" ,Enabled=true,UpdateDate=DateTime.Now,module=modules[7]}
 	         #endregion
             };
             DbSet<Permission> permissionSet = context.Set<Permission>();
@@ -104,16 +105,16 @@ namespace WY.RMS.Component.Data.Migrations
             {
                 new Role { Id=1,  RoleName = "superadmin", Description="超级管理员",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now ,Permissions=permissions},
                 new Role { Id=2,  RoleName = "管理员", Description="系统管理员",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now,Permissions=permissions},
-                 new Role { Id=3,  RoleName = "普通角色1", Description="普通角色1",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now ,Permissions=permissions},
-                  new Role { Id=4,  RoleName = "普通角色2", Description="普通角色2",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                   new Role { Id=5,  RoleName = "普通角色3", Description="普通角色3",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                    new Role { Id=6,  RoleName = "普通角色4", Description="普通角色4",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                     new Role { Id=7,  RoleName = "普通角色5", Description="普通角色5",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                      new Role { Id=8,  RoleName = "普通角色6", Description="普通角色6",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                       new Role { Id=9,  RoleName = "普通角色7", Description="普通角色7",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                        new Role { Id=10,  RoleName = "普通角色8", Description="普通角色8",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                         new Role { Id=11,  RoleName = "普通角色9", Description="普通角色9",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
-                                new Role { Id=12,  RoleName = "普通角色10", Description="普通角色10",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now }
+                new Role { Id=3,  RoleName = "普通角色1", Description="普通角色1",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now ,Permissions=permissions},
+                new Role { Id=4,  RoleName = "普通角色2", Description="普通角色2",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=5,  RoleName = "普通角色3", Description="普通角色3",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=6,  RoleName = "普通角色4", Description="普通角色4",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=7,  RoleName = "普通角色5", Description="普通角色5",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=8,  RoleName = "普通角色6", Description="普通角色6",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=9,  RoleName = "普通角色7", Description="普通角色7",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=10,  RoleName = "普通角色8", Description="普通角色8",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=11,  RoleName = "普通角色9", Description="普通角色9",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now },
+                new Role { Id=12,  RoleName = "普通角色10", Description="普通角色10",Enabled=true,OrderSort=1,UpdateDate=DateTime.Now }
             };
             DbSet<Role> roleSet = context.Set<Role>();
             roleSet.AddOrUpdate(m => new { m.RoleName }, roles.ToArray());
