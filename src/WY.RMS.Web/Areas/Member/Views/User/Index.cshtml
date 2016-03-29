@@ -77,7 +77,7 @@
         </div>
 
         @Html.Partial("_ModalForm")
-        @Html.Partial("_SetRoleModal")
+        @Html.Partial("_SettingModal")
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @section scripts{
@@ -169,7 +169,7 @@
             //初始化表格
             InitTable($("#tb_users"), actionUrl, dbQueryParams, tbColumns);
         });
-        var $settingModal = $("#setRolesAndGroupModal");
+        var $settingModal = $("#settingModal");
         window.operateEvents = {
             'click .setgroup': function (e, value, row, index) {
                 var actionUrl = "@Url.Action("SetUserGroups")";

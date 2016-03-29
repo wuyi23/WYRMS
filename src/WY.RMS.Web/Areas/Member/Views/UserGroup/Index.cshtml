@@ -71,7 +71,7 @@
         </div>
 
         @Html.Partial("_ModalForm")
-        @Html.Partial("_SetRoleModal")
+        @Html.Partial("_SettingModal")
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @section  scripts{
@@ -131,7 +131,7 @@
                     }
                 }, {
                     field: 'operate',
-                    title: '&nbsp&nbsp&nbsp&nbsp设置&nbsp&nbsp&nbsp&nbsp',
+                    title: '设置',
                     align: 'center',
                     events: operateEvents,
                     formatter: function (value, row, index) {
@@ -139,7 +139,7 @@
                         @{
                             if (SetRolesPermission != null)
                             {
-                                <text> strSetrole = '&nbsp&nbsp<a class="setrole" href="javascript:void(0)" title="@SetRolesPermission.Name"><i class="glyphicon glyphicon-cog"></i></a>'; </text>
+                                <text> strSetrole = '<a class="setrole" href="javascript:void(0)" title="@SetRolesPermission.Name"><i class="glyphicon glyphicon-cog"></i></a>'; </text>
                             }
                         }
                         return  strSetrole;
@@ -150,7 +150,7 @@
             InitTable($("#tb_usergroups"), actionUrl, dbQueryParams, tbColumns);
         });
 
-        var $settingsmodal = $("#setRolesAndGroupModal");
+        var $settingsmodal = $("#settingModal");
         window.operateEvents = {
             'click .setrole': function (e, value, row, index) {
                 var actionUrl = "@Url.Action("SetRoles")";

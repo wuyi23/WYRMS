@@ -164,7 +164,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                     IsChecked = ids.Contains(c.Id)
 
                 }).ToList();
-                return PartialView(list);
+                return PartialView("_SetCheckBox",list);
             }
         }
         [HttpPost]

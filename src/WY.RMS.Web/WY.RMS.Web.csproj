@@ -411,10 +411,10 @@
     <Content Include="Areas\Member\Views\Permission\Index.cshtml" />
     <Content Include="Areas\Member\Views\Permission\Create.cshtml" />
     <Content Include="Areas\Member\Views\Role\AuthorizePermission.cshtml" />
-    <Content Include="Areas\Member\Views\Shared\SetRoles.cshtml" />
+    <Content Include="Areas\Member\Views\Shared\_SetCheckBox.cshtml" />
     <Content Include="Areas\Member\Views\UserGroup\Index.cshtml" />
     <Content Include="Areas\Member\Views\UserGroup\Create.cshtml" />
-    <Content Include="Areas\Member\Views\Shared\_SetRoleModal.cshtml" />
+    <Content Include="Areas\Member\Views\Shared\_SettingModal.cshtml" />
     <None Include="Properties\PublishProfiles\xiaowu.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\AdminLTE2.3.0\bootstrap\css\bootstrap.css" />
