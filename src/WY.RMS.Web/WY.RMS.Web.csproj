@@ -391,7 +391,7 @@
     <Content Include="Scripts\Custom\ModalForm.js" />
     <Content Include="Scripts\Custom\MyCommon.js" />
     <Content Include="Scripts\Custom\Role\AuthorizePermissionModal.js" />
-    <Content Include="Scripts\Custom\User\SetRolesModal.js" />
+    <Content Include="Scripts\Custom\User\User.js" />
     <Content Include="Scripts\Custom\WinMsg.js" />
     <Content Include="Scripts\Custom\TableOperation.js" />
     <Content Include="Scripts\jquery.ztree.all-3.5.js" />

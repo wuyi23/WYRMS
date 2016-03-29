@@ -24,12 +24,14 @@ namespace WY.RMS.CoreBLL.Service.Member
     {
         private readonly IUserRepository _userRepository;
         private readonly IRoleService _roleService;
+        private readonly IUserGroupService _userGroupService;
 
-        public UserService(IUserRepository userRepository, IRoleService roleService, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IRoleService roleService,IUserGroupService userGroupService, IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             this._userRepository = userRepository;
             this._roleService = roleService;
+            this._userGroupService = userGroupService;
         }
         public IQueryable<User> Users
         {
@@ -179,6 +181,46 @@ namespace WY.RMS.CoreBLL.Service.Member
             catch
             {
                 return new OperationResult(OperationResultType.Error, "设置用户角色失败!");
+            }
+        }
+
+        public OperationResult UpdateUserGroups(int userId, string[] chkUserGroups)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var oldUser = Users.FirstOrDefault(c => c.Id == userId);
+                    if (oldUser == null)
+                    {
+                        throw new Exception();
+                    }
+                    oldUser.UserGroups.Clear();
+                    List<UserGroup> newUserGroups = new List<UserGroup>();
+                    if (chkUserGroups != null && chkUserGroups.Length > 0)
+                    {
+                        int[] idInts = Array.ConvertAll<string, int>(chkUserGroups, Convert.ToInt32);
+                        newUserGroups = _userGroupService.UserGroups.Where(c => idInts.Contains(c.Id)).ToList();
+                        oldUser.UserGroups = newUserGroups;
+                    }
+                    UnitOfWork.Commit();
+                    #region 重置权限缓存
+                    var roleIdsByUser = newUserGroups.Select(r => r.Id).ToList();
+                    var roleIdsByUserGroup = oldUser.UserGroups.SelectMany(g => g.Roles).Select(r => r.Id).ToList();
+                    roleIdsByUser.AddRange(roleIdsByUserGroup);
+                    var roleIds = roleIdsByUser.Distinct().ToList();
+                    List<Permission> permissions = _roleService.Roles.Where(t => roleIds.Contains(t.Id) && t.Enabled == true).SelectMany(c => c.Permissions).Distinct().ToList();
+                    var strKey = CacheKey.StrPermissionsByUid + "_" + oldUser.Id;
+                    //设置Cache滑动过期时间为1天
+                    CacheHelper.SetCache(strKey, permissions, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0, 0));
+                    #endregion
+                    scope.Complete();
+                    return new OperationResult(OperationResultType.Success, "设置用户组成功！");
+                }
+            }
+            catch
+            {
+                return new OperationResult(OperationResultType.Error, "设置用户组失败!");
             }
         }
     }

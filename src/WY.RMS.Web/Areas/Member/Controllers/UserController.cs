@@ -24,10 +24,12 @@ namespace WY.RMS.Web.Areas.Member.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
-        public UserController(IUserService userService, IRoleService roleService)
+        private readonly IUserGroupService _userGroupService;
+        public UserController(IUserService userService, IRoleService roleService, IUserGroupService userGroupService)
         {
             this._userService = userService;
             this._roleService = roleService;
+            this._userGroupService = userGroupService;
         }
 
         //
@@ -150,7 +152,8 @@ namespace WY.RMS.Web.Areas.Member.Controllers
         }
 
 
-        // GET: /Member/User/SetRoles
+        #region 设置角色
+		 // GET: /Member/User/SetRoles
         [IsAjax]
         public ActionResult SetRoles(int id = 0)
         {
@@ -184,8 +187,48 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             OperationResult result = _userService.UpdateUserRoles(keyId, chkRoles);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
-        }
+        } 
+	#endregion
 
+
+        #region 设置用户组
+        // GET: /Member/User/SetUserGroups
+        [IsAjax]
+        public ActionResult SetUserGroups(int id = 0)
+        {
+            ViewBag.KeyId = id;
+            var user = _userService.Users.Include(c => c.UserGroups).FirstOrDefault(c => c.Id == id);
+            if (user == null)
+            {
+                return PartialView("Create", new UserVM());
+            }
+            else
+            {
+                List<int> ids = user.UserGroups.Select(c => c.Id).ToList();
+                var list = _userGroupService.UserGroups.Where(c => c.Enabled == true).Select(c => new CheckBoxVM()
+            {
+                Name = "chkUserGroups",
+                Value = c.Id,
+                Discription = c.GroupName,
+                IsChecked = ids.Contains(c.Id)
+
+            }).ToList();
+                return PartialView("SetRoles",list);
+            }
+        }
+        [HttpPost]
+        public ActionResult SetUserGroups(int keyId, string[] chkUserGroups)
+        {
+            if (keyId <= 0)
+            {
+                return Json(new OperationResult(OperationResultType.ParamError, "参数错误!"));
+            }
+            OperationResult result = _userService.UpdateUserGroups(keyId, chkUserGroups);
+            result.Message = result.Message ?? result.ResultType.GetDescription();
+            return Json(result);
+        } 
+	    #endregion
+        
         #region 私有函数
         /// <summary>
         /// 获取按钮可见权限

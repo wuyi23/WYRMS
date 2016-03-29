@@ -85,7 +85,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
-    <script src="~/Scripts/Custom/User/SetRolesModal.js"></script>
+    <script src="~/Scripts/Custom/User/User.js"></script>
     <script>
         $(function () {
             //得到表格查询的参数
@@ -169,14 +169,17 @@
             //初始化表格
             InitTable($("#tb_users"), actionUrl, dbQueryParams, tbColumns);
         });
+        var $settingModal = $("#setRolesAndGroupModal");
         window.operateEvents = {
             'click .setgroup': function (e, value, row, index) {
-                alert('You click like action, row: ' + JSON.stringify(row));
+                var actionUrl = "@Url.Action("SetUserGroups")";
+                var param = { id: row.Id };
+                ShowModal_Setting(actionUrl, param, "设置用户组", $settingModal);
             },
             'click .setrole': function (e, value, row, index) {
                 var actionUrl = "@Url.Action("SetRoles")";
                 var param = { id: row.Id };
-                ShowModal_SetRoles(actionUrl, param, "设置角色");
+                ShowModal_Setting(actionUrl, param, "设置角色", $settingModal);
             }
         };
 
@@ -228,10 +231,9 @@
             SaveModal($tb);
         });
 
-        //模态框中“角色授权”保存
-        var $setrolesmodal = $("#setRolesModal");
-        $("#btnSave", $setrolesmodal).click(function () {
-            SaveModal_SetRoles();
+        //模态框中“设置角色”&&“设置用户组”保存
+        $("#btnSave", $settingModal).click(function () {
+            SaveModal_Setting($settingModal);
         });
 
     </script>

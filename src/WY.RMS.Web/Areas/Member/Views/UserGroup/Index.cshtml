@@ -80,7 +80,7 @@
     <script src="~/Scripts/jquery.ztree.all-3.5.min.js"></script>
     <script src="~/Scripts/Custom/TableOperation.js"></script>
     <script src="~/Scripts/Custom/ModalForm.js"></script>
-    <script src="~/Scripts/Custom/User/SetRolesModal.js"></script>
+    <script src="~/Scripts/Custom/User/User.js"></script>
     <script>
         $(function () {
             //得到表格查询的参数
@@ -149,11 +149,13 @@
             //初始化表格
             InitTable($("#tb_usergroups"), actionUrl, dbQueryParams, tbColumns);
         });
+
+        var $settingsmodal = $("#setRolesAndGroupModal");
         window.operateEvents = {
             'click .setrole': function (e, value, row, index) {
                 var actionUrl = "@Url.Action("SetRoles")";
                 var param = { id: row.Id };
-                ShowModal_SetRoles(actionUrl, param, "设置角色");
+                ShowModal_Setting(actionUrl, param, "设置角色", $settingsmodal);
             }
         };
 
@@ -200,9 +202,8 @@
         });
 
         //模态框中“角色授权”保存
-        var $setrolesmodal = $("#setRolesModal");
-        $("#btnSave", $setrolesmodal).click(function () {
-            SaveModal_SetRoles();
+        $("#btnSave", $settingsmodal).click(function () {
+            SaveModal_Setting($settingsmodal);
         });
 
     </script>
