@@ -17,3 +17,4 @@ src/WY.RMS.Web/Properties/PublishProfiles/xiaowu.pubxml
 src/WY.RMS.Web/Properties/PublishProfiles/xiaowu.pubxml
 *.user
 *.suo
+*.user
