@@ -55,12 +55,10 @@
     <Compile Include="Repositories\Member\Impl\ModuleRepository.cs" />
     <Compile Include="Repositories\Member\Impl\PermissionRepository.cs" />
     <Compile Include="Repositories\Member\IPermissionRepository.cs" />
-    <Compile Include="Repositories\Member\IUserRepository.cs" />
     <Compile Include="Repositories\Member\Impl\ModuleRepository.generated.cs" />
     <Compile Include="Repositories\Member\Impl\PermissionRepository.generated.cs" />
     <Compile Include="Repositories\Member\Impl\RoleRepository.generated.cs" />
     <Compile Include="Repositories\Member\Impl\UserGroupRepository.generated.cs" />
-    <Compile Include="Repositories\Member\Impl\UserRepository.cs" />
     <Compile Include="Repositories\Member\Impl\UserRepository.generated.cs" />
     <Compile Include="Repositories\Member\IPermissionRepository.generated.cs" />
     <Compile Include="Repositories\Member\IRoleRepository.generated.cs" />

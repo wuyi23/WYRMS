@@ -89,7 +89,7 @@ namespace WY.RMS.Component.Tools.helpers
         }
 
         /// <summary>
-        ///     向调用层抛出数据访问层异常
+        ///     向调用层抛出业务逻辑层异常
         /// </summary>
         /// <param name="msg"> 自定义异常消息 </param>
         /// <param name="e"> 实际引发异常的异常实例 </param>

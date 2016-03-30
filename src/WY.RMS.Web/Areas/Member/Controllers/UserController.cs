@@ -42,7 +42,8 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             ViewBag.EnableItems = enabledItems;
             return View();
         }
-
+        //
+        // GET: /Member/User/GetUsers
         public JsonResult GetUsers(int limit, int offset, string userName, int enable)
         {
             Expression<Func<User, bool>> wh = c => true;
@@ -129,7 +130,6 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
         //
         // POST: /Member/User/Delete
-
         [HttpPost]
         public ActionResult Delete()
         {
@@ -153,7 +153,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
 
 
         #region 设置角色
-		 // GET: /Member/User/SetRoles
+        // GET: /Member/User/SetRoles
         [IsAjax]
         public ActionResult SetRoles(int id = 0)
         {
@@ -174,7 +174,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                 IsChecked = ids.Contains(c.Id)
 
             }).ToList();
-                return PartialView("_SetCheckBox",list);
+                return PartialView("_SetCheckBox", list);
             }
         }
         [HttpPost]
@@ -187,8 +187,8 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             OperationResult result = _userService.UpdateUserRoles(keyId, chkRoles);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
-        } 
-	#endregion
+        }
+        #endregion
 
 
         #region 设置用户组
@@ -213,7 +213,7 @@ namespace WY.RMS.Web.Areas.Member.Controllers
                 IsChecked = ids.Contains(c.Id)
 
             }).ToList();
-                return PartialView("_SetCheckBox",list);
+                return PartialView("_SetCheckBox", list);
             }
         }
         [HttpPost]
@@ -226,9 +226,9 @@ namespace WY.RMS.Web.Areas.Member.Controllers
             OperationResult result = _userService.UpdateUserGroups(keyId, chkUserGroups);
             result.Message = result.Message ?? result.ResultType.GetDescription();
             return Json(result);
-        } 
-	    #endregion
-        
+        }
+        #endregion
+
         #region 私有函数
         /// <summary>
         /// 获取按钮可见权限
