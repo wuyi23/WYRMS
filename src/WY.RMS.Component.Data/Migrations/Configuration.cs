@@ -124,8 +124,8 @@ namespace WY.RMS.Component.Data.Migrations
             #region 用户管理
             List<User> members = new List<User>
             {
-                new User { Id=1, UserName = "admin", Password = "000102030405060708090a0b0c0d0e0f", Email = "375368093@qq.com", TrueName = "管理员",Phone="18181818181",Address="广东广州市天河区科韵路XX街XX号XXX房X号" ,Enabled=true,Roles=new List<Role>{roles[1]} },
-                new User { Id=2, UserName = "xiaowu", Password = "000102030405060708090a0b0c0d0e0f", Email = "11111@1111.com", TrueName = "小吴",Phone="18181818181",Address="广东广州市天河区科韵路XX街X广东广州市天河区科韵路XX街XX号XXX房X号",Enabled=true,Roles=new List<Role>{roles[1]} }
+                new User { Id=1, UserName = "admin", Password = "e10adc3949ba59abbe56e057f20f883e", Email = "375368093@qq.com", TrueName = "管理员",Phone="18181818181",Address="广东广州市天河区科韵路XX街XX号XXX房X号" ,Enabled=true,Roles=new List<Role>{roles[1]} },
+                new User { Id=2, UserName = "xiaowu", Password = "e10adc3949ba59abbe56e057f20f883e", Email = "11111@1111.com", TrueName = "小吴",Phone="18181818181",Address="广东广州市天河区科韵路XX街X广东广州市天河区科韵路XX街XX号XXX房X号",Enabled=true,Roles=new List<Role>{roles[1]} }
             };
             DbSet<User> memberSet = context.Set<User>();
             memberSet.AddOrUpdate(m => new { m.UserName }, members.ToArray());
