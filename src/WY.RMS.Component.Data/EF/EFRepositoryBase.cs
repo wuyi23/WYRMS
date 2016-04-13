@@ -33,7 +33,7 @@ namespace WY.RMS.Component.Data.EF
         public virtual IQueryable<TEntity> Entities
         {
             get { return Context.Set<TEntity>(); }
-        } 
+        }
         #endregion
 
         #endregion
@@ -108,7 +108,7 @@ namespace WY.RMS.Component.Data.EF
 
         #region 删除
         /// <summary>
-        ///     删除所有符合特定表达式的数据
+        ///    删除所有符合特定表达式的数据（EntityFramework.Extensions扩展））,用法详见https://github.com/loresoft/EntityFramework.Extended
         /// </summary>
         /// <param name="predicate"> 查询条件谓语表达式 </param>
         /// <param name="isSave"> 是否执行保存 </param>
@@ -177,6 +177,19 @@ namespace WY.RMS.Component.Data.EF
         {
             PublicHelper.CheckArgument(entity, "entity");
             Context.Update<TEntity, TKey>(entity);
+            return isSave ? Context.SaveChanges() : 0;
+        }
+
+        /// <summary>
+        /// （扩展）修改所有符合特定表达式的数据（EntityFramework.Extensions扩展）,用法详见https://github.com/loresoft/EntityFramework.Extended
+        /// </summary>
+        /// <param name="fun1">查询条件谓语表达式</param>
+        /// <param name="fun2">需要修改的字段谓词表达式</param>
+        /// <param name="isSave">是否执行保存</param>
+        /// <returns>操作影响的行数</returns>
+        public virtual int Update(Expression<Func<TEntity, bool>> fun1, Expression<Func<TEntity, TEntity>> fun2, bool isSave)
+        {
+            Context.Set<TEntity>().Update(fun1, fun2);
             return isSave ? Context.SaveChanges() : 0;
         }
 
