@@ -14,6 +14,7 @@ using EntityFramework.Extensions;
 using WY.RMS.Component.Data.EF.Interface;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
+using System.IO;
 
 namespace WY.RMS.Component.Data.EF
 {
@@ -189,7 +190,7 @@ namespace WY.RMS.Component.Data.EF
         /// <returns>操作影响的行数</returns>
         public virtual int Update(Expression<Func<TEntity, bool>> fun1, Expression<Func<TEntity, TEntity>> fun2, bool isSave)
         {
-            Context.Set<TEntity>().Update(fun1, fun2);
+            Context.Set<TEntity>().Where(fun1).Update(fun2);
             return isSave ? Context.SaveChanges() : 0;
         }
 

@@ -2,15 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Objects.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using WY.RMS.Component.Data.EF;
 using WY.RMS.Component.Data.Enum;
 using WY.RMS.Component.Tools;
 using WY.RMS.Component.Tools.helpers;
-using WY.RMS.CoreBLL.Service;
 using WY.RMS.CoreBLL.Service.Member.Interface;
 using WY.RMS.Domain.Model.Member;
 using WY.RMS.ViewModel;
